@@ -1,0 +1,41 @@
+<div class="team-card">
+    <div class="team-avatar-wrapper">
+        <img src="{{ member.image | relative_url }}" alt="{{ member.name }}" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name={{ member.name | url_encode }}&background=2563eb&color=fff'">
+    </div>
+    <div class="team-info">
+        <h3>{{ member.name }}</h3>
+        <p class="role">{{ member.role }}</p>
+        {% if member.bio %}<p class="bio">{{ member.bio }}</p>{% endif %}
+        
+        {% if member.expertise %}
+        <div class="expertise">
+            {% for item in member.expertise %}
+            <span class="badge">{{ item }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if member.projects %}
+        <div class="projects-list">
+            <strong>Projects:</strong> {{ member.projects | join: ", " }}
+        </div>
+        {% endif %}
+
+        {% if member.social %}
+        <div class="social-links">
+            {% if member.social.github %}
+            <a href="https://github.com/{{ member.social.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+            {% endif %}
+            {% if member.social.linkedin %}
+            <a href="https://linkedin.com/in/{{ member.social.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            {% endif %}
+            {% if member.social.twitter %}
+            <a href="https://twitter.com/{{ member.social.twitter }}" target="_blank" rel="noopener noreferrer">Twitter</a>
+            {% endif %}
+            {% if member.social.portfolio %}
+            <a href="{{ member.social.portfolio }}" target="_blank" rel="noopener noreferrer">Portfolio</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>

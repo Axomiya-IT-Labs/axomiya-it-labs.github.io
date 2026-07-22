@@ -1,0 +1,52 @@
+leadership:
+  - name: "Dr. Rakibul Islam"
+    role: "Founder & Director"
+    bio: "AI Researcher & Open Source Advocate"
+    image: "/assets/images/team/leads/rakibul.jpg"
+    social:
+      github: "rakibulislam"
+      linkedin: "rakibul-islam"
+      twitter: "rakibul_ai"
+    expertise: ["AI/ML", "Community Building", "Open Source"]
+
+  - name: "Priya Sharma"
+    role: "Community Manager"
+    bio: "Building inclusive AI communities and educational programs."
+    image: "/assets/images/team/leads/priya.jpg"
+    social:
+      github: "priyasharma"
+      linkedin: "priya-sharma"
+    expertise: ["Community", "Events", "Education"]
+
+developers:
+  - name: "Arun Barman"
+    role: "Senior Developer"
+    bio: "Full-stack software and AI systems developer."
+    image: "/assets/images/team/developers/arun.jpg"
+    social:
+      github: "arunbarman"
+    projects: ["Open AI Tools", "Community Bot"]
+
+  - name: "Moni Saikia"
+    role: "ML Engineer"
+    bio: "Focusing on NLP models and machine learning pipelines."
+    image: "/assets/images/team/developers/moni.jpg"
+    social:
+      github: "monisaikia"
+    projects: ["Language Model", "Translation Tool"]
+
+designers:
+  - name: "Rumi Baruah"
+    role: "UI/UX Designer"
+    bio: "Designing accessible user interfaces and intuitive design systems."
+    image: "/assets/images/team/designers/rumi.jpg"
+    social:
+      portfolio: "https://rumi.design"
+
+advisors:
+  - name: "Dr. K. Nath"
+    role: "Technology Advisor"
+    bio: "Guidance on technology scaling and community research."
+    image: "/assets/images/team/advisors/knath.jpg"
+    social:
+      linkedin: "knath-advisor"

@@ -1,0 +1,24 @@
+<div class="announcement-card {% if featured %}featured{% endif %}">
+    {% if announcement.image %}
+    <div class="announcement-image">
+        <img src="{{ announcement.image | relative_url }}" alt="{{ announcement.title }}">
+        <span class="badge {{ announcement.type }}">{{ announcement.type | capitalize }}</span>
+    </div>
+    {% endif %}
+    <div class="announcement-content">
+        <h2><a href="{{ announcement.link | relative_url }}">{{ announcement.title }}</a></h2>
+        <p class="meta">
+            <span class="date">📅 {{ announcement.date | date: "%B %d, %Y" }}</span>
+            {% if announcement.author %}<span class="author">✍️ {{ announcement.author }}</span>{% endif %}
+        </p>
+        <p class="excerpt">{{ announcement.excerpt }}</p>
+        {% if announcement.tags %}
+        <div class="tags">
+            {% for tag in announcement.tags %}
+                <span class="tag">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <a href="{{ announcement.link | relative_url }}" class="read-more">Read More →</a>
+    </div>
+</div>

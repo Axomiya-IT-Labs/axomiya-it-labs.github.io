@@ -1,0 +1,68 @@
+projects:
+  - id: "ai-suite"
+    title: "Axomiya AI Core"
+    category: "AI & ML"
+    badge: "Featured FOSS"
+    description: "Lightweight, open-source AI utility framework for seamless model inference, API wrappers, and developer tooling."
+    stars: 128
+    forks: 34
+    language: "Python"
+    repo: "https://github.com/axomiyaitlabs/axomiya-ai-core"
+    demo: "https://axomiya-it-labs.github.io/projects/ai-core"
+    tags: ["Python", "TensorFlow", "FastAPI", "Open Source"]
+
+  - id: "community-assistant"
+    title: "Community Chat Widget"
+    category: "Web & UI"
+    badge: "Active"
+    description: "An embeddable, customizable open-source AI chat widget for static sites with LLM integration and fallback modes."
+    stars: 84
+    forks: 19
+    language: "JavaScript"
+    repo: "https://github.com/axomiyaitlabs/community-chat-widget"
+    demo: "https://axomiya-it-labs.github.io/projects/chat-widget"
+    tags: ["JavaScript", "SCSS", "Gemini API", "Jekyll"]
+
+  - id: "dev-automation-cli"
+    title: "Lab Automation CLI"
+    category: "Developer Tools"
+    badge: "Tooling"
+    description: "A fast terminal CLI tool to automate repository scaffolding, documentation generation, and GitHub Pages deployments."
+    stars: 62
+    forks: 11
+    language: "Go"
+    repo: "https://github.com/axomiyaitlabs/lab-cli"
+    tags: ["Go", "CLI", "Automation", "DevTools"]
+
+ideas_bar:
+  - id: "idea-1"
+    title: "Voice-Controlled Code Snippet Search"
+    difficulty: "Intermediate"
+    tech_stack: ["Python", "Web Speech API", "SQLite"]
+    description: "Build a minimal offline voice-activated search engine for local code snippets and developer documentation."
+    looking_for: ["Backend Dev", "UI Designer"]
+    status: "Open Idea"
+
+  - id: "idea-2"
+    title: "Markdown to Slide Presentation Converter"
+    difficulty: "Beginner Friendly"
+    tech_stack: ["JavaScript", "CSS3", "HTML5"]
+    description: "Create an ultra-fast browser tool that converts plain Markdown files into clean, interactive presentation slides."
+    looking_for: ["Frontend Dev", "Markdown Enthusiast"]
+    status: "Open Idea"
+
+  - id: "idea-3"
+    title: "Automated GitHub Profile README Generator"
+    difficulty: "Beginner Friendly"
+    tech_stack: ["Python", "GitHub Actions", "SVG"]
+    description: "A dynamic SVG generator that creates live dynamic statistics, badges, and tech stack icons for developer profiles."
+    looking_for: ["Python Dev", "SVG Designer"]
+    status: "In Progress"
+
+  - id: "idea-4"
+    title: "Local LLM Privacy Wrapper"
+    difficulty: "Advanced"
+    tech_stack: ["Rust", "Ollama", "REST API"]
+    description: "A zero-log local proxy server that sanitizes API payloads before sending prompt queries to local LLM engines."
+    looking_for: ["Rust Engineer", "Security Enthusiast"]
+    status: "Open Idea"

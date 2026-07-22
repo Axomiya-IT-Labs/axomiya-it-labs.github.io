@@ -1,0 +1,30 @@
+stats:
+  total_members: 245
+  active_contributors: 89
+  projects: 12
+  countries: 15
+
+featured_members:
+  - name: "Bhaskar Hazarika"
+    role: "AI Enthusiast"
+    location: "Guwahati, Assam"
+    image: "/assets/images/community/members/bhaskar.jpg"
+    skills: ["Python", "TensorFlow", "Django"]
+    contributions: 45
+    github: "bhaskarh"
+    joined: "2025-03-15"
+
+  - name: "Nabanita Das"
+    role: "Data Scientist"
+    location: "Jorhat, Assam"
+    image: "/assets/images/community/members/nabanita.jpg"
+    skills: ["Data Analysis", "R", "Tableau"]
+    contributions: 32
+    github: "nabanitadas"
+    joined: "2025-05-20"
+
+recent_contributors:
+  - name: "Ananta Gogoi"
+    contributions: 12
+    badge: "Rising Star"
+    image: "/assets/images/community/members/ananta.jpg"

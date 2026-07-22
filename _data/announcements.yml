@@ -1,0 +1,32 @@
+- id: 1
+  title: "Axomiya AI Launch 🚀"
+  date: "2026-07-20"
+  type: "major"
+  category: "Product Launch"
+  excerpt: "Introducing our first open-source AI model designed for easy integration."
+  image: "/assets/images/announcements/2026-07/ai-launch.jpg"
+  link: "/announcements/axomiya-ai-launch"
+  author: "Rakibul Islam"
+  tags: ["AI", "Launch", "Open Source"]
+
+- id: 2
+  title: "Community Hackathon 2026"
+  date: "2026-07-15"
+  type: "event"
+  category: "Events"
+  excerpt: "Join us for a 48-hour AI and open-source software hackathon."
+  image: "/assets/images/announcements/2026-07/hackathon.jpg"
+  link: "/announcements/hackathon-2026"
+  author: "Priya Sharma"
+  tags: ["Hackathon", "Community", "Learning"]
+
+- id: 3
+  title: "New Open Source Projects"
+  date: "2026-07-10"
+  type: "update"
+  category: "Projects"
+  excerpt: "We are launching three new open-source repositories to empower developers."
+  image: "/assets/images/announcements/2026-07/projects.jpg"
+  link: "/announcements/new-projects"
+  author: "Arun Barman"
+  tags: ["Open Source", "Projects"]

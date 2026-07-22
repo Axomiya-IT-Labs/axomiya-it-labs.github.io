@@ -1,0 +1,24 @@
+<div class="member-card">
+    <div class="member-avatar-wrapper">
+        <img src="{{ member.image | relative_url }}" alt="{{ member.name }}" class="member-avatar" onerror="this.src='https://ui-avatars.com/api/?name={{ member.name | url_encode }}&background=0D8ABC&color=fff'">
+    </div>
+    <h3>{{ member.name }}</h3>
+    <p class="role">{{ member.role }}</p>
+    {% if member.location %}<p class="location">📍 {{ member.location }}</p>{% endif %}
+    {% if member.skills %}
+    <div class="skills">
+        {% for skill in member.skills %}
+            <span class="skill-tag">{{ skill }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="stats">
+        {% if member.contributions %}<span>⭐ {{ member.contributions }} contributions</span>{% endif %}
+        {% if member.joined %}<span>📅 Joined {{ member.joined | date: "%b %Y" }}</span>{% endif %}
+    </div>
+    {% if member.github %}
+    <div class="social">
+        <a href="https://github.com/{{ member.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+    {% endif %}
+</div>

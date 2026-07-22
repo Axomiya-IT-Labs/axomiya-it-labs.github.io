@@ -1,0 +1,5 @@
+<div class="team-grid">
+    {% for member in include.team %}
+        {% include components/team-card.html member=member %}
+    {% endfor %}
+</div>

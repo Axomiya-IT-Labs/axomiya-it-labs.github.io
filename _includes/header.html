@@ -1,0 +1,20 @@
+<header class="site-header">
+  <div class="container header-content">
+    <a class="site-logo" href="{{ '/' | relative_url }}">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">Axomiya IT Labs</span>
+    </a>
+    
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav" id="siteNav">
+      {% for item in site.data.nav %}
+        <a href="{{ item.url | relative_url }}" class="nav-link {% if page.url == item.url %}active{% endif %}">{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

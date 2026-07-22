@@ -1,0 +1,111 @@
+// Announcements Page Styles
+.announcements-grid, .announcements-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.announcement-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .announcement-image {
+    position: relative;
+    max-height: 240px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+
+  .announcement-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.35rem;
+
+      a {
+        color: var(--secondary);
+
+        &:hover {
+          color: var(--primary);
+        }
+      }
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .excerpt {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      .tag {
+        font-size: 0.75rem;
+        color: var(--primary);
+        background: #eff6ff;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+      }
+    }
+
+    .read-more {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+# Multilingual generator disabled - English only site

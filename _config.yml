@@ -1,0 +1,47 @@
+title: Axomiya IT Labs
+description: "Equal Access for All — Making AI Easy for Everyone."
+url: "https://axomiya-it-labs.github.io"
+baseurl: ""
+
+author: Axomiya IT Labs
+telegram: https://t.me/AxomiyaITLabs
+facebook_page: https://www.facebook.com/AxomiyaITLabs
+facebook_group: https://www.facebook.com/groups/1556385872564016/
+youtube: https://www.youtube.com/@AxomiyaITLabs
+
+markdown: kramdown
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-sass-converter
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - PROJECT.md
+  - node_modules
+
+# AI Chat Configuration
+ai_chat:
+  enabled: true
+  api_key: "your-api-key-here"
+  model: "gemini-pro"
+  api_url: "https://api.gemini.com/v1/chat"
+  welcome_message: "Welcome to Axomiya IT Labs! How can I help you today?"
+  community_context:
+    description: "Axomiya IT Labs community for open source AI development"
+    members: 245
+    projects: 12
+
+# Blog Generator Configuration
+blog_generator:
+  auto_categories: true
+  auto_authors: true
+  monthly_archives: true
+  yearly_archives: true
+  related_posts: true
