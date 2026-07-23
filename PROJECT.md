@@ -1,191 +1,196 @@
-# 📘 Axomiya IT Labs — Ultimate Master Documentation (`PROJECT.md`)
+# 📘 Axomiya IT Labs — Master Documentation & Contribution Guide (`PROJECT.md`)
 
-Welcome to the single-source-of-truth master documentation for **Axomiya IT Labs**. This static website is engineered with an **Anthropic-inspired warm minimalist design aesthetic**, fully **mobile-first & desktop-friendly**, and 100% compatible with **GitHub Pages** (Jekyll).
+Welcome to the official master documentation and contribution guide for **Axomiya IT Labs**. This static website is built with an **Anthropic-inspired warm minimalist design aesthetic**, fully **mobile-first**, accessible, and 100% compatible with **GitHub Pages** (Jekyll).
 
 ---
 
 ## 🏛️ 1. Core Mission & Identity
 
-> **Rooted in Assam — Assam's first AI & open-source community.**
+> **Rooted in Assam — Assam's first AI & open-source community.**  
 > Everyone is welcome — no matter your age, background, or technical skill. If you are curious and want to learn, build, or share, you belong here.
 
-### The Three Pillars (Learn, Build, Share):
+### The Three Pillars:
 - 📖 **Learn**: Read short guides, watch practical tutorials, and explore AI tools in plain language. *(Clear language lowers fear.)*
 - 🔨 **Build**: Create real projects: websites, AI tools, automation scripts, and educational platforms. *(Visible progress keeps motivation alive.)*
 - 🤝 **Share**: Share what you learn, even if it feels small. Every translation, tutorial, example, bug report, and line of code removes friction for the next person. *(Small help compounds.)*
 
-### The Three Guiding Principles:
-1. **01 From Scrolling to Creating**: Turn curiosity into useful projects. Start with something small enough to finish today.
-2. **02 Open Source, Made Easier by AI**: Everything is free and community-driven. You can contribute even if your first contribution is a correction.
-3. **03 Accessible Tech & Learning**: Language does not decide who gets to learn. Understanding comes first. Speed comes after.
-
 ---
 
-## 📂 2. Repository Architecture & Layout
+## 📂 2. Repository Architecture
 
 ```text
 axomiyaitlabs/
 ├── .github/
 │   └── workflows/
-│       └── pages.yml              # 🚀 GitHub Actions deployment workflow
-├── _data/                         # 📊 Data files
-│   ├── navigation.yml             # Main navigation menu (dropdown-ready)
-│   └── team.yml                   # Team member profiles
+│       └── pages.yml              # 🚀 GitHub Actions automated build & deployment workflow
+├── _data/                         # 📊 YAML Data Files
+│   ├── navigation.yml             # Main navigation menu structure (with dropdown support)
+│   └── team.yml                   # Team member profiles & roles
 ├── _includes/                     # 🧩 Reusable HTML Components
-│   ├── header.html                # Responsive header + CSS dropdown
-│   ├── footer.html                # Dark minimalist footer
-│   ├── components/
-│   │   ├── announcement-card.html # Announcement card
-│   │   ├── member-card.html       # Member card
-│   │   └── team-card.html         # Team member card
-│   ├── partials/
-│   │   └── newsletter-signup.html # Newsletter form
-│   └── sections/
-│       ├── community-stats.html   # Community stats grid
-│       └── team-grid.html         # Team grid layout
-├── _layouts/                      # 📐 HTML Page Layout Templates
-│   ├── default.html               # Head, SEO, OG, Twitter Cards, fonts
+│   ├── header.html                # Responsive header + OpenAI-style Live Search + Mobile Drawer
+│   ├── footer.html                # Dark minimalist footer with row columns & copyright bottom bar
+│   ├── components/                # UI Cards (announcements, members, team)
+│   ├── partials/                  # Newsletters & reusable forms
+│   └── sections/                  # Homepage & community layout sections
+├── _layouts/                      # 📐 Jekyll Layout Templates
+│   ├── default.html               # Master layout (SEO tags, Google Fonts, header, footer, search modal)
 │   ├── page.html                  # Standard page template
-│   ├── post.html                  # Blog post template
-│   ├── project.html               # Project detail template
+│   ├── post.html                  # Blog & research post layout
+│   ├── project.html               # Project detail layout
 │   ├── announcements.html         # Announcements hub template
 │   ├── community.html             # Community landing template
 │   └── team.html                  # Team page template
-├── _pages/                        # 📄 Main Pages
+├── _pages/                        # 📄 Main Page Views
 │   ├── about/index.md             # /about/
 │   ├── contribute/index.md        # /contribute/
-│   ├── projects/index.md          # /projects/ (Active + Ideas Bar)
+│   ├── projects/index.md          # /projects/ (Active projects + Ideas bar)
 │   ├── announcements/index.md     # /announcements/
 │   ├── research/index.md          # /research/
-│   ├── community/index.md         # /community/
+│   ├── community/index.md         # /community/ (Official channels with platform SVG icons)
 │   └── team/index.md              # /team/
-├── _posts/                        # ✍️ Research Posts (YYYY-MM-DD-title.md)
-│   └── 2026-07-23-ai-problem-breakdown.md
-├── _projects/                     # 🛠️ Project Collection (add .md files here)
-│   ├── 00-TEMPLATE.md             # Template for real projects
-│   └── 00-IDEA-TEMPLATE.md        # Template for open ideas
-├── _announcements/                # 📢 Announcement Collection (add .md files here)
+├── _posts/                        # ✍️ Research Articles (YYYY-MM-DD-title.md)
+├── _projects/                     # 🛠️ Project Collection (.md files for active projects & ideas)
+│   ├── 00-TEMPLATE.md             # Standard template for new projects
+│   └── 00-IDEA-TEMPLATE.md        # Template for community project ideas
+├── _announcements/                # 📢 Announcements Collection
 │   └── 00-TEMPLATE.md             # Template for announcements
 ├── _sass/                         # 🎨 SASS Stylesheets (Anthropic Design System)
-│   ├── base.scss                  # Fonts, typography, design tokens, buttons
-│   ├── layout.scss                # Header, mobile nav, dropdown, dark footer
-│   ├── components/
-│   │   └── _ai-chat.scss          # AI assistant widget styles
-│   └── pages/
-│       ├── _announcements.scss    # Announcements grid
-│       ├── _community.scss       # Member cards & stats grid
-│       ├── _projects.scss         # Project cards & Ideas Bar styles
-│       ├── _team.scss             # Team member cards
-│       └── _listing.scss          # Shared listing card styles
+│   ├── base.scss                  # Typography, variables, global reset, buttons
+│   ├── layout.scss                # Header, search modal, full-screen mobile nav, dark footer
+│   ├── components/                # Modular SASS components
+│   └── pages/                     # Page-specific styling rules
 ├── assets/                        # 🖼️ Static Assets
 │   ├── css/
-│   │   └── main.scss              # Main stylesheet entrypoint
+│   │   └── main.scss              # SCSS entry point compiled to main.css
 │   ├── js/
-│   │   └── main.js                # Mobile drawer, dropdown toggle, smooth scroll
+│   │   └── main.js                # Core interactive JavaScript
 │   └── images/
-│       ├── icons/icon.svg         # Favicon / browser tab icon
-│       ├── og-image.webp          # Social sharing preview image
-│       ├── projects/              # Project images
-│       ├── announcements/         # Announcement images
-│       ├── team/                  # Team member photos
-│       └── research/              # Research post images
-├── _config.yml                    # ⚙️ Jekyll Configuration
-├── Gemfile                        # 💎 Dependencies
-├── index.md                       # 🏠 Home Page
-├── README.md                      # GitHub Repository README
-└── PROJECT.md                     # 📖 This Documentation File
+│       ├── icons/                 # Official SVG icons (github, x, linkedin, telegram, etc.)
+│       ├── og-image.webp          # OpenGraph social preview image
+│       └── {projects,team,etc}/   # Asset media directories
+├── search.json                    # 🔍 Dynamic Jekyll search index generator
+├── _config.yml                    # ⚙️ Jekyll Site Configuration
+├── Gemfile                        # 💎 Ruby dependencies
+├── index.md                       # 🏠 Landing Page
+├── README.md                      # 📖 GitHub Repository README
+└── PROJECT.md                     # 📘 Master Documentation (This file)
 ```
 
 ---
 
-## 🎨 3. Design System & Theme Tokens (Anthropic Aesthetic)
+## 🎨 3. Design System & Key Features
 
-The design system mimics Anthropic's warm, elegant editorial aesthetic (`anthropic.com`):
-
+### Anthropic Warm Minimalist Aesthetic
 ```scss
 :root {
-  --bg-main: #fcfbfa;            /* Warm off-white background */
-  --bg-card: #ffffff;            /* Pure white card backgrounds */
+  --bg-main: #fcfbfa;            /* Warm off-white page background */
+  --bg-card: #ffffff;            /* Pure white content cards */
   --bg-subtle: #f4f0ea;          /* Warm subtle beige containers */
-  --bg-dark: #141413;            /* Warm dark footer */
-  --text-main: #191919;          /* Deep charcoal primary text */
-  --text-muted: #595755;        /* Muted charcoal secondary text */
-  --accent-warm: #cc5500;        /* Signature warm terracotta/amber accent */
-  --border-light: #e8e3dc;       /* Warm subtle border lines */
+  --bg-dark: #141413;            /* Dark minimalist footer */
+  --text-main: #191919;          /* Primary dark charcoal text */
+  --text-muted: #595755;        /* Secondary muted charcoal text */
+  --accent-warm: #cc5500;        /* Warm terracotta/amber signature accent */
+  --border-light: #e8e3dc;       /* Clean subtle line borders */
   --font-serif: 'Instrument Serif', Georgia, serif; /* Editorial headings */
-  --font-sans: 'Inter', sans-serif;                /* Clean sans-serif body */
+  --font-sans: 'Inter', sans-serif;                /* Body & navigation */
 }
 ```
 
-### Key Principles:
-- **Mobile-First**: Base CSS applies to mobile devices; upward scaling `@media (min-width: 768px)` enhances desktop layouts.
-- **No Heavy Hard Colors**: Clean, warm off-white tones, subtle borders, high readability.
-- **Editorial Typography**: Large, elegant serif headings paired with clean modern body sans-serif.
+### Key Technical Implementations
+1. **🔍 OpenAI-Style Live Search**:
+   - Search trigger button next to the brand logo in the header with `⌘K` / `Ctrl+K` keyboard shortcut.
+   - Modal overlay that queries `search.json` dynamically with zero dependencies.
+   - Instantly indexes all pages, projects, and research articles.
+
+2. **📱 Full-Screen Mobile Drawer Navigation**:
+   - Covers the entire viewport (`top: 0`) when clicked.
+   - High z-index stacking context (`z-index: 1000000` for toggle button) ensures the hamburger icon remains visible and functional above all overlays.
+   - Smooth CSS transform slide transitions.
+
+3. **🦶 Structured Dark Footer**:
+   - Dual-column layout on desktop (`Quick Links` & `Connect` side-by-side).
+   - Social & channel links listed vertically in column alignment.
+   - Distinct `.footer-bottom` copyright bar (`© 2026 Axomiya IT Labs · Open Source · Built with Passion`) pinned as the very last element of the page.
+
+4. **⚡ Official Platform SVG Icons**:
+   - Community channels (`/community/`) use SVG icons from `assets/images/icons/` (`github.svg`, `x.svg`, `linkedin.svg`, `telegram.svg`, `youtube.svg`, `facebook.svg`, `instagram.svg`, `email.svg`).
 
 ---
 
-## 🛠️ 4. How to Update Anything on the Site
+## 🤝 4. How to Contribute
 
-### ✍️ A. Publishing Research Posts
-1. Create `_posts/YYYY-MM-DD-your-title.md`.
-2. Add Front Matter:
+We welcome contributions of all kinds! Follow these simple steps based on what you want to add or update:
+
+### ✍️ A. Publishing a Research Post or Guide
+1. Create a markdown file inside `_posts/` with the filename format `YYYY-MM-DD-your-title.md`.
+2. Include the required Front Matter at the top:
 ```markdown
 ---
 layout: post
-title: "Research Title"
-date: 2026-07-23
-author: "Author Name"
-permalink: /research/your-slug/
-excerpt: "Short summary."
-image: "/assets/images/research/your-image.jpg"
+title: "Title of your Research or Guide"
+date: 2026-07-24
+author: "Your Name"
+permalink: /research/your-title-slug/
+excerpt: "A brief 1-2 sentence summary of what this article covers."
+image: "/assets/images/research/your-image.webp"
 tags:
-  - AI-In-Assam
-  - Automation
+  - Open-Source
+  - AI
 ---
 
-Write research content in Markdown...
+Your markdown content goes here...
 ```
-The Research page (`/research/`) automatically lists all posts.
 
-### 🛠️ B. Adding Projects & Ideas
-1. Copy `_projects/00-TEMPLATE.md` for real projects or `_projects/00-IDEA-TEMPLATE.md` for ideas.
-2. Rename and fill front matter + body content.
-3. Drop the file into `_projects/`.
-4. The Projects page (`/projects/`) automatically lists them.
+### 🛠️ B. Adding a Project or Community Idea
+1. Copy `_projects/00-TEMPLATE.md` (for active projects) or `_projects/00-IDEA-TEMPLATE.md` (for community ideas).
+2. Save it into `_projects/` with a descriptive filename (e.g., `my-cool-ai-tool.md`).
+3. Fill in the title, status (`Live`, `Beta`, `In Progress`, or `Idea`), category, and description.
 
-**Status values:** `Live`, `Beta`, `In Progress`, `Idea`
-
-### 📢 C. Adding Announcements
+### 📢 C. Publishing an Announcement
 1. Copy `_announcements/00-TEMPLATE.md`.
-2. Rename and fill front matter + body content.
-3. Drop the file into `_announcements/`.
-4. The Announcements page (`/announcements/`) automatically lists them.
+2. Save it in `_announcements/` as `YYYY-MM-DD-title.md`.
+3. Add the title, date, excerpt, and content.
 
-### 👨‍💻 D. Adding Team Members
-Edit `_data/team.yml` under `leadership`, `developers`, `designers`, or `advisors`.
-
-### 📝 E. Updating Navigation
-Edit `_data/navigation.yml`. Add `dropdown:` under any item to create a dropdown menu.
-
-### 🖼️ F. Images & Media
-- Supported formats: `.JPG`, `.JPEG`, `.PNG`, `.WEBP`, `.SVG`
-- **`.webp` is highly preferred** for all raster images.
-- Place images in `assets/images/{projects,announcements,team,research}/`.
-- Set `image:` in front matter to the relative path (e.g., `/assets/images/projects/my-project.jpg`).
-
----
-
-## 🚀 5. Running & Deploying
-
-### Local Development:
-```bash
-bundle install
-bundle exec jekyll serve
+### 👨‍💻 D. Adding or Updating Team Members
+1. Open `_data/team.yml`.
+2. Add your entry under the appropriate category (`leadership`, `developers`, `designers`, or `advisors`):
+```yaml
+- name: "Your Name"
+  role: "Your Role / Contribution"
+  bio: "Short bio about what you build or research."
+  github: "https://github.com/your-username"
+  avatar: "/assets/images/team/your-avatar.jpg"
 ```
-Open `http://localhost:4000`.
-
-### GitHub Pages (2026 Standard):
-Pushes to `main` automatically deploy via `.github/workflows/pages.yml`.
 
 ---
-*Documentation maintained by Axomiya IT Labs.*
+
+## 💻 5. Local Setup & Workflow
+
+### Prerequisites
+- **Ruby** (v3.0+)
+- **Bundler** (`gem install bundler`)
+
+### Step-by-Step Setup
+1. **Fork & Clone** the repository:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/axomiya-it-labs.github.io.git
+   cd axomiya-it-labs.github.io
+   ```
+2. **Install Dependencies**:
+   ```bash
+   bundle install
+   ```
+3. **Run Local Server**:
+   ```bash
+   bundle exec jekyll serve
+   ```
+4. **Preview**: Open `http://localhost:4000` in your web browser.
+
+### Submitting a Pull Request (PR)
+1. Create a feature branch: `git checkout -b feature/my-new-contribution`
+2. Commit your changes: `git commit -m "feat: add new research article on AI"`
+3. Push to your fork: `git push origin feature/my-new-contribution`
+4. Open a **Pull Request** on the main `Axomiya-IT-Labs/axomiya-it-labs.github.io` repository!
+
+---
+*Maintained with ❤️ by Axomiya IT Labs community.*
