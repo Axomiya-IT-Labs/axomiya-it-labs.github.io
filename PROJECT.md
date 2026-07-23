@@ -1,6 +1,6 @@
-# 📘 Axomiya IT Labs — Master Documentation & Contribution Guide (`PROJECT.md`)
+# 📘 Axomiya IT Labs — Ultimate Master Documentation & Contribution Guide (`PROJECT.md`)
 
-Welcome to the official master documentation and contribution guide for **Axomiya IT Labs**. This static website is built with an **Anthropic-inspired warm minimalist design aesthetic**, fully **mobile-first**, accessible, and 100% compatible with **GitHub Pages** (Jekyll).
+Welcome to the official master documentation and contributor guide for **Axomiya IT Labs**. This repository powers our static website and community platform, engineered with an **Anthropic-inspired warm minimalist design aesthetic**, fully **mobile-first**, accessible, and 100% hosted on **GitHub Pages** (Jekyll).
 
 ---
 
@@ -14,9 +14,14 @@ Welcome to the official master documentation and contribution guide for **Axomiy
 - 🔨 **Build**: Create real projects: websites, AI tools, automation scripts, and educational platforms. *(Visible progress keeps motivation alive.)*
 - 🤝 **Share**: Share what you learn, even if it feels small. Every translation, tutorial, example, bug report, and line of code removes friction for the next person. *(Small help compounds.)*
 
+### Guiding Principles:
+1. **From Scrolling to Creating**: Turn curiosity into useful projects. Start with something small enough to finish today.
+2. **Open Source, Made Easier by AI**: Everything is free and community-driven. You can contribute even if your first contribution is a correction.
+3. **Accessible Tech & Learning**: Language does not decide who gets to learn. Understanding comes first. Speed comes after.
+
 ---
 
-## 📂 2. Repository Architecture
+## 📂 2. Repository Architecture & Layout
 
 ```text
 axomiyaitlabs/
@@ -50,8 +55,11 @@ axomiyaitlabs/
 │   └── team/index.md              # /team/
 ├── _posts/                        # ✍️ Research Articles (YYYY-MM-DD-title.md)
 ├── _projects/                     # 🛠️ Project Collection (.md files for active projects & ideas)
-│   ├── 00-TEMPLATE.md             # Standard template for new projects
-│   └── 00-IDEA-TEMPLATE.md        # Template for community project ideas
+│   ├── 00-TEMPLATE.md             # Standard template for active projects
+│   ├── 00-IDEA-TEMPLATE.md        # Template for community project ideas
+│   ├── what-after-12.md            # Active project entry
+│   ├── axomiya-ai-tutor.md        # Active project entry
+│   └── open-assam-data.md         # Active project entry
 ├── _announcements/                # 📢 Announcements Collection
 │   └── 00-TEMPLATE.md             # Template for announcements
 ├── _sass/                         # 🎨 SASS Stylesheets (Anthropic Design System)
@@ -73,14 +81,14 @@ axomiyaitlabs/
 ├── Gemfile                        # 💎 Ruby dependencies
 ├── index.md                       # 🏠 Landing Page
 ├── README.md                      # 📖 GitHub Repository README
-└── PROJECT.md                     # 📘 Master Documentation (This file)
+└── PROJECT.md                     # 📘 Master Documentation & Contribution Guide (This File)
 ```
 
 ---
 
-## 🎨 3. Design System & Key Features
+## 🎨 3. Design System & Key Technical Features
 
-### Anthropic Warm Minimalist Aesthetic
+### Anthropic Warm Minimalist Design System
 ```scss
 :root {
   --bg-main: #fcfbfa;            /* Warm off-white page background */
@@ -89,7 +97,7 @@ axomiyaitlabs/
   --bg-dark: #141413;            /* Dark minimalist footer */
   --text-main: #191919;          /* Primary dark charcoal text */
   --text-muted: #595755;        /* Secondary muted charcoal text */
-  --accent-warm: #cc5500;        /* Warm terracotta/amber signature accent */
+  --accent-warm: #cc5500;        /* Signature warm terracotta/amber accent */
   --border-light: #e8e3dc;       /* Clean subtle line borders */
   --font-serif: 'Instrument Serif', Georgia, serif; /* Editorial headings */
   --font-sans: 'Inter', sans-serif;                /* Body & navigation */
@@ -98,32 +106,75 @@ axomiyaitlabs/
 
 ### Key Technical Implementations
 1. **🔍 OpenAI-Style Live Search**:
-   - Search trigger button next to the brand logo in the header with `⌘K` / `Ctrl+K` keyboard shortcut.
-   - Modal overlay that queries `search.json` dynamically with zero dependencies.
-   - Instantly indexes all pages, projects, and research articles.
+   - Search trigger button placed next to the brand logo in the header with `⌘K` / `Ctrl+K` keyboard shortcut badge.
+   - Interactive glassmorphism modal overlay querying dynamic `search.json`.
+   - Instantly searches pages, active projects, community ideas, and research articles with zero external dependencies.
 
-2. **📱 Full-Screen Mobile Drawer Navigation**:
-   - Covers the entire viewport (`top: 0`) when clicked.
-   - High z-index stacking context (`z-index: 1000000` for toggle button) ensures the hamburger icon remains visible and functional above all overlays.
-   - Smooth CSS transform slide transitions.
+2. **📱 Mobile Navigation & Hamburger Drawer**:
+   - Full-screen slide-over drawer (`top: 0`) with high z-index stacking context (`z-index: 1000000` for toggle button, `999999` for drawer).
+   - Keeps brand logo and close toggle button (`is-open` animated ✕) clearly visible at top bar height (64px).
+   - Smooth CSS transform transitions (`transform: translateX(0)`) and accordion support for dropdown submenus.
 
-3. **🦶 Structured Dark Footer**:
-   - Dual-column layout on desktop (`Quick Links` & `Connect` side-by-side).
-   - Social & channel links listed vertically in column alignment.
-   - Distinct `.footer-bottom` copyright bar (`© 2026 Axomiya IT Labs · Open Source · Built with Passion`) pinned as the very last element of the page.
+3. **🦶 Structured Dark Footer Layout**:
+   - Desktop grid layout (`Quick Links` & `Connect` side-by-side in `.footer-cols-row`).
+   - Social and platform channel links aligned vertically in clean columns.
+   - Pinned `.footer-bottom` copyright bar (`© 2026 Axomiya IT Labs · Open Source · Built with Passion`) as the final element of the web page.
 
 4. **⚡ Official Platform SVG Icons**:
-   - Community channels (`/community/`) use SVG icons from `assets/images/icons/` (`github.svg`, `x.svg`, `linkedin.svg`, `telegram.svg`, `youtube.svg`, `facebook.svg`, `instagram.svg`, `email.svg`).
+   - Official platform vector icons from `assets/images/icons/` (`github.svg`, `x.svg`, `linkedin.svg`, `telegram.svg`, `youtube.svg`, `facebook.svg`, `instagram.svg`, `email.svg`) used across `/community/` and footer.
 
 ---
 
-## 🤝 4. How to Contribute
+## 🛠️ 4. Project Lifecycles & Status Badges
 
-We welcome contributions of all kinds! Follow these simple steps based on what you want to add or update:
+Projects on our website are managed in `_projects/`. Each project has a designated `status` in its front matter which determines how it renders on `/projects/`:
 
-### ✍️ A. Publishing a Research Post or Guide
-1. Create a markdown file inside `_posts/` with the filename format `YYYY-MM-DD-your-title.md`.
-2. Include the required Front Matter at the top:
+| Status | Meaning | Rendered Location |
+| :--- | :--- | :--- |
+| **`Live`** | Production-ready tool or platform. | Active Projects Section |
+| **`Beta`** | Working prototype undergoing testing. | Active Projects Section |
+| **`In Progress`** | Active development underway. | Active Projects Section |
+| **`Idea`** | Open community proposal looking for builders. | Ideas Bar Section |
+
+---
+
+## ✍️ 5. Step-by-Step Guide to Add or Update Content
+
+### A. Adding a New Project or Community Idea
+1. **Choose a Template**:
+   - For working tools, prototypes, or active projects: copy `_projects/00-TEMPLATE.md`.
+   - For unbuilt proposals or community ideas: copy `_projects/00-IDEA-TEMPLATE.md`.
+2. **Create Markdown File**: Name it using a lowercase slug, e.g., `_projects/your-project-name.md`.
+3. **Fill in Front Matter**:
+```yaml
+---
+layout: project
+title: "Your Project Title"
+permalink: /projects/your-project-slug/
+date: 2026-07-24
+status: Beta                     # Options: Live, Beta, In Progress, Idea
+category: AI & Education         # Options: AI & ML, Education, Data & Automation, Web
+image: /assets/images/projects/your-project.webp
+tags:
+  - Assamese-AI
+  - Open-Source
+repo: "https://github.com/Axomiya-IT-Labs/your-repo"
+demo: "https://your-demo-url.com"
+tech_stack:
+  - Next.js
+  - Python
+  - Tailwind CSS
+---
+```
+4. **Write Body Sections**:
+   - `## What It Solves`: Explain the real-world problem.
+   - `## Key Features`: Bullet points of functionality.
+   - `## Who Is It For`: Target audience.
+   - `## How to Contribute`: Steps for new contributors.
+
+### B. Publishing Research Posts & Tutorials
+1. Add a markdown file in `_posts/` formatted as `YYYY-MM-DD-title.md`.
+2. Add Front Matter:
 ```markdown
 ---
 layout: post
@@ -131,66 +182,58 @@ title: "Title of your Research or Guide"
 date: 2026-07-24
 author: "Your Name"
 permalink: /research/your-title-slug/
-excerpt: "A brief 1-2 sentence summary of what this article covers."
+excerpt: "A brief summary of what this article covers."
 image: "/assets/images/research/your-image.webp"
 tags:
   - Open-Source
   - AI
 ---
-
-Your markdown content goes here...
 ```
 
-### 🛠️ B. Adding a Project or Community Idea
-1. Copy `_projects/00-TEMPLATE.md` (for active projects) or `_projects/00-IDEA-TEMPLATE.md` (for community ideas).
-2. Save it into `_projects/` with a descriptive filename (e.g., `my-cool-ai-tool.md`).
-3. Fill in the title, status (`Live`, `Beta`, `In Progress`, or `Idea`), category, and description.
+### C. Publishing Announcements
+1. Copy `_announcements/00-TEMPLATE.md` to `_announcements/YYYY-MM-DD-title.md`.
+2. Set title, date, excerpt, and announcement details.
 
-### 📢 C. Publishing an Announcement
-1. Copy `_announcements/00-TEMPLATE.md`.
-2. Save it in `_announcements/` as `YYYY-MM-DD-title.md`.
-3. Add the title, date, excerpt, and content.
-
-### 👨‍💻 D. Adding or Updating Team Members
-1. Open `_data/team.yml`.
-2. Add your entry under the appropriate category (`leadership`, `developers`, `designers`, or `advisors`):
-```yaml
-- name: "Your Name"
-  role: "Your Role / Contribution"
-  bio: "Short bio about what you build or research."
-  github: "https://github.com/your-username"
-  avatar: "/assets/images/team/your-avatar.jpg"
-```
+### D. Updating Team Profiles
+1. Edit `_data/team.yml`.
+2. Add entries under `leadership`, `developers`, `designers`, or `advisors`.
 
 ---
 
-## 💻 5. Local Setup & Workflow
+## 🤝 6. Contributor Git Workflow (Pull Requests)
 
-### Prerequisites
-- **Ruby** (v3.0+)
-- **Bundler** (`gem install bundler`)
-
-### Step-by-Step Setup
-1. **Fork & Clone** the repository:
+1. **Fork the Repository**: Click "Fork" on `Axomiya-IT-Labs/axomiya-it-labs.github.io`.
+2. **Clone your Fork**:
    ```bash
    git clone https://github.com/YOUR-USERNAME/axomiya-it-labs.github.io.git
    cd axomiya-it-labs.github.io
    ```
-2. **Install Dependencies**:
+3. **Install & Run Locally**:
    ```bash
    bundle install
-   ```
-3. **Run Local Server**:
-   ```bash
    bundle exec jekyll serve
    ```
-4. **Preview**: Open `http://localhost:4000` in your web browser.
+   Visit `http://localhost:4000`.
+4. **Create a Feature Branch**:
+   ```bash
+   git checkout -b feature/my-contribution
+   ```
+5. **Commit & Push**:
+   ```bash
+   git add .
+   git commit -m "feat: add new AI research article"
+   git push origin feature/my-contribution
+   ```
+6. **Submit a PR**: Open a Pull Request on the main repository!
 
-### Submitting a Pull Request (PR)
-1. Create a feature branch: `git checkout -b feature/my-new-contribution`
-2. Commit your changes: `git commit -m "feat: add new research article on AI"`
-3. Push to your fork: `git push origin feature/my-new-contribution`
-4. Open a **Pull Request** on the main `Axomiya-IT-Labs/axomiya-it-labs.github.io` repository!
+---
+
+## 📈 7. Scaling to 50+ Projects
+
+To ensure the repository and platform scale effortlessly:
+- Use consistent category tags (`AI & ML`, `Education`, `Data & Automation`, `Community & Web`).
+- Ensure all active projects link to a valid open-source GitHub repository in `_projects/`.
+- Optimize all project thumbnail images as `.webp` (target file size under 200KB).
 
 ---
 *Maintained with ❤️ by Axomiya IT Labs community.*
