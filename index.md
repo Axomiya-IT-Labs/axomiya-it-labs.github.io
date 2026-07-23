@@ -5,22 +5,25 @@ title: Home
 
 <div class="hero-section">
   <span class="hero-badge">Rooted in Assam</span>
-  <h1 class="hero-title">Assam's first AI & open-source community.</h1>
-  <p class="hero-subtitle">Everyone is welcome — no matter your age, background, or technical skill. If you are curious and want to learn, build, or share, you belong here.</p>
+  <h1 class="hero-title">Assam's first AI &amp; open-source community.</h1>
+  <p class="hero-subtitle">The internet is the greatest free encyclopedia humanity has ever built. We collect precise information, make thoughtful analyses, and make it accessible to everyone in Assam — so no one is left behind.</p>
   <div class="hero-buttons">
-    <a href="{{ '/projects/' | relative_url }}" class="btn btn-primary">Explore FOSS Projects</a>
-    <a href="{{ '/community/' | relative_url }}" class="btn btn-secondary">Join Community</a>
+    <a href="{{ '/projects/' | relative_url }}" class="btn btn-primary">Explore Projects</a>
+    <a href="{{ '/community/' | relative_url }}" class="btn btn-secondary">Join the Community</a>
   </div>
 </div>
 
 <section class="mission-block text-center container">
   <h2 class="section-title">Our Mission</h2>
-  <p class="lead">
-    The internet is the greatest free encyclopedia humanity has ever built. We are here to collect precise information, make thoughtful analyses, present clear findings, add local context, and make all of it accessible to everyone in Assam — so that no one is left behind by international standards of technology and knowledge.
+  <p class="lead" style="max-width: 720px; margin: 0 auto 1.25rem;">
+    We are here to collect precise information, make thoughtful analyses, present clear findings, add local context, and make all of it accessible to everyone in Assam — so that no one is left behind by international standards of technology and knowledge.
   </p>
-  <p class="lead">
-    If you want to share what you know, benefit others, and explore new fields with genuine curiosity, this is your community. Assam's first AI and open-source space — where everyone is welcome, whatever you do professionally.
+  <p style="max-width: 680px; margin: 0 auto 1.5rem; color: var(--text-muted);">
+    If you want to share what you know, benefit others, and explore new fields with genuine curiosity — this is your community. Whatever you do professionally, bring your best. Assam's first AI and open-source space, where everyone is welcome.
   </p>
+  <div class="hero-buttons" style="justify-content: center; margin-top: 1.5rem;">
+    <a href="{{ '/about/' | relative_url }}" class="btn btn-secondary">Read Our Full Mission</a>
+  </div>
 </section>
 
 <section class="what-we-do-section container">
@@ -31,24 +34,47 @@ title: Home
 
   <div class="three-column-grid">
     <div class="card-item">
-      <div class="card-icon">📖</div>
+      <div class="card-icon-text">Learn</div>
       <h3>Learn</h3>
-      <p>Read short guides, watch practical tutorials, and explore AI tools in plain language. Each lesson is written to feel friendly, not intimidating, so beginners can keep going without getting bored.</p>
+      <p>Read short guides, watch practical tutorials, and explore AI tools in plain language. Each lesson is written to feel friendly — so beginners can keep going without getting overwhelmed.</p>
       <p class="card-quote">"Clear language lowers fear."</p>
     </div>
 
     <div class="card-item">
-      <div class="card-icon">🔨</div>
+      <div class="card-icon-text">Build</div>
       <h3>Build</h3>
-      <p>Create real projects: websites, AI tools, automation scripts, and educational platforms. We keep the steps visible and the code open, so people feel progress quickly and can improve what already exists.</p>
+      <p>Create real projects: websites, AI tools, automation scripts, educational platforms. We keep the steps visible and the code open, so people feel progress quickly and can improve what already exists.</p>
       <p class="card-quote">"Visible progress keeps motivation alive."</p>
     </div>
 
     <div class="card-item">
-      <div class="card-icon">🤝</div>
+      <div class="card-icon-text">Share</div>
       <h3>Share</h3>
-      <p>Share what you learn, even if it feels small. Every translation, tutorial, example, bug report, and line of code removes friction for the next person and makes the community feel easier to enter.</p>
+      <p>Share what you learn, even if it feels small. Every translation, tutorial, bug report, and line of code removes friction for the next person and makes the community easier to enter.</p>
       <p class="card-quote">"Small help compounds."</p>
+    </div>
+  </div>
+</section>
+
+<section class="featured-project-section container">
+  <div class="text-center">
+    <h2 class="section-title">Featured Project</h2>
+    <p class="section-subtitle">Built in Assam, for Assam.</p>
+  </div>
+  <div class="featured-project-card">
+    <div class="fp-meta">
+      <span class="fp-status">Beta</span>
+      <span class="fp-category">AI &amp; Education</span>
+    </div>
+    <h3 class="fp-title">What After 12th</h3>
+    <p class="fp-desc">An AI-guided assistant that breaks down college streams, scholarships, and job pathways in plain Assamese — for Class 10 &amp; 12 students who lack access to structured career counseling.</p>
+    <div class="fp-links">
+      <a href="https://whatafter12.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
+      <a href="https://github.com/axomiyaindie/wa12" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <img src="{{ '/assets/images/icons/github.svg' | relative_url }}" alt="" width="16" height="16" aria-hidden="true" style="vertical-align:middle;margin-right:0.35rem;">
+        View on GitHub
+      </a>
+      <a href="{{ '/projects/what-after-12/' | relative_url }}" class="btn btn-secondary">Project Details</a>
     </div>
   </div>
 </section>
@@ -70,13 +96,13 @@ title: Home
     <div class="principle-card">
       <div class="principle-num">02</div>
       <h3>Open Source, Made Easier by AI</h3>
-      <p>Everything we make is free, transparent, and community-driven, built with contributors instead of only for users. AI reduces the hard parts: drafting docs, translating content, reviewing code, and finding bugs. That gives people more energy for ideas, judgment, and impact.</p>
+      <p>Everything we make is free, transparent, and community-driven — built with contributors instead of only for users. AI reduces the hard parts: drafting docs, translating content, reviewing code, and finding bugs. That gives people more energy for ideas, judgment, and impact.</p>
       <div class="principle-takeaway">You can contribute even if your first contribution is a correction.</div>
     </div>
 
     <div class="principle-card">
       <div class="principle-num">03</div>
-      <h3>Accessible Tech & Learning</h3>
+      <h3>Accessible Tech &amp; Learning</h3>
       <p>Language does not decide who gets to learn. We build clear, accessible resources so every learner starts with confidence. Understanding comes first. Speed comes after.</p>
       <div class="principle-takeaway">Understanding comes first. Speed comes after.</div>
     </div>
@@ -123,6 +149,6 @@ title: Home
     {% endfor %}
   </div>
   <div class="text-center" style="margin-top: 1.5rem;">
-    <a href="{{ '/announcements/' | relative_url }}" class="btn btn-secondary">View All Announcements →</a>
+    <a href="{{ '/announcements/' | relative_url }}" class="btn btn-secondary">View All Announcements</a>
   </div>
 </section>

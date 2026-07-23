@@ -3,7 +3,7 @@ layout: announcement
 title: "Official Launch of Axomiya IT Labs — Assam's First AI & FOSS Community"
 permalink: /announcements/axomiya-it-labs-launch/
 date: 2026-07-23
-author: "Axomiya IT Labs"
+author: "Rakibul Islam"
 type: "Official Launch"
 category: "Community"
 excerpt: "We are thrilled to launch Axomiya IT Labs — Assam's first AI and open-source community dedicated to making technology accessible for everyone."

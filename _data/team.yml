@@ -1,14 +1,12 @@
 leadership:
-  - name: "Dr. Rakibul Islam"
+  - name: "Rakibul Islam"
     role: "Founder & Director"
-    bio: "AI Researcher & Open Source Advocate — passionate about GenAI, community building, and making technology accessible in Assamese."
+    bio: "AI researcher and open-source advocate passionate about GenAI, community building, and making technology accessible in Assamese."
     image: "/assets/images/team/leads/rakibul.jpg"
-    education: "B.Tech in Computer Science, BVEC"
     social:
-      github: "rakibulislam"
-      linkedin: "rakibul-islam"
-      twitter: "rakibul_ai"
-    interests: ["Open Source", "GenAI", "Community Building", "AI/ML"]
+      github: "https://github.com/axomiyaindie"
+      linkedin: "https://www.linkedin.com/in/axomiyaindie/"
+      twitter: "https://x.com/axomiyaindie"
 
 developers: []
 

@@ -11,7 +11,7 @@ tags:
   - Career-Guidance
   - Open-Source
 repo: "https://github.com/axomiyaindie/wa12"
-demo: "https://whatafter12.vercel.app/"
+demo: "https://whatafter12.vercel.app/en"
 tech_stack:
   - Next.js
   - Python

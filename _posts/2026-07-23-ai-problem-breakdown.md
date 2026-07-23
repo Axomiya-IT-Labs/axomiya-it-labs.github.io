@@ -2,7 +2,7 @@
 layout: default
 title: "AI Problem Breakdown: Career Guidance After Class 12"
 date: 2026-07-23
-author: Axomiya IT Labs
+author: "Rakibul Islam"
 permalink: /research/ai-problem-breakdown/
 ---
 
