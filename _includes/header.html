@@ -1,52 +1,33 @@
 <header class="site-header">
   <div class="header-container">
-    <!-- Brand Logo (left side) -->
+
+    <!-- Brand Logo — fixed left -->
     <a href="{{ '/' | relative_url }}" class="site-logo" aria-label="Axomiya IT Labs — Home">
-      <svg class="logo-svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="34" height="34" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#22c55e"/>
-            <stop offset="60%" stop-color="#06b6d4"/>
-            <stop offset="100%" stop-color="#2563eb"/>
-          </linearGradient>
-        </defs>
-        <rect width="512" height="512" rx="110" fill="#0f172a"/>
-        <!-- A letterform -->
-        <path d="M92 420L214 90h84l122 330h-78l-27-77H197l-27 77H92z M221 276h70l-35-102-35 102z" fill="url(#logo-grad)"/>
-        <!-- Circuit traces -->
-        <g fill="none" stroke="url(#logo-grad)" stroke-width="14" stroke-linecap="round">
-          <path d="M302 190H390"/>
-          <path d="M302 245H430"/>
-          <path d="M302 300H390"/>
-        </g>
-        <!-- Circuit nodes -->
-        <g fill="url(#logo-grad)">
-          <circle cx="390" cy="190" r="10"/>
-          <circle cx="430" cy="245" r="10"/>
-          <circle cx="390" cy="300" r="10"/>
-        </g>
-      </svg>
+      <img src="{{ '/assets/images/icons/icon.svg' | relative_url }}" alt="Axomiya IT Labs" class="logo-svg" width="34" height="34">
       <span class="logo-text">Axomiya IT Labs</span>
     </a>
 
-    <!-- Mobile menu toggle -->
-    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
+    <!-- Spacer — pushes nav to start from visual centre on desktop -->
+    <div class="header-spacer" aria-hidden="true"></div>
 
     <!-- Desktop & Mobile Navigation -->
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <ul class="nav-list">
         {% for item in site.data.navigation %}
-          <li class="nav-item{% if item.dropdown %} has-dropdown{% endif %}">
-            <a href="{{ item.link | relative_url }}" class="nav-link {% if page.url == item.link %}active{% endif %}">
-              {{ item.name }}
-              {% if item.dropdown %}<span class="dropdown-arrow" aria-hidden="true">▾</span>{% endif %}
-            </a>
+          <li class="nav-item{% if item.dropdown %} has-dropdown{% endif %}" id="nav-item-{{ forloop.index }}">
             {% if item.dropdown %}
-              <ul class="dropdown-menu" role="menu">
+              <button
+                class="nav-link nav-link--btn {% if page.url == item.link %}active{% endif %}"
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-dropdown="dropdown-{{ forloop.index }}"
+              >
+                {{ item.name }}
+                <span class="dropdown-arrow" aria-hidden="true">
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+              <ul class="dropdown-menu" id="dropdown-{{ forloop.index }}" role="menu">
                 {% for subitem in item.dropdown %}
                   <li role="none">
                     <a href="{{ subitem.link | relative_url }}" class="dropdown-item {% if page.url == subitem.link %}active{% endif %}" role="menuitem">
@@ -55,45 +36,119 @@
                   </li>
                 {% endfor %}
               </ul>
+            {% else %}
+              <a href="{{ item.link | relative_url }}" class="nav-link {% if page.url == item.link %}active{% endif %}">
+                {{ item.name }}
+              </a>
             {% endif %}
           </li>
         {% endfor %}
       </ul>
     </nav>
+
+    <!-- Mobile hamburger — always visible on mobile -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
   </div>
 </header>
 
 <script>
-(function() {
+(function () {
+  // ── Hamburger / mobile drawer ──────────────────────────────
   var toggle = document.getElementById('mobile-menu-toggle');
   var nav    = document.getElementById('site-nav');
-  if (!toggle || !nav) return;
 
-  toggle.addEventListener('click', function() {
-    var isOpen = nav.classList.toggle('open');
-    toggle.classList.toggle('is-open', isOpen);
-    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  function openMobileNav() {
+    nav.classList.add('open');
+    toggle.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close navigation menu');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileNav() {
+    nav.classList.remove('open');
+    toggle.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+    document.body.style.overflow = '';
+  }
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (nav.classList.contains('open')) { closeMobileNav(); } else { openMobileNav(); }
+    });
+
+    // Escape key closes mobile nav
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeMobileNav();
+        closeAllDropdowns();
+      }
+    });
+  }
+
+  // ── Click-only dropdowns (desktop + mobile) ────────────────
+  var dropdownBtns = document.querySelectorAll('[data-dropdown]');
+
+  function closeAllDropdowns(except) {
+    dropdownBtns.forEach(function (btn) {
+      if (btn === except) return;
+      var menuId = btn.getAttribute('data-dropdown');
+      var menu   = document.getElementById(menuId);
+      if (menu) {
+        menu.classList.remove('is-open');
+        menu.removeAttribute('style');
+      }
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('dropdown-open');
+      // Reset arrow
+      var arrow = btn.querySelector('.dropdown-arrow');
+      if (arrow) arrow.classList.remove('rotated');
+    });
+  }
+
+  dropdownBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var menuId  = btn.getAttribute('data-dropdown');
+      var menu    = document.getElementById(menuId);
+      var isOpen  = menu && menu.classList.contains('is-open');
+      var arrow   = btn.querySelector('.dropdown-arrow');
+
+      closeAllDropdowns(btn);
+
+      if (!isOpen && menu) {
+        menu.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.classList.add('dropdown-open');
+        if (arrow) arrow.classList.add('rotated');
+      } else {
+        if (arrow) arrow.classList.remove('rotated');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.classList.remove('dropdown-open');
+      }
+    });
   });
 
-  // Close on outside click
-  document.addEventListener('click', function(e) {
-    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
-      nav.classList.remove('open');
-      toggle.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open navigation menu');
-    }
+  // Close dropdowns when clicking anywhere outside nav
+  document.addEventListener('click', function () {
+    closeAllDropdowns();
+    // Do NOT close mobile nav here — that needs explicit toggle click
   });
 
-  // Close on Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && nav.classList.contains('open')) {
-      nav.classList.remove('open');
-      toggle.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.focus();
-    }
-  });
+  // Prevent nav clicks from bubbling to document and closing themselves
+  if (nav) {
+    nav.addEventListener('click', function (e) {
+      // Only stop propagation for non-link elements
+      if (!e.target.closest('a')) e.stopPropagation();
+    });
+  }
+
 })();
 </script>

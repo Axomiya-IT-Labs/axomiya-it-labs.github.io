@@ -7,7 +7,7 @@ author: "Axomiya IT Labs"
 type: "Community Event"
 category: "Hackathons"
 excerpt: "Get ready for Assam's first community-driven AI and open-source hackathon — build real solutions for regional challenges."
-image: "/assets/images/announcements/axomiya-it-labs-launch.webp"
+image: "/assets/images/announcements/hackathon.webp"
 tags:
   - Hackathon
   - AI-Event

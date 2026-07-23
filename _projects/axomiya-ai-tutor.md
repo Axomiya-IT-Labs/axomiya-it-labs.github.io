@@ -3,15 +3,13 @@ layout: project
 title: "Axomiya AI Tutor — LLM Assistant for Learners"
 permalink: /projects/axomiya-ai-tutor/
 date: 2026-07-23
-status: Live
+status: Coming Soon
 category: AI & ML
 excerpt: "An interactive LLM learning assistant that translates programming concepts and error logs into beginner-friendly Assamese."
 tags:
   - LLM
   - NLP
   - Assamese-Translation
-repo: "https://github.com/Axomiya-IT-Labs/axomiya-ai-tutor"
-demo: "https://axomiya-it-labs.github.io"
 tech_stack:
   - JavaScript
   - PyTorch

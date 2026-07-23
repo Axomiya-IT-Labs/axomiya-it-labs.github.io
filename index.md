@@ -56,26 +56,55 @@ title: Home
   </div>
 </section>
 
+<!-- Live Projects — Krittimat & WhatAfter12 -->
 <section class="featured-project-section container">
   <div class="text-center">
-    <h2 class="section-title">Featured Project</h2>
-    <p class="section-subtitle">Built in Assam, for Assam.</p>
+    <h2 class="section-title">Live Projects</h2>
+    <p class="section-subtitle">Built in Assam, for everyone.</p>
   </div>
-  <div class="featured-project-card">
-    <div class="fp-meta">
-      <span class="fp-status">Beta</span>
-      <span class="fp-category">AI &amp; Education</span>
+
+  <div class="fp-grid">
+
+    <!-- Krittimat -->
+    <div class="featured-project-card">
+      <div class="fp-meta">
+        <span class="fp-status fp-status--live">Live</span>
+        <span class="fp-category">AI &amp; Tools</span>
+      </div>
+      <h3 class="fp-title">Krittimat</h3>
+      <p class="fp-desc">Know all the most famous AI tools for everything — Image Generation, Voice Cloning, Video Creation, Content Writing, Coding, Orchestration, and Prompting in the age of LLMs.</p>
+      <div class="fp-links">
+        <a href="https://krittimat.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
+        <a href="https://github.com/axomiyaindie/krittimat" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <img src="{{ '/assets/images/icons/github.svg' | relative_url }}" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
+          GitHub
+        </a>
+        <a href="{{ '/projects/krittimat/' | relative_url }}" class="btn btn-secondary">Details</a>
+      </div>
     </div>
-    <h3 class="fp-title">What After 12th</h3>
-    <p class="fp-desc">An AI-guided assistant that breaks down college streams, scholarships, and job pathways in plain Assamese — for Class 10 &amp; 12 students who lack access to structured career counseling.</p>
-    <div class="fp-links">
-      <a href="https://whatafter12.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
-      <a href="https://github.com/axomiyaindie/wa12" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-        <img src="{{ '/assets/images/icons/github.svg' | relative_url }}" alt="" width="16" height="16" aria-hidden="true" style="vertical-align:middle;margin-right:0.35rem;">
-        View on GitHub
-      </a>
-      <a href="{{ '/projects/what-after-12/' | relative_url }}" class="btn btn-secondary">Project Details</a>
+
+    <!-- What After 12th -->
+    <div class="featured-project-card">
+      <div class="fp-meta">
+        <span class="fp-status fp-status--live">Live</span>
+        <span class="fp-category">AI &amp; Education</span>
+      </div>
+      <h3 class="fp-title">What After 12th</h3>
+      <p class="fp-desc">An AI-guided assistant that breaks down college streams, scholarships, and job pathways in plain Assamese — for Class 10 &amp; 12 students who lack access to structured career counseling.</p>
+      <div class="fp-links">
+        <a href="https://whatafter12.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
+        <a href="https://github.com/axomiyaindie/wa12" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <img src="{{ '/assets/images/icons/github.svg' | relative_url }}" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
+          GitHub
+        </a>
+        <a href="{{ '/projects/what-after-12/' | relative_url }}" class="btn btn-secondary">Details</a>
+      </div>
     </div>
+
+  </div>
+
+  <div class="text-center" style="margin-top:1.75rem;">
+    <a href="{{ '/projects/' | relative_url }}" class="btn btn-secondary">View All Projects</a>
   </div>
 </section>
 

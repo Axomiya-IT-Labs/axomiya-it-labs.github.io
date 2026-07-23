@@ -31,16 +31,33 @@
     {% if member.social %}
     <div class="social-links">
         {% if member.social.github %}
-        <a href="https://github.com/{{ member.social.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        {% assign gh_url = member.social.github %}
+        {% unless gh_url contains '://' %}{% assign gh_url = 'https://github.com/' | append: gh_url %}{% endunless %}
+        <a href="{{ gh_url }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+          <img src="{{ '/assets/images/icons/github.svg' | relative_url }}" alt="" width="16" height="16" aria-hidden="true">
+          <span>GitHub</span>
+        </a>
         {% endif %}
         {% if member.social.linkedin %}
-        <a href="https://linkedin.com/in/{{ member.social.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        {% assign li_url = member.social.linkedin %}
+        {% unless li_url contains '://' %}{% assign li_url = 'https://linkedin.com/in/' | append: li_url %}{% endunless %}
+        <a href="{{ li_url }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <img src="{{ '/assets/images/icons/linkedin.svg' | relative_url }}" alt="" width="16" height="16" aria-hidden="true">
+          <span>LinkedIn</span>
+        </a>
         {% endif %}
         {% if member.social.twitter %}
-        <a href="https://twitter.com/{{ member.social.twitter }}" target="_blank" rel="noopener noreferrer">Twitter</a>
+        {% assign tw_url = member.social.twitter %}
+        {% unless tw_url contains '://' %}{% assign tw_url = 'https://x.com/' | append: tw_url %}{% endunless %}
+        <a href="{{ tw_url }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+          <img src="{{ '/assets/images/icons/x.svg' | relative_url }}" alt="" width="16" height="16" aria-hidden="true">
+          <span>X</span>
+        </a>
         {% endif %}
         {% if member.social.portfolio %}
-        <a href="{{ member.social.portfolio }}" target="_blank" rel="noopener noreferrer">Portfolio</a>
+        <a href="{{ member.social.portfolio }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Portfolio">
+          <span>Portfolio</span>
+        </a>
         {% endif %}
     </div>
     {% endif %}

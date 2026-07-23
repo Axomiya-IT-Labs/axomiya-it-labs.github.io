@@ -17,8 +17,13 @@
         {% if member.joined %}<span>📅 Joined {{ member.joined | date: "%b %Y" }}</span>{% endif %}
     </div>
     {% if member.github %}
+    {% assign gh_url = member.github %}
+    {% unless gh_url contains '://' %}{% assign gh_url = 'https://github.com/' | append: gh_url %}{% endunless %}
     <div class="social">
-        <a href="https://github.com/{{ member.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="{{ gh_url }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <img src="{{ '/assets/images/icons/github.svg' | relative_url }}" alt="" width="16" height="16" aria-hidden="true">
+            <span>GitHub</span>
+        </a>
     </div>
     {% endif %}
 </div>

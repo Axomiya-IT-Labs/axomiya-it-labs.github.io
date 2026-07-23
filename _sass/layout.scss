@@ -4,27 +4,26 @@
 
 // ── Site Header ─────────────────────────────────────────────
 .site-header {
-  background: var(--bg-main);
+  background: rgba(252, 251, 250, 0.96);
   border-bottom: 1px solid var(--border-light);
   padding: 0;
   position: sticky;
   top: 0;
   z-index: 200;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   .header-container {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 1140px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.25rem;
+    padding: 0 1.5rem;
     height: 64px;
-    gap: 1.5rem;
   }
 
-  // ── Brand Logo (left anchor) ────────────────────────────
+  // ── Brand Logo — fixed far left ─────────────────────────
   .site-logo {
     display: flex;
     align-items: center;
@@ -32,17 +31,18 @@
     color: var(--text-main);
     font-family: var(--font-sans);
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
     border-bottom: none;
     white-space: nowrap;
     flex-shrink: 0;
     text-decoration: none;
+    margin-right: 0;
 
     .logo-svg {
       display: block;
       flex-shrink: 0;
-      transition: transform 0.25s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .logo-text {
@@ -57,85 +57,116 @@
       border-bottom: none;
 
       .logo-svg {
-        transform: rotate(-4deg) scale(1.06);
+        transform: rotate(-5deg) scale(1.08);
       }
     }
   }
 
-  // ── Spacer — pushes nav to start from centre ───────────
-  // The logo takes ~50% and the nav fills from midpoint rightward
-  .header-container::after {
-    content: '';
-    flex: 1;
+  // ── Spacer — pushes nav to right half of header ─────────
+  .header-spacer {
+    flex: 1; // Takes up all free space, pushing nav to far right
+    min-width: 1rem;
   }
 
   // ── Desktop Navigation ──────────────────────────────────
   .site-nav {
-    display: none; // hidden on mobile by default
-    align-items: center;
+    display: none; // hidden on mobile by default — JS toggles open class
 
     .nav-list {
       display: flex;
       list-style: none;
       margin: 0;
       padding: 0;
-      gap: 0.25rem;
+      gap: 0.15rem;
+      align-items: center;
     }
 
     .nav-item {
       position: relative;
     }
 
+    // Shared styles for both <a> and <button> nav links
     .nav-link {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.2rem;
-      padding: 0.45rem 0.85rem;
+      gap: 0.3rem;
+      padding: 0.45rem 0.9rem;
       border-radius: var(--radius-sm);
       color: var(--text-muted);
       font-family: var(--font-sans);
       font-weight: 500;
       font-size: 0.925rem;
       border-bottom: none;
-      transition: color 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+      transition: color 0.18s ease, background 0.18s ease;
+      cursor: pointer;
 
       &:hover,
-      &.active {
+      &.active,
+      &.dropdown-open {
         color: var(--text-main);
         background: var(--bg-subtle);
         text-decoration: none;
         border-bottom: none;
       }
+    }
 
-      .dropdown-arrow {
-        font-size: 0.7rem;
-        opacity: 0.6;
-        transition: transform 0.2s ease;
+    // Button reset for dropdown triggers
+    .nav-link--btn {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .dropdown-arrow {
+      display: inline-flex;
+      align-items: center;
+      opacity: 0.55;
+      transition: transform 0.22s ease;
+
+      svg {
+        display: block;
+      }
+
+      &.rotated {
+        transform: rotate(180deg);
+        opacity: 0.9;
       }
     }
 
-    // Dropdown
+    // ── Desktop Dropdown Menu ─────────────────────────────
     .dropdown-menu {
-      display: none;
+      display: none; // Hidden by default
       position: absolute;
-      top: calc(100% + 6px);
+      top: calc(100% + 8px);
       right: 0;
       background: #ffffff;
       border: 1px solid var(--border-light);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
       list-style: none;
       padding: 6px 0;
-      min-width: 170px;
+      min-width: 180px;
       border-radius: var(--radius-md);
-      z-index: 300;
+      z-index: 500;
+      animation: dropIn 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      &.is-open {
+        display: block;
+      }
 
       .dropdown-item {
         display: block;
-        padding: 0.5rem 1rem;
+        padding: 0.55rem 1.1rem;
         font-size: 0.9rem;
         color: var(--text-muted);
+        font-family: var(--font-sans);
+        font-weight: 500;
         border-bottom: none;
+        text-decoration: none;
         transition: background 0.15s ease, color 0.15s ease;
+        white-space: nowrap;
 
         &:hover,
         &.active {
@@ -145,18 +176,9 @@
         }
       }
     }
-
-    .nav-item.has-dropdown:hover .dropdown-menu,
-    .nav-item.has-dropdown:focus-within .dropdown-menu {
-      display: block;
-    }
-
-    .nav-item.has-dropdown:hover .dropdown-arrow {
-      transform: rotate(180deg);
-    }
   }
 
-  // ── Mobile hamburger ────────────────────────────────────
+  // ── Mobile Hamburger Button ─────────────────────────────
   .mobile-menu-toggle {
     display: flex;
     flex-direction: column;
@@ -164,25 +186,30 @@
     align-items: center;
     gap: 5px;
     background: none;
-    border: none;
+    border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
     cursor: pointer;
-    padding: 0.4rem;
-    margin-left: auto; // push to right edge on mobile
-    width: 40px;
-    height: 40px;
+    padding: 0.4rem 0.5rem;
+    margin-left: 0.75rem;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease;
 
     .hamburger-line {
       display: block;
-      width: 22px;
+      width: 20px;
       height: 2px;
       background: var(--text-main);
       border-radius: 2px;
-      transition: transform 0.28s ease, opacity 0.2s ease;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
       transform-origin: center;
     }
 
     &.is-open {
+      background: var(--bg-subtle);
+      border-color: var(--text-main);
+
       .hamburger-line:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
       }
@@ -201,11 +228,168 @@
   }
 }
 
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 // ── Main Content ─────────────────────────────────────────────
 .main-content {
   min-height: calc(100vh - 340px);
   padding-top: 2rem;
   padding-bottom: 4rem;
+}
+
+// ============================================================
+// Mobile — Full-Screen Drawer Nav (max-width: 767px)
+// ============================================================
+@media (max-width: 767px) {
+  .site-header {
+    .site-nav {
+      // Initial state: off-screen to the right, hidden
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-main);
+      border-top: 2px solid var(--border-light);
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      // Use transform for smooth slide-in; keep display:none when not open
+      // We use a visibility trick: display:none by default, display:flex when .open added
+      transform: translateX(105%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &.open {
+        display: flex; // Override display:none
+        transform: translateX(0);
+      }
+
+      .nav-list {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 0.5rem 0;
+      }
+
+      .nav-item {
+        width: 100%;
+        border-bottom: 1px solid var(--border-subtle);
+
+        &:last-child { border-bottom: none; }
+      }
+
+      // Both link and button nav items on mobile
+      .nav-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+        border-radius: 0;
+        background: transparent;
+
+        &:hover,
+        &.active,
+        &.dropdown-open {
+          background: var(--bg-subtle);
+          color: var(--text-main);
+        }
+      }
+
+      .nav-link--btn {
+        text-align: left;
+        width: 100%;
+      }
+
+      // ── Mobile Dropdown — inline accordion ───────────────
+      .dropdown-menu {
+        position: static;    // Not absolute on mobile
+        display: none;       // Hidden by default
+        box-shadow: none;
+        border: none;
+        border-top: 1px solid var(--border-subtle);
+        border-radius: 0;
+        background: var(--bg-subtle);
+        padding: 0.25rem 0;
+        width: 100%;
+        animation: none;
+
+        &.is-open {
+          display: block;   // Show when toggled
+        }
+
+        .dropdown-item {
+          display: block;
+          padding: 0.85rem 2rem; // Indented for hierarchy
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: var(--text-muted);
+          border-bottom: 1px solid var(--border-subtle);
+          text-decoration: none;
+          white-space: normal;
+
+          &:last-child { border-bottom: none; }
+
+          &:hover,
+          &.active {
+            background: var(--border-light);
+            color: var(--text-main);
+          }
+        }
+      }
+
+      // Rotate arrow when dropdown is open on mobile
+      .dropdown-open .dropdown-arrow {
+        transform: rotate(180deg);
+      }
+    }
+
+    // Hide spacer on mobile (not needed)
+    .header-spacer {
+      display: none;
+    }
+  }
+}
+
+// ============================================================
+// Desktop — 768px+
+// ============================================================
+@media (min-width: 768px) {
+  .site-header {
+    // Hide hamburger on desktop
+    .mobile-menu-toggle {
+      display: none;
+    }
+
+    // Show nav as horizontal flex row
+    .site-nav {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    // Spacer shows on desktop, pushes nav to start from center
+    .header-spacer {
+      display: block;
+    }
+  }
+
+  // ── Footer grid on desktop ────────────────────────────────
+  .site-footer {
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+  }
 }
 
 // ============================================================
@@ -233,7 +417,7 @@
       color: #ffffff;
       font-family: var(--font-sans);
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 
@@ -241,22 +425,24 @@
     color: #a3a19b;
     font-size: 0.95rem;
     margin-bottom: 0;
+    line-height: 1.6;
   }
 
   .copyright {
     margin-top: 1.25rem;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: #5e5c56;
+    line-height: 1.5;
   }
 
   .footer-links,
   .footer-social {
     h4 {
       color: #ffffff;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       margin-bottom: 1rem;
       font-family: var(--font-sans);
     }
@@ -267,7 +453,7 @@
       margin: 0;
 
       li {
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.6rem;
 
         a {
           color: #a3a19b;
@@ -275,9 +461,7 @@
           border-bottom: none;
           transition: color 0.2s ease;
 
-          &:hover {
-            color: #ffffff;
-          }
+          &:hover { color: #ffffff; }
         }
       }
     }
@@ -286,7 +470,7 @@
   .social-links {
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
+    gap: 0.6rem;
 
     .social-link {
       display: inline-flex;
@@ -298,138 +482,18 @@
       transition: color 0.2s ease;
 
       img {
-        opacity: 0.6;
-        filter: invert(1) brightness(0.8);
+        opacity: 0.55;
+        filter: invert(1) brightness(0.85);
         transition: opacity 0.2s ease;
+        flex-shrink: 0;
       }
 
       &:hover {
         color: #ffffff;
         border-bottom: none;
 
-        img {
-          opacity: 1;
-        }
+        img { opacity: 1; }
       }
-    }
-  }
-}
-
-// ============================================================
-// Mobile — Responsive Drawer Nav
-// ============================================================
-@media (max-width: 767px) {
-  .site-header {
-    .site-nav {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg-main);
-      border-top: 1px solid var(--border-light);
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 1.75rem 1.5rem;
-      gap: 0;
-      overflow-y: auto;
-      transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-      &.open {
-        display: flex;
-        transform: translateX(0);
-      }
-
-      .nav-list {
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-      }
-
-      .nav-item {
-        width: 100%;
-        border-bottom: 1px solid var(--border-subtle);
-
-        &:last-child {
-          border-bottom: none;
-        }
-      }
-
-      .nav-link {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 1rem 0;
-        font-size: 1.05rem;
-        border-radius: 0;
-        background: transparent;
-
-        &:hover {
-          background: transparent;
-        }
-      }
-
-      // Mobile dropdown: open inline
-      .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        border-radius: 0;
-        background: transparent;
-        padding: 0 0 0.5rem 0.75rem;
-
-        .dropdown-item {
-          padding: 0.6rem 0;
-          font-size: 0.95rem;
-          border-radius: 0;
-
-          &:hover {
-            background: transparent;
-            color: var(--accent-warm);
-          }
-        }
-      }
-
-      .nav-item.has-dropdown:hover .dropdown-menu,
-      .nav-item.has-dropdown:focus-within .dropdown-menu {
-        display: block;
-      }
-    }
-
-    // Hide spacer pseudo-element on mobile
-    .header-container::after {
-      display: none;
-    }
-  }
-}
-
-// ============================================================
-// Desktop — 768px+
-// ============================================================
-@media (min-width: 768px) {
-  .site-header {
-    .mobile-menu-toggle {
-      display: none;
-    }
-
-    .site-nav {
-      display: flex;
-      margin-left: auto; // nav starts from the natural centre-right
-    }
-
-    // Re-enable spacer so logo is on left and nav fills from ~50%
-    .header-container::after {
-      display: block;
-      flex: 1;
-    }
-  }
-
-  .site-footer {
-    .footer-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 3rem;
     }
   }
 }

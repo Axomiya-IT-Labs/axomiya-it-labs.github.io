@@ -3,7 +3,7 @@ layout: project
 title: "Open Assam Data Hub — FOSS Open Datasets"
 permalink: /projects/open-assam-data/
 date: 2026-07-23
-status: In Progress
+status: Coming Soon
 category: Data & Automation
 excerpt: "Aggregating, cleaning, and publishing open-license Assamese speech, text, dictionary terms, and regional datasets for AI models."
 tags:
