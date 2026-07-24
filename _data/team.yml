@@ -1,8 +1,5 @@
 leadership:
   - name: "Rakibul Islam"
-    role: "Founder & Lead"
-    bio: "AI enthusiast and open-source advocate passionate about making AI accessible to everyone in Assam."
+    role: "Founder"
+    bio: "AI enthusiast and open-source advocate passionate about making AI accessible to everyone."
     image: "/assets/images/team/rakibul.jpg"
-    github: "axomiyaindie"
-    twitter: "axomiyaindie"
-    linkedin: "axomiya-it-labs"

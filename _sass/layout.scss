@@ -25,7 +25,7 @@
     box-sizing: border-box;
   }
 
-  // ── Brand Logo — fixed left ─────────────────────────────
+  // ── Brand Logo — fixed left ───────��─────────────────────
   .site-logo {
     display: flex;
     align-items: center;
@@ -65,7 +65,7 @@
     }
   }
 
-  // ── Header Search Trigger Box (Anthropic/OpenAI Style) ─────
+  // ── Header Search Trigger Box
   .header-search-box {
     margin-left: 0.75rem;
     flex-shrink: 0;
@@ -111,7 +111,6 @@
         border-color: var(--text-main);
         color: var(--text-main);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
         .search-icon { opacity: 1; }
       }
     }
@@ -119,7 +118,7 @@
 
   // ── Desktop Navigation ──────────────────────────────────
   .site-nav {
-    display: none; // Hidden on mobile; desktop query overrides
+    display: none;
 
     .mobile-nav-header,
     .mobile-nav-footer {
@@ -186,7 +185,7 @@
       }
     }
 
-    // ── Desktop Dropdown Menu ─────────────────────────────
+    // ── Desktop Dropdown Menu
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -239,20 +238,20 @@
     cursor: pointer;
     padding: 0;
     margin-left: auto;
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    min-height: 42px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
     flex-shrink: 0;
     position: relative;
     z-index: 100003;
     transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
     .hamburger-line {
       display: block;
-      width: 18px;
-      height: 2px;
+      width: 20px;
+      height: 2.5px;
       background: var(--text-main);
       border-radius: 2px;
       transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, background-color 0.2s ease;
@@ -260,26 +259,30 @@
     }
 
     &.is-open {
-      background: var(--bg-subtle);
-      border-color: var(--text-main);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: var(--accent-warm);
+      border-color: var(--accent-warm);
+      box-shadow: 0 4px 12px rgba(204, 85, 0, 0.15);
+
+      .hamburger-line {
+        background: #ffffff;
+      }
 
       .hamburger-line:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
       }
       .hamburger-line:nth-child(2) {
         opacity: 0;
         transform: scaleX(0);
       }
       .hamburger-line:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
       }
     }
 
     &:hover {
       background: var(--bg-subtle);
       border-color: var(--text-main);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -289,7 +292,7 @@
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-// ── Main Content ─────────────────────────────────────────────
+// ── Main Content
 .main-content {
   min-height: calc(100vh - 340px);
   padding-top: 2rem;
@@ -328,7 +331,6 @@
       }
     }
 
-    // Mobile nav drawer container
     .site-nav {
       display: flex !important;
       position: fixed !important;
@@ -341,13 +343,13 @@
       z-index: 100001 !important;
       flex-direction: column !important;
       align-items: stretch !important;
-      padding: 1.25rem 1.5rem 2.5rem !important;
+      padding: 1.5rem !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch;
       visibility: hidden;
       opacity: 0;
-      transform: translateY(-8px);
+      transform: translateX(-100%);
       transition: visibility 0.25s ease, opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
@@ -355,14 +357,13 @@
       &.open {
         visibility: visible !important;
         opacity: 1 !important;
-        transform: translateY(0) !important;
+        transform: translateX(0) !important;
         pointer-events: auto !important;
       }
 
-      // Search trigger button inside drawer
       .mobile-nav-header {
         display: block !important;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
         padding-bottom: 1rem;
         border-bottom: 1px solid var(--border-light);
 
@@ -372,7 +373,7 @@
           gap: 0.65rem;
           width: 100%;
           padding: 0.75rem 1rem;
-          background: #ffffff;
+          background: var(--bg-subtle);
           border: 1px solid var(--border-light);
           border-radius: var(--radius-sm);
           font-family: var(--font-sans);
@@ -389,6 +390,7 @@
           &:hover {
             border-color: var(--text-main);
             color: var(--text-main);
+            background: #ffffff;
           }
         }
       }
@@ -396,7 +398,7 @@
       .nav-list {
         display: flex !important;
         flex-direction: column !important;
-        gap: 0.25rem !important;
+        gap: 0 !important;
         width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -405,7 +407,7 @@
 
       .nav-item {
         width: 100% !important;
-        border-bottom: 1px solid var(--border-subtle) !important;
+        border-bottom: 1px solid var(--border-light) !important;
 
         &:last-child {
           border-bottom: none !important;
@@ -417,14 +419,14 @@
         justify-content: space-between !important;
         align-items: center !important;
         width: 100% !important;
-        padding: 1rem 0.5rem !important;
-        font-size: 1.15rem !important;
+        padding: 1.15rem 0.75rem !important;
+        font-size: 1.05rem !important;
         font-weight: 500 !important;
         color: var(--text-main) !important;
-        border-radius: var(--radius-sm) !important;
+        border-radius: 0 !important;
         background: transparent !important;
         text-decoration: none !important;
-        transition: color 0.18s ease, background 0.18s ease !important;
+        transition: all 0.18s ease !important;
 
         .nav-link-text {
           font-family: var(--font-sans);
@@ -434,8 +436,9 @@
         &:focus,
         &.active,
         &.dropdown-open {
-          background: rgba(204, 85, 0, 0.05) !important;
+          background: var(--bg-subtle) !important;
           color: var(--accent-warm) !important;
+          padding-left: 1rem !important;
         }
       }
 
@@ -451,12 +454,13 @@
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 28px;
-          height: 28px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
           background: var(--bg-subtle);
           color: var(--text-muted);
-          transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease;
+          transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+          flex-shrink: 0;
 
           svg { display: block; }
         }
@@ -468,20 +472,17 @@
         }
       }
 
-      // ── Mobile Dropdown Accordion (Folders) ─────────────────
       .dropdown-menu {
         position: static !important;
-        display: none;
+        display: none !important;
         box-shadow: none !important;
         border: none !important;
         border-left: 3px solid var(--accent-warm) !important;
         border-radius: 0 !important;
-        background: #ffffff !important;
-        padding: 0.5rem 0 0.75rem 1rem !important;
-        margin-left: 0.25rem !important;
-        margin-top: 0.25rem !important;
-        margin-bottom: 0.5rem !important;
-        width: calc(100% - 0.5rem) !important;
+        background: transparent !important;
+        padding: 0.75rem 0 0.75rem 1rem !important;
+        margin: 0 !important;
+        width: 100% !important;
         animation: slideDown 0.2s ease-out !important;
 
         &.is-open {
@@ -490,15 +491,15 @@
 
         .dropdown-item {
           display: block !important;
-          padding: 0.75rem 1rem !important;
-          font-size: 1rem !important;
-          font-weight: 500 !important;
-          color: var(--text-main) !important;
+          padding: 0.85rem 1rem !important;
+          font-size: 0.95rem !important;
+          font-weight: 400 !important;
+          color: var(--text-muted) !important;
           border-bottom: none !important;
           border-radius: var(--radius-sm) !important;
           text-decoration: none !important;
           white-space: normal !important;
-          background: #ffffff !important;
+          background: transparent !important;
           transition: all 0.15s ease !important;
 
           &:hover,
@@ -510,13 +511,13 @@
         }
       }
 
-      // Drawer Footer CTAs
       .mobile-nav-footer {
         display: flex !important;
         margin-top: auto;
-        padding-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-light) !important;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 1rem;
 
         .btn-mobile-cta {
           width: 100%;
@@ -529,14 +530,14 @@
   }
 }
 
-// ── Mobile Nav Backdrop Overlay ─────────────────────────────
+// ── Mobile Nav Backdrop
 .mobile-nav-backdrop {
   position: fixed;
   top: 64px;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(20, 20, 19, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 100000;
@@ -649,7 +650,7 @@
 }
 
 // ============================================================
-// Footer — Dark Minimal
+// Footer
 // ============================================================
 .site-footer {
   background: var(--bg-dark);
@@ -666,7 +667,6 @@
     padding-bottom: 3rem;
   }
 
-  // Quick Links + Connect columns — stacked on mobile
   .footer-cols-row {
     display: flex;
     flex-direction: column;
@@ -694,7 +694,6 @@
     line-height: 1.6;
   }
 
-  // Copyright bottom bar — very last thing on the page
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.07);
     padding: 1.1rem 0;
@@ -740,7 +739,6 @@
     }
   }
 
-  // Connect social links — column layout (one per row)
   .social-links--row {
     display: flex;
     flex-direction: column;
@@ -765,17 +763,12 @@
       &:hover {
         color: #ffffff;
         border-bottom: none;
-
         img { opacity: 1; }
       }
     }
   }
 }
 
-// ============================================================
-// Footer desktop overrides — MUST come after base .site-footer
-// so they correctly override flex-direction: column
-// ============================================================
 @media (min-width: 768px) {
   .site-footer {
     .footer-content {
@@ -794,7 +787,7 @@
 }
 
 // ============================================================
-// OpenAI-Style Search Modal
+// Search Modal
 // ============================================================
 .search-modal-backdrop {
   position: fixed;
@@ -802,7 +795,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(20, 20, 19, 0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 2000000;

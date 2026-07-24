@@ -1,153 +1,188 @@
-# 📘 Axomiya IT Labs — Master Architecture & Contribution Guide (`CONTRIBUTE.md`)
+# Master Contribution Guide
 
-Welcome to the central master documentation and contributor manual for **Axomiya IT Labs**. This repository powers our static website and community platform, engineered with an **Anthropic-inspired warm minimalist design aesthetic**, fully **mobile-first**, accessible, and 100% hosted on **GitHub Pages** (Jekyll).
+## Welcome to Axomiya IT Labs
 
----
-
-## 🏛️ 1. Core Mission & Identity
-
-> **Rooted in Assam — Assam's first AI & open-source community.**  
-> Everyone is welcome — no matter your age, background, or technical skill. If you are curious and want to learn, build, or share, you belong here.
-
-### The Three Pillars:
-- 📖 **Learn**: Read short guides, watch practical tutorials, and explore AI tools in plain language. *(Clear language lowers fear.)*
-- 🔨 **Build**: Create real projects: websites, AI tools, automation scripts, and educational platforms. *(Visible progress keeps motivation alive.)*
-- 🤝 **Share**: Share what you learn, even if it feels small. Every translation, tutorial, example, bug report, and line of code removes friction for the next person. *(Small help compounds.)*
+We're building Assam's first AI and open-source community. Everyone is welcome—regardless of experience level.
 
 ---
 
-## 📂 2. Master Repository Architecture
+## Repository Structure
 
-```text
+```
 axomiyaitlabs/
-├── .github/
-│   └── workflows/
-│       └── pages.yml              # 🚀 GitHub Actions automated build & deployment workflow
-├── _data/                         # 📊 YAML Data Files
-│   ├── navigation.yml             # Main navigation menu structure (with dropdown support)
-│   └── team.yml                   # Team member profiles & roles
-├── _includes/                     # 🧩 Reusable HTML Components
-│   ├── header.html                # Responsive header + OpenAI-style Live Search + Mobile Drawer
-│   ├── footer.html                # Dark minimalist footer with row columns & copyright bottom bar
-│   ├── components/                # UI Cards (announcements, members, team)
-│   ├── partials/                  # Newsletters & reusable forms
-│   └── sections/                  # Homepage & community layout sections
-├── _layouts/                      # 📐 Jekyll Layout Templates
-│   ├── default.html               # Master layout (SEO tags, Google Fonts, header, footer, search modal)
-│   ├── page.html                  # Standard page template
-│   ├── post.html                  # Blog & research post layout
-│   ├── project.html               # Project detail layout
-│   ├── announcements.html         # Announcements hub template
-│   ├── community.html             # Community landing template
-│   └── team.html                  # Team page template
-├── _pages/                        # 📄 Main Page Views
-│   ├── about/index.md             # /about/
-│   ├── contribute/index.md        # /contribute/
-│   ├── projects/index.md          # /projects/ (Active projects + Ideas bar)
-│   ├── announcements/index.md     # /announcements/
-│   ├── research/index.md          # /research/
-│   ├── community/index.md         # /community/ (Official channels with platform SVG icons)
-│   └── team/index.md              # /team/
-├── _posts/                        # ✍️ Research Articles (YYYY-MM-DD-title.md)
-├── _projects/                     # 🛠️ Project Collection (.md files for active projects & ideas)
-├── _announcements/                # 📢 Announcements Collection
-├── _sass/                         # 🎨 SASS Stylesheets (Anthropic Design System)
-│   ├── base.scss                  # Typography, variables, global reset, buttons
-│   ├── layout.scss                # Header, search modal, full-screen mobile nav, dark footer
-│   ├── components/                # Modular SASS components
-│   └── pages/                     # Page-specific styling rules
-├── assets/                        # 🖼️ Static Assets
-│   ├── css/
-│   │   └── main.scss              # SCSS entry point compiled to main.css
-│   ├── js/
-│   │   └── main.js                # Core interactive JavaScript
-│   └── images/
-│       ├── icons/                 # Official SVG icons (github, x, linkedin, telegram, etc.)
-│       ├── og-image.webp          # OpenGraph social preview image
-│       └── {projects,team,etc}/   # Asset media directories
-├── search.json                    # 🔍 Dynamic Jekyll search index generator
-├── _config.yml                    # ⚙️ Jekyll Site Configuration
-├── Gemfile                        # 💎 Ruby dependencies
-├── index.md                       # 🏠 Landing Page
-├── README.md                      # 📖 GitHub Repository README & Documentation Hub
-├── PROJECT.md                     # 🛠️ Project Updates & Ideas Guide
-├── RESEARCH.md                    # 🔬 Research & Articles Guide
-└── CONTRIBUTE.md                  # 📘 Master Architecture & Git Manual (This File)
+├── _data/                  Site data (navigation, team)
+├── _includes/              Reusable HTML components
+├── _layouts/               Page templates
+├── _pages/                 Main pages (about, projects, community, etc.)
+├── _posts/                 Research articles and tutorials
+├── _projects/              Project descriptions
+├── _sass/                  Styling (SCSS)
+├── assets/                 Images, CSS, JavaScript
+├── _config.yml             Jekyll configuration
+├── Gemfile                 Ruby dependencies
+├── PROJECT.md              How to add projects
+├── RESEARCH.md             How to write articles
+└── README.md               Repository overview
 ```
 
 ---
 
-## 🎨 3. Design System & Key Features
+## What Can You Contribute?
 
-### Anthropic Warm Minimalist Design System
-```scss
-:root {
-  --bg-main: #fcfbfa;            /* Warm off-white page background */
-  --bg-card: #ffffff;            /* Pure white content cards */
-  --bg-subtle: #f4f0ea;          /* Warm subtle beige containers */
-  --bg-dark: #141413;            /* Dark minimalist footer */
-  --text-main: #191919;          /* Primary dark charcoal text */
-  --text-muted: #595755;        /* Secondary muted charcoal text */
-  --accent-warm: #cc5500;        /* Signature warm terracotta/amber accent */
-  --border-light: #e8e3dc;       /* Clean subtle line borders */
-  --font-serif: 'Instrument Serif', Georgia, serif; /* Editorial headings */
-  --font-sans: 'Inter', sans-serif;                /* Body & navigation */
-}
+### Projects
+Add a new project or update an existing one.
+- Read `PROJECT.md` for detailed instructions
+- Projects must solve real problems for Assam
+- Can be Live, Beta, In Progress, or Ideas
+
+### Research Articles
+Write tutorials, guides, or explanations about AI and tech.
+- Read `RESEARCH.md` for detailed instructions
+- Can be in English, Assamese, or both
+- Keep language simple and clear
+
+### Code & Fixes
+Improve the website itself.
+- Fix bugs or broken links
+- Improve styling or performance
+- Add missing features
+- Write better documentation
+
+### Community
+Help others in the community.
+- Answer questions
+- Review pull requests
+- Suggest improvements
+- Share in our Telegram: https://t.me/AxomiyaITLabs
+
+---
+
+## How to Contribute
+
+### 1. Set Up Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io.git
+cd axomiya-it-labs.github.io
+
+# Install dependencies
+bundle install
+
+# Start the local server
+bundle exec jekyll serve
 ```
 
-### Key Technical Features
-1. **🔍 OpenAI-Style Live Search**:
-   - Integrated search trigger button in header with `⌘K` / `Ctrl+K` shortcut.
-   - Live modal querying auto-updating `search.json`.
-2. **📱 Mobile Drawer Navigation**:
-   - Full-screen overlay (`top: 0`) with `z-index: 1000000` toggle button ensuring 100% visibility.
-3. **🦶 Structured Dark Footer**:
-   - Dual-column desktop layout (`Quick Links` & `Connect` side-by-side) with pinned copyright bottom bar.
-4. **⚡ Official Platform SVG Icons**:
-   - Vector SVG icons across `/community/` and footer.
+Visit `http://localhost:4000` to see your changes live.
+
+### 2. Make Your Changes
+
+- For **projects**: Add a file to `_projects/`
+- For **articles**: Add a file to `_posts/`
+- For **website fixes**: Edit the relevant file
+
+Read `PROJECT.md` or `RESEARCH.md` for detailed instructions.
+
+### 3. Test Your Changes
+
+Run `bundle exec jekyll serve` and verify everything looks good.
+
+### 4. Commit and Push
+
+```bash
+# Create a new branch
+git checkout -b feature/your-contribution-name
+
+# Add your changes
+git add .
+
+# Commit with a clear message
+git commit -m "Add: Description of what you changed"
+
+# Push to your fork
+git push origin feature/your-contribution-name
+```
+
+### 5. Open a Pull Request
+
+1. Go to https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io
+2. Click "New Pull Request"
+3. Select your branch
+4. Write a clear title and description
+5. Submit!
 
 ---
 
-## 💻 4. Local Development Setup
+## Design System
 
-### Prerequisites
-- **Ruby** (v3.0+)
-- **Bundler** (`gem install bundler`)
+The site uses a clean, minimal design system:
 
-### Step-by-Step Instructions
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io.git
-   cd axomiya-it-labs.github.io
-   ```
-2. **Install Ruby gems**:
-   ```bash
-   bundle install
-   ```
-3. **Run local Jekyll server**:
-   ```bash
-   bundle exec jekyll serve
-   ```
-4. **Open in browser**: Visit `http://localhost:4000`.
+- **Colors**: Warm, accessible palette
+- **Typography**: Clear, readable fonts
+- **Mobile First**: Works great on phones and tablets
+- **No Jargon**: Accessible to everyone
+
+Don't change the design without discussing with the team first.
 
 ---
 
-## 🤝 5. Git & Pull Request (PR) Workflow
+## Writing Guidelines
 
-1. **Fork the Repository**: Click "Fork" on GitHub.
-2. **Create a Feature Branch**:
-   ```bash
-   git checkout -b feature/my-contribution
-   ```
-3. **Make Your Changes**: Add/modify files.
-4. **Verify Locally**: Run `bundle exec jekyll serve` to verify layout.
-5. **Commit & Push**:
-   ```bash
-   git add .
-   git commit -m "feat: your descriptive commit message"
-   git push origin feature/my-contribution
-   ```
-6. **Open Pull Request**: Submit a PR to `Axomiya-IT-Labs/axomiya-it-labs.github.io`.
+### Be Clear
+- Use simple, everyday words
+- Avoid jargon or explain it
+- Write short sentences
+- Use bullet points
+
+### Be Respectful
+- Welcome beginners
+- No gatekeeping
+- Assume good intentions
+- Give credit to others
+
+### Be Helpful
+- Include examples
+- Link to related content
+- Explain why something matters
+- Proofread before submitting
 
 ---
-*Maintained with ❤️ by Axomiya IT Labs community.*
+
+## Git Commit Messages
+
+Write clear, descriptive messages:
+
+```
+Add: New project for weather app
+Fix: Mobile menu not closing properly
+Update: Improve article about AI basics
+Docs: Add instructions for new contributors
+```
+
+Start with: `Add`, `Fix`, `Update`, `Docs`, or `Remove`
+
+---
+
+## Questions or Issues?
+
+1. **For quick questions**: Ask in Telegram: https://t.me/AxomiyaITLabs
+2. **For bugs**: Open a GitHub issue
+3. **For ideas**: Discuss in Telegram first
+
+---
+
+## Need Help?
+
+Check these resources:
+- `PROJECT.md` - Adding projects
+- `RESEARCH.md` - Writing articles
+- `README.md` - Repository overview
+- Our Telegram community - Ask anything!
+
+---
+
+## Thank You
+
+Every contribution—no matter how small—helps make Assam's tech community stronger. We're grateful for your help!
+
+Maintained with care by Axomiya IT Labs community.

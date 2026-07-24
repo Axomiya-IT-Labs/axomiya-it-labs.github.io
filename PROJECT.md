@@ -1,98 +1,170 @@
-# 🛠️ Axomiya IT Labs — Project & Ideas Guide (`PROJECT.md`)
+# How to Add & Update Projects
 
-Welcome to the dedicated guide for adding, updating, and maintaining **Projects and Community Ideas** at **Axomiya IT Labs**. Whether you are showcasing a completed tool, an active prototype, or proposing an open community idea, this document covers everything you need to know.
+## What is a Project?
+A project is anything Axomiya IT Labs is building, maintaining, or proposing as a community idea:
+- **Live**: Production-ready tools and applications
+- **Beta**: Working prototypes in testing
+- **In Progress**: Active development
+- **Idea**: Community proposals looking for builders
 
 ---
 
-## 🎯 1. Core Goal of Our Projects
+## Step 1: Create Your Project File
 
-Every project built or featured by **Axomiya IT Labs** aims to solve real-world problems for people in Assam and beyond. We prioritize clear language, open source code, Assamese localization, and accessible AI tools so anyone can learn and build.
+Create a new markdown file in the `_projects/` folder:
 
----
-
-## 📂 2. Project File Structure
-
-Projects on our website are managed as a Jekyll collection in `_projects/`:
-
-```text
-axomiyaitlabs/
-├── _projects/                          # 🛠️ All project markdown files (.md)
-│   ├── 00-TEMPLATE.md                  # Template for Live / Beta / In Progress projects
-│   ├── 00-IDEA-TEMPLATE.md             # Template for Open Community Ideas
-│   ├── what-after-12.md                # Active Project Entry
-│   ├── axomiya-ai-tutor.md             # Active Project Entry
-│   └── open-assam-data.md              # Active Project Entry
-└── assets/images/projects/             # 🖼️ Project Screenshots & Thumbnails (.webp preferred)
+```
+_projects/your-project-name.md
 ```
 
----
-
-## 🚦 3. Project Lifecycles & Status Badges
-
-Every project requires a designated `status` in its front matter. This controls how it is displayed on the `/projects/` page:
-
-| Status Badge | Meaning | Display Section |
-| :--- | :--- | :--- |
-| **`Live`** | Production-ready tool or application. | Active Projects Section |
-| **`Beta`** | Working prototype currently undergoing testing. | Active Projects Section |
-| **`In Progress`** | Active development underway. | Active Projects Section |
-| **`Idea`** | Open community proposal looking for maintainers/builders. | Ideas Bar Section |
+Use lowercase with hyphens (example: `ai-chatbot.md`)
 
 ---
 
-## ✍️ 4. How to Add a Project or Idea (Step-by-Step)
+## Step 2: Add Front Matter (Metadata)
 
-### Step 1: Pick a Template
-- For **active projects, prototypes, or live applications**: copy `_projects/00-TEMPLATE.md`.
-- For **unbuilt community proposals or ideas**: copy `_projects/00-IDEA-TEMPLATE.md`.
+Copy this template at the top of your file:
 
-### Step 2: Create Your Markdown File
-Name your file using a lowercase slug matching your project name:  
-`_projects/your-project-slug.md`
-
-### Step 3: Fill in Front Matter Schema
 ```yaml
 ---
 layout: project
 title: "Your Project Title"
 permalink: /projects/your-project-slug/
 date: 2026-07-24
-status: Beta                     # Options: Live, Beta, In Progress, Idea
-category: AI & Education         # Options: AI & ML, Education, Data & Automation, Web
-image: /assets/images/projects/your-project.webp
+status: Live
+category: AI & Education
+excerpt: "One line description of what this project does."
+image: /assets/images/projects/your-image.webp
 tags:
-  - Assamese-AI
-  - Open-Source
+  - tag1
+  - tag2
 repo: "https://github.com/Axomiya-IT-Labs/your-repo"
-demo: "https://your-demo-url.com"
-tech_stack:
-  - Next.js
-  - Python
-  - Tailwind CSS
+demo: "https://your-live-demo.com"
 ---
 ```
 
-### Step 4: Write Body Sections
-Structure your project content clearly with standard headings:
-- **`## What It Solves`** — The real-world problem being addressed.
-- **`## Key Features`** — Bullet points of capabilities.
-- **`## Who Is It For`** — Target audience (students, teachers, developers, general public).
-- **`## How to Contribute`** — Steps for new contributors to get involved.
-
-### Step 5: Add Media Assets
-- Drop image files into `assets/images/projects/`.
-- **`.webp` format is strongly recommended** for optimal compression and fast loading.
-- Keep image file sizes below 200KB.
+### Field Explanations:
+- **title**: Name of your project
+- **status**: Live | Beta | In Progress | Idea
+- **category**: AI & ML | Education | Web | Tools | Other
+- **excerpt**: 1-2 sentence description
+- **image**: Path to project preview image (.webp recommended)
+- **tags**: List of related keywords
+- **repo**: GitHub repository link (optional)
+- **demo**: Live demo link (optional)
 
 ---
 
-## 🤝 5. How People Can Contribute to Your Project
+## Step 3: Write Your Project Description
 
-1. **Fork the Repo**: Fork `Axomiya-IT-Labs/axomiya-it-labs.github.io`.
-2. **Add/Update Project File**: Save your `.md` file inside `_projects/`.
-3. **Test Locally**: Run `bundle exec jekyll serve` to verify layout on `http://localhost:4000/projects/`.
-4. **Submit PR**: Open a Pull Request on GitHub!
+After the front matter, write your project content:
+
+```markdown
+## What It Solves
+Explain the problem this project addresses.
+
+## Key Features
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Who Is It For
+Describe the target audience.
+
+## How to Contribute
+Explain how others can help with this project.
+```
 
 ---
-*Maintained with ❤️ by Axomiya IT Labs community.*
- 
+
+## Step 4: Add an Image
+
+1. Save your project image as `.webp` format
+2. Keep file size under 200KB
+3. Place it in: `assets/images/projects/your-image.webp`
+4. Reference it in front matter: `image: /assets/images/projects/your-image.webp`
+
+---
+
+## Step 5: Submit Your Changes
+
+1. Fork the repository
+2. Add your `.md` file to `_projects/`
+3. Test locally: `bundle exec jekyll serve`
+4. Open a Pull Request
+
+---
+
+## Example Project File
+
+**File**: `_projects/weather-app.md`
+
+```markdown
+---
+layout: project
+title: "Assamese Weather App"
+permalink: /projects/weather-app/
+date: 2026-07-24
+status: Live
+category: Web
+excerpt: "Real-time weather information in Assamese language."
+image: /assets/images/projects/weather-app.webp
+tags:
+  - Assamese
+  - Weather
+  - Web
+repo: "https://github.com/Axomiya-IT-Labs/weather-app"
+demo: "https://weather-app-assam.vercel.app"
+---
+
+## What It Solves
+Provides weather data in plain Assamese, making it accessible to everyone in Assam.
+
+## Key Features
+- Real-time weather updates
+- Assamese language support
+- Mobile-friendly interface
+- No ads, completely free
+
+## Who Is It For
+- Farmers needing weather data
+- Students learning web development
+- Anyone who prefers Assamese language content
+
+## How to Contribute
+1. Report bugs on GitHub Issues
+2. Suggest new features
+3. Help with Assamese translations
+4. Improve code quality
+```
+
+---
+
+## Project Status Explained
+
+| Status | Meaning | Example |
+|--------|---------|----------|
+| **Live** | Ready to use right now | Krittimat AI Tool Directory |
+| **Beta** | Testing phase, mostly working | AI Tutor (being refined) |
+| **In Progress** | Active development | New feature being built |
+| **Idea** | Concept proposal | A tool someone wants to build |
+
+---
+
+## Common Questions
+
+**Q: Can I update my project later?**
+Yes! Just edit your `.md` file and submit a new PR.
+
+**Q: What if I don't have a live demo yet?**
+Leave the `demo:` line blank or remove it. Only `repo:` is optional.
+
+**Q: Can I use PNG images instead of WebP?**
+Yes, but WebP is preferred (smaller file size, faster loading).
+
+**Q: How do I test my project locally?**
+Run `bundle exec jekyll serve` and visit `http://localhost:4000/projects/your-project-slug/`
+
+---
+
+Questions? Ask in our Telegram community: https://t.me/AxomiyaITLabs
