@@ -540,7 +540,7 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 100000;
+  z-index: 99999;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
