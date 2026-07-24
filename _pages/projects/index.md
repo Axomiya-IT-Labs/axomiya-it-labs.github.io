@@ -5,7 +5,7 @@ permalink: /projects/
 ---
 
 <div class="projects-header-block text-center">
-    <h2>🚀 Our Projects</h2>
+    <h2>Our Projects</h2>
     <p>Active tools, experiments, and open community proposals.</p>
 </div>
 
@@ -17,7 +17,7 @@ permalink: /projects/
 {% if live_projects.size > 0 %}
 <section class="container">
     <div class="text-center" style="margin: 2rem 0 1.5rem;">
-        <h3>✅ Live Projects</h3>
+        <h3>Live Projects</h3>
         <p style="color: var(--text-muted);">Production-ready tools and applications.</p>
     </div>
     <div class="listings-grid">
@@ -31,7 +31,7 @@ permalink: /projects/
 {% if beta_projects.size > 0 or in_progress.size > 0 %}
 <section class="container">
     <div class="text-center" style="margin: 2rem 0 1.5rem;">
-        <h3>⚙️ In Development</h3>
+        <h3>In Development</h3>
         <p style="color: var(--text-muted);">Beta versions and active development.</p>
     </div>
     <div class="listings-grid">
@@ -48,7 +48,7 @@ permalink: /projects/
 {% if ideas.size > 0 %}
 <section class="container">
     <div class="text-center" style="margin: 2rem 0 1.5rem;">
-        <h3>💡 Open Ideas</h3>
+        <h3>Open Ideas</h3>
         <p style="color: var(--text-muted);">Community proposals looking for builders and maintainers.</p>
     </div>
     <div class="listings-grid">
