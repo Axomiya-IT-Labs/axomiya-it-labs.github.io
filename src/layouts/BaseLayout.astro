@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../i18n/ui';
+import { useTranslations, navLabels } from '../i18n/ui';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
+import { getCollection } from 'astro:content';
+import { localizedPath, swapLangPath } from '../i18n/utils';
+import { navigationData } from '../data/navigation';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import SearchModal from '../components/SearchModal.astro';
+
+interface Props { lang: Lang; title?: string; description?: string; translationSlug?: string; section?: 'blog' | 'projects' | 'announcements' | 'pages'; heroImage?: string; placeholder?: boolean; robots?: string; contentDate?: Date; author?: string; repo?: string; }
+const { lang, title = SITE_TITLE, description = SITE_DESCRIPTION, translationSlug = '', section = 'pages', heroImage, placeholder = false, robots = 'index,follow', contentDate, author, repo } = Astro.props;
+const t = useTranslations(lang);
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://axomiya-it-labs.github.io');
+const socialImage = new URL(heroImage ?? '/assets/images/og-image.webp', Astro.site ?? 'https://axomiya-it-labs.github.io');
+const isHome = section === 'pages' && translationSlug === 'home';
+const pagePath = isHome ? '' : section === 'pages' ? `/${translationSlug}` : `/${section}/${translationSlug}`;
+const contentPath = `${pagePath || ''}/`.replace(/^\//, '');
+const enUrl = getAbsoluteLocaleUrl('en', contentPath);
+const asUrl = getAbsoluteLocaleUrl('as', contentPath);
+const path = (part: string) => localizedPath(lang, part);
+const localizedNav = [
+  { label: t.home, href: path('/') }, { label: t.blog, href: path('/blog/') },
+  ...navigationData.map((item) => ({
+    label: navLabels[item.name] ? t[navLabels[item.name]] : item.name,
+    href: path(item.link),
+    children: item.dropdown?.map((sub) => ({ label: navLabels[sub.name] ? t[navLabels[sub.name]] : sub.name, href: path(sub.link) })),
+  })),
+];
+const otherLang: Lang = lang === 'en' ? 'as' : 'en';
+const [blogEntries, projectEntries, announcementEntries, pageEntries] = await Promise.all([
+  getCollection('blog'), getCollection('projects'), getCollection('announcements'), getCollection('pages'),
+]);
+const routeWithoutLocale = Astro.url.pathname.startsWith('/as/') ? Astro.url.pathname.slice(3) : Astro.url.pathname;
+const collectionForSection = section === 'blog' ? blogEntries : section === 'projects' ? projectEntries : section === 'announcements' ? announcementEntries : pageEntries;
+const isGeneratedListing = section === 'pages' && routeWithoutLocale === '/blog/';
+const hasTranslation = isGeneratedListing || collectionForSection.some((entry) => entry.data.lang === otherLang && entry.data.translationSlug === translationSlug);
+const otherPath = hasTranslation
+  ? swapLangPath(Astro.url.pathname, otherLang)
+  : localizedPath(otherLang, section === 'blog' ? '/blog/' : section === 'projects' ? '/projects/' : section === 'announcements' ? '/announcements/' : '/');
+const switchLink = (target: Lang) => target === lang ? Astro.url.pathname : otherPath;
+const switchTitle = (target: Lang) => target !== lang && !hasTranslation ? 'Not yet translated' : undefined;
+const organizationSchema = { '@context': 'https://schema.org', '@type': 'Organization', name: SITE_TITLE, url: Astro.site, logo: new URL('/assets/images/icons/icon.svg', Astro.site), sameAs: ['https://github.com/axomiyaindie', 'https://www.linkedin.com/in/axomiyaindie', 'https://x.com/axomiyaindie'] };
+const pageSchema = isHome
+  ? { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_TITLE, url: Astro.site, inLanguage: ['en', 'as'] }
+  : section === 'blog'
+    ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: title, description, datePublished: contentDate?.toISOString(), author: { '@type': 'Person', name: author || 'Axomiya IT Labs' }, inLanguage: lang }
+    : section === 'projects'
+      ? { '@context': 'https://schema.org', '@type': 'SoftwareSourceCode', name: title, description, url: canonical, inLanguage: lang, ...(repo ? { codeRepository: repo } : {}) }
+      : undefined;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | {SITE_TITLE}</title>
+    <meta name="description" content={description || SITE_DESCRIPTION} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="as" href={asUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} — ${t.blog}`} href={path('/rss.xml')} />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} — ${t.blog} (অসমীয়া)`} href="/as/rss.xml" />
+    <link rel="llms" href="/llms.txt" />
+    <meta name="robots" content={robots} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || SITE_DESCRIPTION} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'as' ? 'as_IN' : 'en_US'} />
+    <meta property="og:image" content={socialImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema).replace(/</g, '\\u003c')} />
+    {pageSchema && <script type="application/ld+json" set:html={JSON.stringify(pageSchema).replace(/</g, '\\u003c')} />}
+    <link rel="icon" type="image/svg+xml" href="/assets/images/icons/icon.svg" />
+  </head>
+  <body>
+    <header class="site-header" data-pagefind-ignore>
+      <a class="brand" href={path('/')}><img src="/assets/images/icons/icon.svg" alt="" width="34" height="34" /> <span>{SITE_TITLE}</span></a>
+      <nav id="site-nav" class="site-nav" aria-label={t.home}>
+        <div class="drawer-heading"><strong>{SITE_TITLE}</strong><button class="nav-close" type="button" aria-label={t.close}>×</button></div>
+        {localizedNav.map((item) => item.children?.length ? <details class="nav-dropdown"><summary>{item.label}</summary><div class="nav-submenu">{item.children.map((child) => <a href={child.href}>{child.label}</a>)}</div></details> : <a href={item.href}>{item.label}</a>)}
+        <div class="drawer-language language-switch" aria-label={t.language}><a href={switchLink('en')} aria-current={lang === 'en' ? 'page' : undefined} title={switchTitle('en')}>EN</a><span aria-hidden="true">|</span><a href={switchLink('as')} aria-current={lang === 'as' ? 'page' : undefined} title={switchTitle('as')}>অসমীয়া</a></div>
+      </nav>
+      <div class="header-tools">
+        <SearchModal lang={lang} />
+        <div class="header-language language-switch" aria-label={t.language}><a href={switchLink('en')} aria-current={lang === 'en' ? 'page' : undefined} title={switchTitle('en')}>EN</a><span aria-hidden="true">|</span><a href={switchLink('as')} aria-current={lang === 'as' ? 'page' : undefined} title={switchTitle('as')}>অসমীয়া</a></div>
+        <button class="menu-toggle" type="button" aria-label={t.menu} aria-expanded="false" aria-controls="site-nav"><span></span><span></span></button>
+      </div>
+    </header>
+    <main data-pagefind-body><slot /></main>
+    <footer class="site-footer" data-pagefind-ignore><div><strong>{SITE_TITLE}</strong><p>{t.footer}</p></div><nav aria-label="Footer"><a href={path('/blog/')}>{t.blog}</a><a href={path('/rss.xml')}>RSS</a><a href="https://github.com/Axomiya-IT-Labs">GitHub</a></nav><small>© {new Date().getFullYear()} {SITE_TITLE} · {t.copyright}</small></footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#site-nav');
+      const close = document.querySelector<HTMLButtonElement>('.nav-close');
+      const setMenu = (open: boolean) => { toggle?.setAttribute('aria-expanded', String(open)); nav?.setAttribute('aria-hidden', String(!open)); nav?.classList.toggle('open', open); document.body.classList.toggle('menu-open', open); };
+      toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+      close?.addEventListener('click', () => { setMenu(false); toggle?.focus(); });
+      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && nav?.classList.contains('open')) setMenu(false); });
+    </script>
+  </body>
+</html>
+

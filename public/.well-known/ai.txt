@@ -1,0 +1,5 @@
+﻿# ai.txt — AI usage policy for axomiya-it-labs.github.io
+User-agent: *
+Allow: /
+Policy: Content may be crawled for search and retrieval. Training use is restricted (see robots.txt).
+Contact: mailto:hello@axomiya-it-labs.github.io

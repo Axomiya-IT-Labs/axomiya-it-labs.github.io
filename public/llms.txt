@@ -1,0 +1,27 @@
+﻿# Axomiya IT Labs
+
+> A bilingual (English/Assamese) open-source community focused on AI, language technology, and developer education in Assam.
+
+Axomiya IT Labs shares practical AI and open-source education, projects, and community updates rooted in Assam. English pages are the authoritative content while Assamese translations are being prepared.
+
+## Blog
+- [Blog index](https://axomiya-it-labs.github.io/blog/)
+- [AI Problem Breakdown: Career Guidance After Class 12](https://axomiya-it-labs.github.io/blog/ai-problem-breakdown/)
+- [Welcome to Axomiya IT Labs](https://axomiya-it-labs.github.io/blog/welcome-to-axomiya/)
+
+## Projects
+- [Projects index](https://axomiya-it-labs.github.io/projects/)
+- [Assamese Speech AI](https://axomiya-it-labs.github.io/projects/assamese-speech-ai/)
+- [Axomiya AI Tutor](https://axomiya-it-labs.github.io/projects/axomiya-ai-tutor/)
+- [Krittimat](https://axomiya-it-labs.github.io/projects/krittimat/)
+- [Open Assam Data](https://axomiya-it-labs.github.io/projects/open-assam-data/)
+- [What After 12](https://axomiya-it-labs.github.io/projects/what-after-12/)
+
+## Pages
+- [About](https://axomiya-it-labs.github.io/about/)
+- [Team](https://axomiya-it-labs.github.io/team/)
+- [Community](https://axomiya-it-labs.github.io/community/)
+- [Research](https://axomiya-it-labs.github.io/research/)
+- [Contribute](https://axomiya-it-labs.github.io/contribute/)
+
+Assamese translations are in progress; English content is authoritative.

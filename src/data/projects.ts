@@ -1,0 +1,5 @@
+﻿export type ProjectData = { name: string; role: string; description: string; website: string; github: string; status: string };
+export const projectsData: { projects: ProjectData[]; ideas_bar: unknown[] } = {
+  projects: [{ name: 'WhatAfter12', role: 'Career Clarity Guidance', description: 'Know all higher education path, jobs & earning opportunities available after 12 in the age of AI.', website: 'https://whatafter12.vercel.app/en', github: 'https://github.com/axomiyaindie/wa12', status: 'Live' }],
+  ideas_bar: [],
+};

@@ -1,1 +1,0 @@
-# Language filters disabled - English only site

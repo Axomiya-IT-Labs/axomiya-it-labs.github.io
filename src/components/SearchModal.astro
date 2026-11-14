@@ -1,0 +1,126 @@
+---
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/ui';
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
+---
+<button class="search-trigger" type="button" aria-label={t.search} aria-haspopup="dialog" data-search-open>
+	<svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg>
+	<span class="search-trigger-label">{t.search}</span><kbd>⌘K</kbd>
+</button>
+<dialog class="search-dialog" aria-label={t.search} data-pagefind-ignore data-empty-message={t.searchEmpty} data-loading-message={t.searchLoading} data-hint-message={t.searchHint}>
+	<section class="search-panel">
+		<header class="search-panel-header">
+			<label class="search-field"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg><input type="search" data-search-input placeholder={t.searchPlaceholder} autocomplete="off" /></label>
+			<button class="search-close" type="button" aria-label={t.close} data-search-close>×</button>
+		</header>
+		<p class="search-status" role="status" aria-live="polite" data-search-status>{t.searchHint}</p>
+		<div class="search-results" aria-live="polite" data-search-results></div>
+	</section>
+</dialog>
+<script is:inline>
+	(() => {
+		const dialog = document.querySelector('.search-dialog');
+		const openButton = document.querySelector('[data-search-open]');
+		const closeButton = document.querySelector('[data-search-close]');
+		const input = document.querySelector('[data-search-input]');
+		const status = document.querySelector('[data-search-status]');
+		const resultsBox = document.querySelector('[data-search-results]');
+		if (!dialog || !openButton || !input || !status || !resultsBox) return;
+		let pagefindPromise;
+		let pagefind;
+		let activeLanguage = null;
+		let requestId = 0;
+		let debounceTimer;
+		const savedLang = document.documentElement.lang || 'en';
+
+		function loadingSkeleton() {
+			resultsBox.innerHTML = '<div class="search-skeleton"><i></i><i></i><i></i></div>';
+		}
+		async function loadPagefind() {
+			if (!pagefindPromise) pagefindPromise = import('/pagefind/pagefind.js');
+			pagefind = await pagefindPromise;
+			await selectIndex(document.documentElement.lang || savedLang);
+		}
+		async function selectIndex(language) {
+			if (!pagefind || activeLanguage === language) return;
+			if (activeLanguage) await pagefind.destroy();
+			document.documentElement.lang = language;
+			await pagefind.init();
+			activeLanguage = language;
+		}
+		function makeResult(item) {
+			const article = document.createElement('article');
+			article.className = 'search-result';
+			const badge = document.createElement('span');
+			badge.className = 'language-badge';
+			badge.textContent = item.lang === 'as' ? 'অসমীয়া' : 'EN';
+			const link = document.createElement('a');
+			link.href = item.url;
+			link.className = 'search-result-link';
+			const title = document.createElement('strong');
+			title.textContent = item.meta?.title || item.url;
+			const excerpt = document.createElement('span');
+			excerpt.className = 'search-result-excerpt';
+			excerpt.innerHTML = item.excerpt || '';
+			link.append(title, excerpt);
+			article.append(badge, link);
+			return article;
+		}
+		async function searchBothLanguages(query) {
+			const thisRequest = ++requestId;
+			const returnLang = document.documentElement.lang || savedLang;
+			status.textContent = 'Searching…';
+			loadingSkeleton();
+			const combined = [];
+			try {
+				for (const language of ['en', 'as']) {
+					await selectIndex(language);
+					const response = await pagefind.search(query);
+					const data = await Promise.all(response.results.slice(0, 6).map((result) => result.data()));
+					combined.push(...data.map((item) => ({ ...item, lang: language })));
+				}
+			} catch (error) {
+				console.error('Search failed', error);
+			} finally {
+				await selectIndex(returnLang);
+			}
+			if (thisRequest !== requestId) return;
+			resultsBox.replaceChildren();
+			if (!combined.length) {
+				status.textContent = dialog.dataset.emptyMessage || 'No results found.';
+				return;
+			}
+			status.textContent = `${combined.length} result${combined.length === 1 ? '' : 's'}`;
+			combined.forEach((item) => resultsBox.append(makeResult(item)));
+		}
+		async function openSearch() {
+			if (!dialog.open) dialog.showModal();
+			loadingSkeleton();
+			status.textContent = dialog.dataset.loadingMessage || 'Preparing search…';
+			input.focus();
+			try {
+				await loadPagefind();
+				status.textContent = dialog.dataset.hintMessage || 'Type to search all languages.';
+				resultsBox.replaceChildren();
+			} catch (error) {
+				status.textContent = 'Search index is not available yet.';
+				console.error('Could not load Pagefind', error);
+			}
+		}
+		function closeSearch() { if (dialog.open) dialog.close(); openButton.focus(); }
+		openButton.addEventListener('click', openSearch);
+		closeButton?.addEventListener('click', closeSearch);
+		dialog.addEventListener('click', (event) => { if (event.target === dialog) closeSearch(); });
+		input.addEventListener('input', () => {
+			clearTimeout(debounceTimer);
+			const query = input.value.trim();
+			if (!query) { requestId++; resultsBox.replaceChildren(); status.textContent = dialog.dataset.hintMessage || 'Type to search all languages.'; return; }
+			debounceTimer = setTimeout(() => searchBothLanguages(query), 220);
+		});
+		document.addEventListener('keydown', (event) => {
+			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); if (!dialog.open) openSearch(); else input.focus(); }
+			if (event.key === 'Escape' && dialog.open) closeSearch();
+		});
+	})();
+</script>
