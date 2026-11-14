@@ -9,7 +9,7 @@
     "validate:content": "node scripts/validate-content.mjs",
     "build:last-updated": "node scripts/build-last-updated.mjs",
     "build": "pnpm validate:content && pnpm build:last-updated && astro build && pnpm postbuild",
-    "postbuild": "pagefind --site dist --glob **/*.html",
+    "postbuild": "pagefind --site dist --glob \"**/*.html\"",
     "preview": "astro preview",
     "astro": "astro"
   },
