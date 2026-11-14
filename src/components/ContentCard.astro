@@ -10,13 +10,24 @@ interface Props {
 }
 
 const { entry, lang, type } = Astro.props;
-const { description, pubDate, heroImage, tags, status, category } = entry.data;
+const { description, pubDate, heroImage, tags, status } = entry.data;
 
-// Strip "[AS] " or "[AS]" from the title for display purposes
+// Strip "[AS] " prefix from title
 const title = entry.data.title.replace(/^\[AS\]\s*/i, '');
 
-// Also strip the Assamese placeholder description (so cards look clean if translation is pending)
+// Hide placeholder description
 const cleanDescription = description === 'অসমীয়া অনুবাদ শীঘ্রই আহি আছে।' ? '' : description;
+
+// Logic: For projects, prefer `logo`, fallback to `heroImage`. For blogs, use `heroImage`.
+let displayImage = heroImage;
+let isLogo = false;
+if (type === 'projects') {
+  const logo = (entry.data as any).logo;
+  if (logo) {
+    displayImage = logo;
+    isLogo = true;
+  }
+}
 
 const href = localizePath(`/${type}/${entry.data.translationSlug}/`, lang);
 const date = new Date(pubDate).toLocaleDateString(lang === 'en' ? 'en-IN' : 'as-IN', {
@@ -25,22 +36,39 @@ const date = new Date(pubDate).toLocaleDateString(lang === 'en' ? 'en-IN' : 'as-
   day: 'numeric'
 });
 ---
-<article class="card flex flex-col h-full overflow-hidden p-0">
-  {heroImage && (
-    <a href={href} class="aspect-video w-full overflow-hidden bg-bg-subtle block relative">
-      <img src={heroImage} alt={title} class="object-cover w-full h-full transition-transform duration-500 hover:scale-105" loading="lazy" />
-    </a>
-  )}
+<article class="card flex flex-col h-full overflow-hidden p-0 group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+  
+  <!-- Image Section -->
+  <a href={href} class={`w-full overflow-hidden bg-bg-subtle relative flex items-center justify-center ${isLogo ? 'aspect-square p-8' : 'aspect-video'}`}>
+    {displayImage ? (
+      <img 
+        src={displayImage} 
+        alt={title} 
+        class={`transition-transform duration-500 group-hover:scale-105 ${
+          isLogo 
+            ? 'w-full h-full object-contain max-h-32 drop-shadow-md' 
+            : 'w-full h-full object-cover'
+        }`} 
+        loading="lazy" 
+      />
+    ) : (
+      <div class="text-5xl font-display font-black text-border-strong opacity-30">
+        {title.charAt(0)}
+      </div>
+    )}
+  </a>
+
+  <!-- Content -->
   <div class="p-6 flex flex-col flex-1">
     <div class="flex items-center gap-2 mb-3 text-xs text-fg-muted">
       {type === 'projects' && status && <span class="badge badge-accent">{status}</span>}
       {type === 'announcements' && <span class="badge">Announcement</span>}
-      {type === 'blog' && <time datetime={new Date(pubDate).toISOString()}>{date}</time>}
       {type === 'research' && <span class="badge badge-accent">Research</span>}
+      {type === 'blog' && <time datetime={new Date(pubDate).toISOString()}>{date}</time>}
     </div>
     
-    <h3 class="text-xl font-bold font-display leading-snug mb-2">
-      <a href={href} class="text-fg hover:text-accent transition-colors">{title}</a>
+    <h3 class="text-lg font-bold font-display leading-snug mb-2 group-hover:text-accent transition-colors">
+      <a href={href}>{title}</a>
     </h3>
     
     {cleanDescription && (
@@ -51,7 +79,7 @@ const date = new Date(pubDate).toLocaleDateString(lang === 'en' ? 'en-IN' : 'as-
     
     {tags && tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border">
-        {tags.slice(0, 3).map(tag => <span class="badge text-[10px]">{tag}</span>)}
+        {tags.slice(0, 3).map(tag => <span class="badge text-[10px] bg-bg-subtle">{tag}</span>)}
       </div>
     )}
   </div>
