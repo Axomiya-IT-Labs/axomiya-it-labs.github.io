@@ -4,13 +4,20 @@ import { localizePath } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
-  entry: CollectionEntry<'blog'> | CollectionEntry<'projects'> | CollectionEntry<'announcements'>;
+  entry: CollectionEntry<'blog'> | CollectionEntry<'projects'> | CollectionEntry<'announcements'> | CollectionEntry<'research'>;
   lang: Lang;
-  type: 'blog' | 'projects' | 'announcements';
+  type: 'blog' | 'projects' | 'announcements' | 'research';
 }
 
 const { entry, lang, type } = Astro.props;
-const { title, description, pubDate, heroImage, tags, status, category } = entry.data;
+const { description, pubDate, heroImage, tags, status, category } = entry.data;
+
+// Strip "[AS] " or "[AS]" from the title for display purposes
+const title = entry.data.title.replace(/^\[AS\]\s*/i, '');
+
+// Also strip the Assamese placeholder description (so cards look clean if translation is pending)
+const cleanDescription = description === 'অসমীয়া অনুবাদ শীঘ্রই আহি আছে।' ? '' : description;
+
 const href = localizePath(`/${type}/${entry.data.translationSlug}/`, lang);
 const date = new Date(pubDate).toLocaleDateString(lang === 'en' ? 'en-IN' : 'as-IN', {
   year: 'numeric',
@@ -29,15 +36,18 @@ const date = new Date(pubDate).toLocaleDateString(lang === 'en' ? 'en-IN' : 'as-
       {type === 'projects' && status && <span class="badge badge-accent">{status}</span>}
       {type === 'announcements' && <span class="badge">Announcement</span>}
       {type === 'blog' && <time datetime={new Date(pubDate).toISOString()}>{date}</time>}
+      {type === 'research' && <span class="badge badge-accent">Research</span>}
     </div>
     
     <h3 class="text-xl font-bold font-display leading-snug mb-2">
       <a href={href} class="text-fg hover:text-accent transition-colors">{title}</a>
     </h3>
     
-    <p class="text-fg-muted text-sm line-clamp-3 mb-4 flex-1">
-      {description}
-    </p>
+    {cleanDescription && (
+      <p class="text-fg-muted text-sm line-clamp-3 mb-4 flex-1">
+        {cleanDescription}
+      </p>
+    )}
     
     {tags && tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border">

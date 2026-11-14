@@ -7,7 +7,6 @@ interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
-const isAs = lang === 'as';
 
 const projects = (await getCollection('projects', ({ data }) => data.lang === lang))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -27,9 +26,13 @@ const t = text[lang];
     </div>
     <a href={t.linkUrl} class="text-sm font-semibold text-accent hover:underline hidden sm:block">{t.linkText}</a>
   </div>
-  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  
+  <!-- Changed to flex-wrap so cards center nicely even if there's only 1 or 2 -->
+  <div class="flex flex-wrap justify-center gap-6">
     {projects.map(project => (
-      <ContentCard entry={project} lang={lang} type="projects" />
+      <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+        <ContentCard entry={project} lang={lang} type="projects" />
+      </div>
     ))}
   </div>
 </section>

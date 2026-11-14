@@ -1,5 +1,5 @@
 ---
-title: "[AS] Open Assam Data Hub — FOSS Open Datasets"
+title: "Open Assam Data Hub — FOSS Open Datasets"
 permalink: /projects/open-assam-data/
 date: 2026-07-23
 status: Coming Soon

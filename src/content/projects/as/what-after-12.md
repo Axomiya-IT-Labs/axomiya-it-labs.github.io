@@ -1,5 +1,5 @@
 ---
-title: "[AS] WhatAfter12 - Career Clarity Guidance"
+title: "WhatAfter12 - Career Clarity Guidance"
 permalink: /projects/what-after-12/
 date: 2026-07-23
 status: Beta

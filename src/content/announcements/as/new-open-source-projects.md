@@ -1,5 +1,5 @@
 ---
-title: "[AS] New Open Source AI Projects Initiative"
+title: "New Open Source AI Projects Initiative"
 permalink: /announcements/new-open-source-projects/
 date: 2026-07-20
 author: "Rakibul Islam"

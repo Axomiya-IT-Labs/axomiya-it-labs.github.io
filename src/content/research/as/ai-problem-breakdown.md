@@ -1,5 +1,5 @@
 ---
-title: "[AS] AI Problem Breakdown: Career Guidance After Class 12"
+title: "AI Problem Breakdown: Career Guidance After Class 12"
 date: 2026-07-23
 author: "Rakibul Islam"
 permalink: /research/ai-problem-breakdown/

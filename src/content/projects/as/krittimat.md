@@ -1,5 +1,5 @@
 ---
-title: "[AS] Krittimat — AI Tools & Prompts Hub"
+title: "Krittimat — AI Tools & Prompts Hub"
 permalink: /projects/krittimat/
 date: 2026-07-24
 status: Live

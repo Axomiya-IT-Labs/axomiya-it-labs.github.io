@@ -1,5 +1,5 @@
 ---
-title: "[AS] Axomiya AI Tutor — LLM Assistant for Learners"
+title: "Axomiya AI Tutor — LLM Assistant for Learners"
 permalink: /projects/axomiya-ai-tutor/
 date: 2026-07-23
 status: Coming Soon

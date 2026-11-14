@@ -1,5 +1,5 @@
 ---
-title: "[AS] Assamese Voice AI & Speech-to-Text Engine"
+title: "Assamese Voice AI & Speech-to-Text Engine"
 permalink: /projects/assamese-speech-ai/
 date: 2026-07-23
 status: Idea

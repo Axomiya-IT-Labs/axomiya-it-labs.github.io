@@ -1,5 +1,5 @@
 ---
-title: "[AS] Official Launch of Axomiya IT Labs — Assam's First AI & FOSS Community"
+title: "Official Launch of Axomiya IT Labs — Assam's First AI & FOSS Community"
 permalink: /announcements/axomiya-it-labs-launch/
 date: 2026-07-23
 author: "Rakibul Islam"

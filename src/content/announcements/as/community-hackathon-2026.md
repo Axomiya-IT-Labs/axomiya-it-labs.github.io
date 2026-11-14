@@ -1,5 +1,5 @@
 ---
-title: "[AS] Upcoming Community AI & FOSS Hackathon 2026"
+title: "Upcoming Community AI & FOSS Hackathon 2026"
 permalink: /announcements/community-hackathon-2026/
 date: 2026-07-15
 author: "Axomiya IT Labs"
