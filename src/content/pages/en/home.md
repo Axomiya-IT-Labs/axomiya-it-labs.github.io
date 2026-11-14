@@ -54,58 +54,6 @@ description: ""
   </div>
 </section>
 
-<!-- Live Projects — Krittimat & WhatAfter12 -->
-<section class="featured-project-section container">
-  <div class="text-center">
-    <h2 class="section-title">Live Projects</h2>
-    <p class="section-subtitle">Built in Assam, for everyone.</p>
-  </div>
-
-  <div class="fp-grid">
-
-    <!-- Krittimat -->
-    <div class="featured-project-card">
-      <div class="fp-meta">
-        <span class="fp-status fp-status--live">Live</span>
-        <span class="fp-category">AI &amp; Tools</span>
-      </div>
-      <h3 class="fp-title">Krittimat</h3>
-      <p class="fp-desc">Know all the most famous AI tools for everything — Image Generation, Voice Cloning, Video Creation, Content Writing, Coding, Orchestration, and Prompting in the age of LLMs.</p>
-      <div class="fp-links">
-        <a href="https://krittimat.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
-        <a href="https://github.com/axomiyaindie/krittimat" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <img src="/social/github.svg" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
-          GitHub
-        </a>
-        <a href="/projects/krittimat/" class="btn btn-secondary">Details</a>
-      </div>
-    </div>
-
-    <!-- What After 12th -->
-    <div class="featured-project-card">
-      <div class="fp-meta">
-        <span class="fp-status fp-status--live">Live</span>
-        <span class="fp-category">AI &amp; Education</span>
-      </div>
-      <h3 class="fp-title">WhatAfter12 - Career Clarity Guidance</h3>
-      <p class="fp-desc">Know all higher education path, jobs & earning opportunities available after 12 in the age of AI.</p>
-      <div class="fp-links">
-        <a href="https://whatafter12.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
-        <a href="https://github.com/axomiyaindie/wa12" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <img src="/social/github.svg" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
-          GitHub
-        </a>
-        <a href="/projects/what-after-12/" class="btn btn-secondary">Details</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="text-center" style="margin-top:1.75rem;">
-    <a href="/projects/" class="btn btn-secondary">View All Projects</a>
-  </div>
-</section>
-
 <section class="principles-section container">
   <div class="text-center">
     <h2 class="section-title">What We Believe</h2>
@@ -164,18 +112,4 @@ description: ""
   </div>
 </section>
 
-<section class="latest-announcements-section container">
-  <div class="text-center">
-    <h2 class="section-title">Latest Announcements</h2>
-    <p class="section-subtitle">Discover product launches, events, and open-source milestones.</p>
-  </div>
-  
-  <div class="announcements-grid">
-    
-      
-    
-  </div>
-  <div class="text-center" style="margin-top: 1.5rem;">
-    <a href="/announcements/" class="btn btn-secondary">View All Announcements</a>
-  </div>
-</section>
+

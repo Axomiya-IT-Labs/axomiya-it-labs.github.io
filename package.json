@@ -5,7 +5,8 @@
   "engines": { "node": ">=22.23.4" },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pnpm postbuild",
+    "validate:content": "node scripts/validate-content.mjs",
+    "build": "pnpm validate:content && astro build && pnpm postbuild",
     "preview": "astro preview",
     "astro": "astro",
     "postbuild": "pagefind --site dist"

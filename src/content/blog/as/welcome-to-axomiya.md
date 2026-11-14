@@ -1,5 +1,5 @@
 ---
-title: "[AS] Welcome to Axomiya IT Labs! 🚀"
+title: "[AS] Welcome to Axomiya IT Labs! "
 author: "Rakibul Islam"
 categories: [Community, Welcome]
 excerpt: "Welcome to our community blog where we share updates, insights, and open-source project developments."

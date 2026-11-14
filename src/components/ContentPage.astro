@@ -15,6 +15,10 @@ const [announcements, projects, posts] = await Promise.all([
 	getCollection('projects', (item) => item.data.lang === lang),
 	getCollection('blog', (item) => item.data.lang === lang),
 ]);
+const newestFirst = <T extends { data: { pubDate: Date } }>(entries: T[]) => entries.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+newestFirst(announcements);
+newestFirst(projects);
+newestFirst(posts);
 const dateLocale = lang === 'as' ? 'as-IN' : 'en-US';
 const liveProjects = projects.filter((item) => item.data.status === 'Live');
 const developmentProjects = projects.filter((item) => ['Beta', 'In Progress', 'Coming Soon'].includes(item.data.status ?? ''));
@@ -24,7 +28,7 @@ const ideaProjects = projects.filter((item) => item.data.status === 'Idea');
 	<article>
 		<div class="prose"><Content /></div>
 		{slug === 'community' && <CommunityRoster />}
-		{slug === 'announcements' && <section class="container section"><div class="card-grid">{announcements.sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).map((item)=><a class="card" href={localizedPath(lang, `/announcements/${item.data.translationSlug}/`)}>{item.data.heroImage&&<img src={item.data.heroImage} alt="" />}<span class="eyebrow">{item.data.type || item.data.category}</span><h2>{item.data.title}</h2><p>{item.data.description}</p><span class="meta">{item.data.pubDate.toLocaleDateString(dateLocale)} · {t.readMore} →</span></a>)}</div></section>}
+		{slug === 'announcements' && <section class="container section"><div class="card-grid">{announcements.map((item)=><a class="card" href={localizedPath(lang, `/announcements/${item.data.translationSlug}/`)}>{item.data.heroImage&&<img src={item.data.heroImage} alt="" width="600" height="338" loading="lazy" />}<span class="eyebrow">{item.data.type || item.data.category}</span><h2>{item.data.title}</h2><p>{item.data.description}</p><span class="meta">{item.data.pubDate.toLocaleDateString(dateLocale)} · {t.readMore} →</span></a>)}</div></section>}
 		{slug === 'projects' && <section class="container section">{[[t.liveProjects, liveProjects], [t.development, developmentProjects], [t.openIdeas, ideaProjects]].map(([heading, items]) => items.length > 0 && <section class="section"><h2>{heading}</h2><div class="card-grid">{items.map((item)=><a class="card" href={localizedPath(lang, `/projects/${item.data.translationSlug}/`)}><span class="eyebrow">{item.data.status} · {item.data.category}</span><h3>{item.data.title}</h3><p>{item.data.description}</p><span class="meta">{item.data.tags?.map((tag)=>`#${tag}`).join(' ')}</span></a>)}</div></section>)}</section>}
 		{slug === 'research' && <section class="container section"><div class="card-grid">{posts.filter((item) => item.data.translationSlug !== 'welcome-to-axomiya').map((item)=><a class="card" href={localizedPath(lang, `/blog/${item.data.translationSlug}/`)}><h2>{item.data.title}</h2><p>{item.data.description}</p><span class="meta">{item.data.pubDate.toLocaleDateString(dateLocale)} · {t.readMore} →</span></a>)}</div></section>}
 		{slug === 'team' && <section class="container section card-grid">{teamData.leadership.map((member)=><article class="card"><img src={member.image} alt={member.name} width="110" height="110" style="border-radius:50%;object-fit:cover"/><h2>{member.name}</h2><p>{member.role}</p><p>{member.bio}</p><nav>{Object.entries(member.social).map(([network,url])=><a href={url}>{network}</a>)}</nav></article>)}</section>}
