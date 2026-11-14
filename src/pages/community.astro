@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const communities = [
+  { platform: "Telegram", name: "Axomiya IT Labs Group", url: "https://t.me/AxomiyaITLabs", icon: "/social/telegram.svg", description: "Our main hub for daily conversations, help, and sharing resources." },
+  { platform: "GitHub", name: "Axomiya IT Labs Repos", url: "https://github.com/Axomiya-IT-Labs", icon: "/social/github.svg", description: "Where we build open-source tools for Assam." },
+  { platform: "X (Twitter)", name: "Axomiya IT Labs", url: "https://x.com", icon: "/social/x.svg", description: "Follow us for announcements and quick updates." },
+  { platform: "Discord", name: "Dev Community", url: "https://discord.gg", icon: "/social/icon.svg", description: "Join our voice channels for live coding and help." }
+];
+---
+<BaseLayout lang="en" title="Community">
+  <div class="container-prose py-16">
+    <header class="mb-12 text-center">
+      <h1 class="display mb-4">Join the Community</h1>
+      <p class="lead mx-auto">Connect with us across platforms. Everyone is welcome.</p>
+    </header>
+
+    <div class="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+      {communities.map(community => (
+        <a href={community.url} target="_blank" rel="noopener" class="card flex items-start gap-4 hover:border-accent group p-6">
+          <div class="p-3 bg-bg-subtle rounded-lg shrink-0 group-hover:bg-accent-soft transition-colors"><img src={community.icon} alt={community.platform} class="w-8 h-8 dark:invert" /></div>
+          <div>
+            <h3 class="font-bold font-display text-lg text-fg group-hover:text-accent transition-colors">{community.name}</h3>
+            <p class="text-sm text-fg-muted mt-1">{community.description}</p>
+            <span class="text-xs font-semibold text-accent mt-3 inline-block">Join &rarr;</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

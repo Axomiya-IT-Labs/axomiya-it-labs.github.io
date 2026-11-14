@@ -6,7 +6,7 @@ author: "Rakibul Islam"
 type: "Official Launch"
 category: "Community"
 excerpt: "We are thrilled to launch Axomiya IT Labs — Assam's first AI and open-source community dedicated to making technology accessible for everyone."
-image: "/assets/images/announcements/axomiya-it-labs-launch.webp"
+image: "/assets/announcements/axomiya-it-labs-launch.webp"
 tags:
   - Official-Launch
   - Open-Source
@@ -15,7 +15,7 @@ lang: en
 translationSlug: axomiya-it-labs-launch
 description: "We are thrilled to launch Axomiya IT Labs — Assam's first AI and open-source community dedicated to making technology accessible for everyone."
 pubDate: "2026-07-23"
-heroImage: "/assets/images/announcements/axomiya-it-labs-launch.webp"
+heroImage: "/assets/announcements/axomiya-it-labs-launch.webp"
 ---
 We are excited to announce the official launch of **Axomiya IT Labs** — Assam's first open-source and artificial intelligence community dedicated to democratizing technology across the region!
 

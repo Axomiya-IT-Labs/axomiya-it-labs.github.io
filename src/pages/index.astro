@@ -1,4 +1,29 @@
 ---
-import HomeLanding from '../components/HomeLanding.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import AnnouncementsStrip from '../components/AnnouncementsStrip.astro';
+import LatestProjects from '../components/LatestProjects.astro';
+import LatestPosts from '../components/LatestPosts.astro';
+
+const lang = 'en' as const;
 ---
-<HomeLanding lang="en" />
+<BaseLayout lang={lang} title="Axomiya IT Labs">
+  
+  <Hero 
+    eyebrow="Rooted in Assam · Open to everyone"
+    title="Axomiya"
+    titleAccent="IT Labs"
+    tagline="Assam's first AI & open-source community. Equal access for all — making technology easy for everyone."
+    primaryBtnText="Join the community"
+    primaryBtnLink="/community/"
+    secondaryBtnText="Explore projects"
+    secondaryBtnLink="/projects/"
+  />
+
+  <AnnouncementsStrip lang={lang} />
+  
+  <LatestProjects lang={lang} />
+  
+  <LatestPosts lang={lang} />
+
+</BaseLayout>

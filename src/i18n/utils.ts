@@ -1,16 +1,45 @@
-export type TargetLang = 'en' | 'as';
+import { defaultLang, type Lang } from './ui';
 
-/** Toggle a localized pathname while retaining its content path and trailing slash. */
-export function swapLangPath(currentPath: string, targetLang: TargetLang): string {
-	const pathname = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
-	const unprefixed = pathname === '/as' ? '/' : pathname.startsWith('/as/') ? pathname.slice(3) : pathname;
-	if (targetLang === 'en') return unprefixed || '/';
-	const suffix = unprefixed === '/' ? '' : unprefixed;
-	return suffix ? `/as${suffix}` : '/as/';
+/**
+ * Computes the equivalent path in the other language.
+ * e.g. /blog/welcome/ -> /as/blog/welcome/
+ * e.g. /as/about/ -> /about/
+ */
+export function swapLangPath(currentPath: string, targetLang: Lang): string {
+  // Strip trailing slash for easier manipulation
+  const path = currentPath.endsWith('/') && currentPath.length > 1
+    ? currentPath.slice(0, -1)
+    : currentPath;
+
+  const isCurrentlyAs = path === '/as' || path.startsWith('/as/');
+
+  if (targetLang === 'as') {
+    if (isCurrentlyAs) return currentPath;
+    // Convert /blog to /as/blog
+    return path === '/' ? '/as/' : `/as${path}/`;
+  } else {
+    // Target is English (default)
+    if (!isCurrentlyAs) return currentPath;
+    // Convert /as/blog to /blog
+    const stripped = path.replace(/^\/as/, '');
+    return stripped === '' ? '/' : `${stripped}/`;
+  }
 }
 
-export function localePrefix(lang: TargetLang): string { return lang === 'as' ? '/as' : ''; }
-export function localizedPath(lang: TargetLang, pathname: string): string {
-	const path = pathname.startsWith('/') ? pathname : `/${pathname}`;
-	return `${localePrefix(lang)}${path}` || '/';
+/**
+ * Ensures a path is prefixed correctly for the target language.
+ * Good for building links where you only know the base path.
+ */
+export function localizePath(path: string, lang: Lang): string {
+  // Ensure path starts with /
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  
+  if (lang === defaultLang) return cleanPath;
+  
+  // Don't double prefix if already prefixed
+  if (cleanPath.startsWith(`/${lang}/`) || cleanPath === `/${lang}`) {
+    return cleanPath;
+  }
+  
+  return cleanPath === '/' ? `/${lang}/` : `/${lang}${cleanPath}`;
 }

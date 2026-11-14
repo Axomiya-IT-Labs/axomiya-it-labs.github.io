@@ -1,0 +1,35 @@
+---
+import type { Lang } from '../i18n/ui';
+import ContentCard from './ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const isAs = lang === 'as';
+
+const projects = (await getCollection('projects', ({ data }) => data.lang === lang))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3); // Just the top 3
+
+const text = {
+  en: { eyebrow: 'What we build', title: 'Live Projects', linkText: 'View all →', linkUrl: '/projects/' },
+  as: { eyebrow: 'আমি কি নিৰ্মাণ কৰোঁ', title: 'লাইভ প্ৰকল্প', linkText: 'সকলো চাওক →', linkUrl: '/as/projects/' }
+};
+const t = text[lang];
+---
+<section class="py-24 container-prose">
+  <div class="flex items-end justify-between mb-10">
+    <div>
+      <span class="eyebrow mb-2">{t.eyebrow}</span>
+      <h2 class="text-3xl md:text-4xl font-bold font-display">{t.title}</h2>
+    </div>
+    <a href={t.linkUrl} class="text-sm font-semibold text-accent hover:underline hidden sm:block">{t.linkText}</a>
+  </div>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {projects.map(project => (
+      <ContentCard entry={project} lang={lang} type="projects" />
+    ))}
+  </div>
+</section>

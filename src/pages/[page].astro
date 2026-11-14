@@ -1,7 +1,0 @@
----
-import { getCollection } from 'astro:content';
-import ContentPage from '../components/ContentPage.astro';
-export async function getStaticPaths() { return (await getCollection('pages')).filter((entry) => entry.data.lang === 'en' && entry.data.translationSlug !== 'home').map((entry) => ({ params: { page: entry.data.translationSlug }, props: { entry } })); }
-const { entry } = Astro.props;
----
-<ContentPage entry={entry} />

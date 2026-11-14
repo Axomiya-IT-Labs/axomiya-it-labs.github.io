@@ -1,4 +1,29 @@
 ---
-import HomeLanding from '../../components/HomeLanding.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import AnnouncementsStrip from '../../components/AnnouncementsStrip.astro';
+import LatestProjects from '../../components/LatestProjects.astro';
+import LatestPosts from '../../components/LatestPosts.astro';
+
+const lang = 'as' as const;
 ---
-<HomeLanding lang="as" />
+<BaseLayout lang={lang} title="Axomiya IT Labs">
+  
+  <Hero 
+    eyebrow="অসমত শিপত · সকলোৰে বাবে মুক্ত"
+    title="Axomiya"
+    titleAccent="IT Labs"
+    tagline="অসমৰ প্ৰথম AI আৰু মুক্ত-উৎস সম্প্ৰদায়। সকলোৰে বাবে সমান অধিকাৰ — প্ৰযুক্তি সহজ কৰি তোলা।"
+    primaryBtnText="সম্প্ৰদায়ত যোগ দিয়ক"
+    primaryBtnLink="/as/community/"
+    secondaryBtnText="প্ৰকল্প চাওক"
+    secondaryBtnLink="/as/projects/"
+  />
+
+  <AnnouncementsStrip lang={lang} />
+  
+  <LatestProjects lang={lang} />
+  
+  <LatestPosts lang={lang} />
+
+</BaseLayout>

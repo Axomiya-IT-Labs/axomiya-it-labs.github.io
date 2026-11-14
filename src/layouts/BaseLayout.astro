@@ -1,116 +1,101 @@
 ---
 import '../styles/global.css';
+import { useTranslations, defaultLang } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
-import { useTranslations, navLabels } from '../i18n/ui';
-import { getAbsoluteLocaleUrl } from 'astro:i18n';
-import { getCollection } from 'astro:content';
-import { localizedPath, swapLangPath } from '../i18n/utils';
-import { navigationData } from '../data/navigation';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { localizePath } from '../i18n/utils';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import SearchModal from '../components/SearchModal.astro';
 
-interface Props { lang: Lang; title?: string; description?: string; translationSlug?: string; section?: 'blog' | 'projects' | 'announcements' | 'pages'; heroImage?: string; ogImage?: string; placeholder?: boolean; robots?: string; contentDate?: Date; author?: string; repo?: string; }
-const { lang, title = SITE_TITLE, description = SITE_DESCRIPTION, translationSlug = '', section = 'pages', heroImage, ogImage, placeholder = false, robots = 'index,follow', contentDate, author, repo } = Astro.props;
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+}
+
+const { 
+  lang, 
+  title, 
+  description = 'Axomiya IT Labs — Assam\'s first AI & open-source community.',
+  ogImage = '/brand/og-image.webp',
+  ogType = 'website'
+} = Astro.props;
+
 const t = useTranslations(lang);
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://axomiya-it-labs.github.io');
-const isHome = section === 'pages' && translationSlug === 'home';
-const pagePath = isHome ? '' : section === 'pages' ? `/${translationSlug}` : `/${section}/${translationSlug}`;
-const contentPath = `${pagePath || ''}/`.replace(/^\//, '');
-const enUrl = getAbsoluteLocaleUrl('en', contentPath);
-const asUrl = getAbsoluteLocaleUrl('as', contentPath);
-const path = (part: string) => localizedPath(lang, part);
-const localizedNav = [
-  { label: t.home, href: path('/') }, { label: t.blog, href: path('/blog/') },
-  ...navigationData.map((item) => ({
-    label: navLabels[item.name] ? t[navLabels[item.name]] : item.name,
-    href: path(item.link),
-    children: item.dropdown?.map((sub) => ({ label: navLabels[sub.name] ? t[navLabels[sub.name]] : sub.name, href: path(sub.link) })),
-  })),
-];
-const otherLang: Lang = lang === 'en' ? 'as' : 'en';
-const [blogEntries, projectEntries, announcementEntries, pageEntries] = await Promise.all([
-  getCollection('blog'), getCollection('projects'), getCollection('announcements'), getCollection('pages'),
-]);
-const routeWithoutLocale = Astro.url.pathname.startsWith('/as/') ? Astro.url.pathname.slice(3) : Astro.url.pathname;
-const collectionForSection = section === 'blog' ? blogEntries : section === 'projects' ? projectEntries : section === 'announcements' ? announcementEntries : pageEntries;
-const hasOgCard = collectionForSection.some((entry) => entry.data.lang === lang && entry.data.translationSlug === translationSlug);
-const generatedOg = hasOgCard ? `/og/${lang}/${section}/${translationSlug}.png` : undefined;
-const socialImage = new URL(generatedOg ?? ogImage ?? heroImage ?? '/brand/og-image.webp', Astro.site ?? 'https://axomiya-it-labs.github.io');
-const isGeneratedListing = section === 'pages' && routeWithoutLocale === '/blog/';
-const hasTranslation = isGeneratedListing || collectionForSection.some((entry) => entry.data.lang === otherLang && entry.data.translationSlug === translationSlug);
-const otherPath = hasTranslation
-  ? swapLangPath(Astro.url.pathname, otherLang)
-  : localizedPath(otherLang, section === 'blog' ? '/blog/' : section === 'projects' ? '/projects/' : section === 'announcements' ? '/announcements/' : '/');
-const switchLink = (target: Lang) => target === lang ? Astro.url.pathname : otherPath;
-const switchTitle = (target: Lang) => target !== lang && !hasTranslation ? 'Not yet translated' : undefined;
-const organizationSchema = { '@context': 'https://schema.org', '@type': 'Organization', name: SITE_TITLE, url: Astro.site, logo: new URL('/brand/logo.png', Astro.site), sameAs: ['https://github.com/axomiyaindie', 'https://www.linkedin.com/in/axomiyaindie', 'https://x.com/axomiyaindie'] };
-const pageSchema = isHome
-  ? { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_TITLE, url: Astro.site, inLanguage: ['en', 'as'] }
-  : section === 'blog'
-    ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: title, description, datePublished: contentDate?.toISOString(), author: { '@type': 'Person', name: author || 'Axomiya IT Labs' }, inLanguage: lang }
-    : section === 'projects'
-      ? { '@context': 'https://schema.org', '@type': 'SoftwareSourceCode', name: title, description, url: canonical, inLanguage: lang, ...(repo ? { codeRepository: repo } : {}) }
-      : undefined;
+
+const siteName = 'Axomiya IT Labs';
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+const currentPath = Astro.url.pathname;
+const canonicalURL = new URL(currentPath, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+const isAs = lang === 'as';
+const enPath = isAs ? currentPath.replace(/^\/as/, '') || '/' : currentPath;
+const asPath = isAs ? currentPath : (currentPath === '/' ? '/as/' : `/as${currentPath}`);
+const enURL = new URL(enPath, Astro.site);
+const asURL = new URL(asPath, Astro.site);
 ---
-<!doctype html>
+<!DOCTYPE html>
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | {SITE_TITLE}</title>
-    <meta name="description" content={description || SITE_DESCRIPTION} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="as" href={asUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
-    <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} — ${t.blog}`} href="/rss.xml" />
-    <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} — ${t.blog} (অসমীয়া)`} href="/as/rss.xml" />
-    <link rel="llms" href="/llms.txt" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="robots" content={robots} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description || SITE_DESCRIPTION} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={lang === 'as' ? 'as_IN' : 'en_US'} />
-    <meta property="og:image" content={socialImage} />
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema).replace(/</g, '\\u003c')} />
-    {pageSchema && <script type="application/ld+json" set:html={JSON.stringify(pageSchema).replace(/</g, '\\u003c')} />}
-    <link rel="icon" href="/favicon.ico" />
-  </head>
-  <body>
-    <div id="route-progress" aria-hidden="true"></div>
-    <header class="site-header" data-pagefind-ignore>
-      <a class="brand" href={path('/')}><img src="/brand/logo.png" alt="" width="34" height="34" /> <span>{SITE_TITLE}</span></a>
-      <nav id="site-nav" class="site-nav" aria-label={t.home}>
-        <div class="drawer-heading"><strong>{SITE_TITLE}</strong><button class="nav-close" type="button" aria-label={t.close}>×</button></div>
-        {localizedNav.map((item) => item.children?.length ? <details class="nav-dropdown"><summary>{item.label}</summary><div class="nav-submenu">{item.children.map((child) => <a href={child.href}>{child.label}</a>)}</div></details> : <a href={item.href}>{item.label}</a>)}
-        <div class="drawer-language language-switch" aria-label={t.language}><a href={switchLink('en')} aria-current={lang === 'en' ? 'page' : undefined} title={switchTitle('en')}>EN</a><span aria-hidden="true">|</span><a href={switchLink('as')} aria-current={lang === 'as' ? 'page' : undefined} title={switchTitle('as')}>অসমীয়া</a></div>
-      </nav>
-      <div class="header-tools">
-        <SearchModal lang={lang} />
-        <div class="header-language language-switch" aria-label={t.language}><a href={switchLink('en')} aria-current={lang === 'en' ? 'page' : undefined} title={switchTitle('en')}>EN</a><span aria-hidden="true">|</span><a href={switchLink('as')} aria-current={lang === 'as' ? 'page' : undefined} title={switchTitle('as')}>অসমীয়া</a></div>
-        <button class="menu-toggle" type="button" aria-label={t.menu} aria-expanded="false" aria-controls="site-nav"><span></span><span></span></button>
-      </div>
-    </header>
-    <main data-pagefind-body><slot /></main>
-    <footer class="site-footer" data-pagefind-ignore><div><strong>{SITE_TITLE}</strong><p>{t.footer}</p></div><nav aria-label="Footer"><a href={path('/blog/')}>{t.blog}</a><a href={path('/rss.xml')}>RSS</a><a href="https://github.com/Axomiya-IT-Labs">GitHub</a></nav><small>© {new Date().getFullYear()} {SITE_TITLE} · {t.copyright}</small></footer>
-    <script>
-      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
-      const nav = document.querySelector<HTMLElement>('#site-nav');
-      const close = document.querySelector<HTMLButtonElement>('.nav-close');
-      const setMenu = (open: boolean) => { toggle?.setAttribute('aria-expanded', String(open)); nav?.setAttribute('aria-hidden', String(!open)); nav?.classList.toggle('open', open); document.body.classList.toggle('menu-open', open); };
-      toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
-      close?.addEventListener('click', () => { setMenu(false); toggle?.focus(); });
-      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
-      document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && nav?.classList.contains('open')) setMenu(false); });
-      const progress = document.querySelector<HTMLElement>('#route-progress');
-      document.addEventListener('click', (event) => {
-        const anchor = (event.target as HTMLElement).closest('a');
-        if (anchor && anchor.origin === location.origin && anchor.pathname !== location.pathname && !anchor.target && !event.ctrlKey && !event.metaKey && !event.shiftKey) progress?.classList.add('active');
-      });
-      window.addEventListener('pageshow', () => progress?.classList.remove('active'));
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/social/icon.svg" />
+    
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.dataset.theme = stored;
+          } else {
+            document.documentElement.dataset.theme = 'system';
+          }
+        } catch (e) {
+          document.documentElement.dataset.theme = 'system';
+        }
+      })();
     </script>
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="as" href={asURL} />
+    <link rel="alternate" hreflang="x-default" href={enURL} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_IN' : 'as_IN'} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <link rel="alternate" type="application/rss+xml" title={siteName} href={lang === 'en' ? '/rss.xml' : '/as/rss.xml'} />
+    <link rel="llms" href="/llms.txt" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    
+    <Header lang={lang} />
+    
+    <!-- Search Modal (rendered once, globally available) -->
+    <SearchModal lang={lang} />
+    
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    
+    <Footer lang={lang} />
   </body>
 </html>
-

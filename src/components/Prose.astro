@@ -1,0 +1,25 @@
+---
+interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+<div class={`content-prose mx-auto ${className}`}>
+  <slot />
+</div>
+
+<style>
+  /* Tell Tailwind where the design tokens live for this scoped block */
+  @reference "../styles/global.css";
+
+  .content-prose :global(h2) { @apply content-prose-h2; }
+  .content-prose :global(h3) { @apply content-prose-h3; }
+  .content-prose :global(p) { @apply mb-6; }
+  .content-prose :global(ul) { @apply list-disc list-inside mb-6 pl-4; }
+  .content-prose :global(ol) { @apply list-decimal list-inside mb-6 pl-4; }
+  .content-prose :global(li) { @apply mb-2; }
+  .content-prose :global(blockquote) { @apply border-l-4 border-accent pl-4 italic text-fg-muted my-6; }
+  .content-prose :global(a) { @apply text-accent hover:underline; }
+  .content-prose :global(code) { @apply bg-bg-subtle px-1.5 py-0.5 rounded text-sm font-mono; }
+  .content-prose :global(pre) { @apply bg-bg-subtle p-4 rounded-lg overflow-x-auto mb-6; }
+  .content-prose :global(pre code) { @apply bg-transparent p-0; }
+  .content-prose :global(img) { @apply rounded-lg shadow-md my-8 max-w-full h-auto; }
+</style>

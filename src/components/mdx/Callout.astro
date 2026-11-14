@@ -1,12 +1,25 @@
 ---
-interface Props { title?: string; }
-const { title = 'A note from Axomiya IT Labs' } = Astro.props;
+interface Props {
+  type?: 'info' | 'warning' | 'success';
+  title?: string;
+}
+
+const { 
+  type = 'info', 
+  title = 'Note' 
+} = Astro.props;
+
+const styles = {
+  info: 'border-blue-500 bg-blue-500/10 text-blue-900 dark:text-blue-100',
+  warning: 'border-yellow-500 bg-yellow-500/10 text-yellow-900 dark:text-yellow-100',
+  success: 'border-green-500 bg-green-500/10 text-green-900 dark:text-green-100'
+};
 ---
-<aside class="mdx-callout" aria-label={title}>
-	<strong>{title}</strong>
-	<div><slot /></div>
-</aside>
-<style>
-	.mdx-callout { margin: 1.5rem 0; padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: .8rem; background: color-mix(in srgb, var(--accent) 7%, var(--panel)); }
-	.mdx-callout strong { display: block; margin-bottom: .35rem; color: var(--accent); }
-</style>
+<div class={`my-6 rounded-r-lg border-l-4 p-4 ${styles[type]}`}>
+  <div class="flex items-center gap-2 mb-1">
+    <span class="font-bold text-sm uppercase tracking-wider">{title}</span>
+  </div>
+  <div class="text-sm prose-p:my-0">
+    <slot />
+  </div>
+</div>

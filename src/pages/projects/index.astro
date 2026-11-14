@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentCard from '../../components/ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects', ({ data }) => data.lang === 'en')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout lang="en" title="Projects">
+  <div class="container-prose py-16">
+    <header class="mb-12">
+      <h1 class="display mb-4">Projects</h1>
+      <p class="lead">Open-source tools and community projects built in Assam.</p>
+    </header>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map(project => <ContentCard entry={project} lang="en" type="projects" />)}
+    </div>
+  </div>
+</BaseLayout>

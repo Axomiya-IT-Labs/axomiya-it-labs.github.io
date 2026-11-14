@@ -6,7 +6,7 @@ author: "Rakibul Islam"
 type: "Project Initiative"
 category: "Projects"
 excerpt: "Announcing our upcoming suite of open-source Assamese AI models, dataset repositories, and developer toolkits."
-image: "/assets/images/announcements/opensource-initiative.webp"
+image: "/assets/announcements/opensource-initiative.webp"
 tags:
   - Open-Source
   - AI-Projects
@@ -15,7 +15,7 @@ lang: en
 translationSlug: new-open-source-projects
 description: "Announcing our upcoming suite of open-source Assamese AI models, dataset repositories, and developer toolkits."
 pubDate: "2026-07-20"
-heroImage: "/assets/images/announcements/opensource-initiative.webp"
+heroImage: "/assets/announcements/opensource-initiative.webp"
 ---
 ##  Open Source AI Projects Initiative
 

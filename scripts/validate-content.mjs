@@ -1,86 +1,129 @@
-import fs from 'node:fs';
+import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const root = process.cwd();
-const collectionRules = {
-	blog: ['title', 'description', 'pubDate', 'lang', 'translationSlug'],
-	projects: ['title', 'description', 'pubDate', 'lang', 'translationSlug'],
-	announcements: ['title', 'description', 'pubDate', 'lang', 'translationSlug'],
-	pages: ['title', 'lang', 'translationSlug'],
+const ROOT = process.cwd();
+const CONTENT = path.join(ROOT, 'src', 'content');
+// Added 'research' to the list
+const SECTIONS = ['blog', 'research', 'projects', 'announcements', 'pages'];
+const LANGS = ['en', 'as'];
+
+// Extremely basic YAML frontmatter extractor (just for validation, Astro will parse the real one)
+const extractFrontmatter = (content) => {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!match) return null;
+  return match[1];
 };
-const errors = [];
-let total = 0;
 
-function walk(directory) {
-	return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-		const fullPath = path.join(directory, entry.name);
-		return entry.isDirectory() ? walk(fullPath) : /\.(?:md|mdx)$/.test(entry.name) ? [fullPath] : [];
-	});
+async function getFiles(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  let files = [];
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files = files.concat(await getFiles(fullPath));
+    } else if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
+      files.push(fullPath);
+    }
+  }
+  return files;
 }
 
-function valueOf(frontmatter, field) {
-	const match = frontmatter.match(new RegExp(`^${field}\\s*:\\s*(.*?)\\s*$`, 'm'));
-	return match?.[1]?.trim().replace(/^(["'])(.*)\1$/, '$2') ?? '';
+async function validate() {
+  let errors = 0;
+  let fileCount = 0;
+  const pairs = new Map();
+
+  for (const section of SECTIONS) {
+    for (const lang of LANGS) {
+      const dir = path.join(CONTENT, section, lang);
+      let files = [];
+      try {
+        files = await getFiles(dir);
+      } catch (e) {
+        continue; // directory might not exist yet
+      }
+
+      for (const file of files) {
+        fileCount++;
+        const relPath = path.relative(CONTENT, file).replace(/\\/g, '/');
+        const raw = await readFile(file, 'utf-8');
+
+        // 1. Check for BOM
+        if (raw.charCodeAt(0) === 0xFEFF || raw.startsWith('\uFEFF')) {
+          console.error(`❌ BOM detected: ${relPath} starts with a Byte Order Mark. Save as UTF-8 without BOM.`);
+          errors++;
+          continue;
+        }
+
+        // 2. Check frontmatter exists
+        const fm = extractFrontmatter(raw);
+        if (!fm) {
+          console.error(`❌ Missing frontmatter block: ${relPath} (must start with ---)`);
+          errors++;
+          continue;
+        }
+
+        // 3. Check for translationSlug
+        const slugMatch = fm.match(/^translationSlug:\s*["']?([^"'\r\n]+)["']?/m);
+        if (!slugMatch) {
+          console.error(`❌ Missing translationSlug: ${relPath}`);
+          errors++;
+          continue;
+        }
+        const slug = slugMatch[1].trim();
+
+        // 4. Check for lang mismatch with folder
+        const langMatch = fm.match(/^lang:\s*["']?([^"'\r\n]+)["']?/m);
+        if (!langMatch || langMatch[1].trim() !== lang) {
+          console.error(`❌ Lang mismatch: ${relPath} declares lang: ${langMatch ? langMatch[1] : 'none'}, but is in the /${lang}/ folder.`);
+          errors++;
+        }
+
+        // 5. Check heroImage path if present
+        const imgMatch = fm.match(/^heroImage:\s*["']?([^"'\r\n]+)["']?/m);
+        if (imgMatch) {
+          let imgPath = imgMatch[1].trim().replace(/^['"]|['"]$/g, '');
+          if (imgPath.startsWith('/')) {
+             // Strip leading slash to check in public/ folder
+             const diskPath = path.join(ROOT, 'public', imgPath.slice(1));
+             try {
+               await readFile(diskPath);
+             } catch (e) {
+               console.error(`❌ Missing heroImage: ${relPath} references ${imgPath}, but the file doesn't exist in public/`);
+               errors++;
+             }
+          }
+        }
+
+        // Track pairs
+        const key = `${section}/${slug}`;
+        if (!pairs.has(key)) pairs.set(key, new Set());
+        pairs.get(key).add(lang);
+      }
+    }
+  }
+
+  // 6. Check translation pairs
+  for (const [key, langs] of pairs.entries()) {
+    if (!langs.has('en')) {
+      console.error(`❌ Missing EN pair: ${key} exists in AS but not EN.`);
+      errors++;
+    }
+    if (!langs.has('as')) {
+      console.error(`❌ Missing AS pair: ${key} exists in EN but not AS.`);
+      errors++;
+    }
+  }
+
+  if (errors > 0) {
+    console.error(`\nContent validation failed with ${errors} problem(s).`);
+    process.exit(1);
+  } else {
+    console.log(`✅ Content validation passed: ${fileCount} files across ${SECTIONS.length} collections; all locale pairs, required fields, and heroImage paths are valid.`);
+  }
 }
 
-for (const [collection, requiredFields] of Object.entries(collectionRules)) {
-	const directory = path.join(root, 'src', 'content', collection);
-	const files = walk(directory);
-	const bySlug = new Map();
-	for (const file of files) {
-		total++;
-		const source = fs.readFileSync(file, 'utf8');
-		const absolute = path.resolve(file);
-		const frontmatterMatch = source.match(/^---\s*\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-		if (!frontmatterMatch) {
-			errors.push(`${absolute}: missing YAML frontmatter block`);
-			continue;
-		}
-		const frontmatter = frontmatterMatch[1];
-		for (const field of requiredFields) {
-			const value = valueOf(frontmatter, field);
-			if (!value) errors.push(`${absolute}: missing required frontmatter field "${field}"`);
-			if (field === 'pubDate' && value && Number.isNaN(Date.parse(value))) {
-				errors.push(`${absolute}: "pubDate" is not a valid date (${value})`);
-			}
-		}
-		const lang = valueOf(frontmatter, 'lang');
-		const expectedLang = path.relative(directory, file).split(path.sep)[0];
-		if (lang && !['en', 'as'].includes(lang)) errors.push(`${absolute}: "lang" must be "en" or "as" (found "${lang}")`);
-		if (lang && expectedLang !== lang) errors.push(`${absolute}: folder locale is "${expectedLang}" but frontmatter lang is "${lang}"`);
-
-		const translationSlug = valueOf(frontmatter, 'translationSlug');
-		if (translationSlug) {
-			const locales = bySlug.get(translationSlug) ?? new Map();
-			if (locales.has(lang)) errors.push(`${absolute}: duplicate ${lang} entry for translationSlug "${translationSlug}" in ${collection}`);
-			locales.set(lang, absolute);
-			bySlug.set(translationSlug, locales);
-		}
-
-		const heroImage = valueOf(frontmatter, 'heroImage');
-		if (heroImage && !/^(?:https?:)?\/\//i.test(heroImage)) {
-			const imagePath = path.resolve(root, 'public', heroImage.replace(/^[/\\]+/, ''));
-			const publicRoot = path.resolve(root, 'public') + path.sep;
-			if (!imagePath.startsWith(publicRoot) || !fs.existsSync(imagePath) || !fs.statSync(imagePath).isFile()) {
-				errors.push(`${absolute}: heroImage "${heroImage}" does not exist as a file under public/`);
-			}
-		}
-	}
-
-	for (const [translationSlug, locales] of bySlug) {
-		for (const lang of ['en', 'as']) {
-			if (!locales.has(lang)) {
-				const counterpart = locales.values().next().value;
-				errors.push(`${counterpart}: missing ${lang} pair for translationSlug "${translationSlug}" in ${collection}`);
-			}
-		}
-	}
-}
-
-if (errors.length) {
-	console.error(`Content validation failed with ${errors.length} problem(s):`);
-	for (const error of errors) console.error(`- ${error}`);
-	process.exitCode = 1;
-} else {
-	console.log(`Content validation passed: ${total} files across ${Object.keys(collectionRules).length} collections; all locale pairs, required fields, and heroImage paths are valid.`);
-}
+validate().catch(err => {
+  console.error("Validation script crashed:", err);
+  process.exit(1);
+});

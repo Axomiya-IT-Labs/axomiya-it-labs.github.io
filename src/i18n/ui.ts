@@ -1,10 +1,107 @@
-export type Lang = 'en' | 'as';
-const ui = {
-	en: { home: 'Home', blog: 'Blog', projects: 'Projects', announcements: 'Announcements', latestAnnouncements: 'Latest Announcements', announcementSummary: 'Discover product launches, events, and open-source milestones.', about: 'About', team: 'Team', community: 'Community', research: 'Research', contribute: 'Contribute', readMore: 'Read more', publishedOn: 'Published on', updatedOn: 'Updated on', latest: 'Latest writing', latestSubtitle: 'Ideas, projects, and updates from our community.', language: 'Language', menu: 'Open navigation menu', close: 'Close menu', search: 'Search', searchPlaceholder: 'Search posts, projects, and pages…', searchLoading: 'Preparing search…', searchHint: 'Type to search all languages.', searchEmpty: 'No results found.', footer: 'Equal Access for All — Making AI Easy for Everyone.', copyright: 'Open Source · Built with passion', backEnglish: 'Read the English version', placeholder: 'অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।', noPosts: 'No posts yet.', viewAll: 'View all', status: 'Status', category: 'Category', tags: 'Topics', liveProjects: 'Live projects', development: 'In development', openIdeas: 'Open ideas' },
-	as: { home: 'ঘৰ', blog: 'লেখা', projects: 'প্ৰকল্প', announcements: 'ঘোষণা', latestAnnouncements: 'শেহতীয়া ঘোষণা', announcementSummary: 'নতুন প্ৰকল্প, অনুষ্ঠান আৰু মুক্ত উৎসৰ গুৰুত্বপূৰ্ণ খবৰসমূহ চাওক।', about: 'আমাৰ বিষয়ে', team: 'দল', community: 'সমাজ', research: 'গৱেষণা', contribute: 'অৱদান', readMore: 'অধিক পঢ়ক', publishedOn: 'প্ৰকাশিত', updatedOn: 'আপডেট', latest: 'শেহতীয়া লেখা', latestSubtitle: 'আমাৰ সমাজৰ ধাৰণা, প্ৰকল্প আৰু খবৰ।', language: 'ভাষা', menu: 'নেভিগেচন মেনু খোলক', close: 'মেনু বন্ধ কৰক', search: 'বিচাৰক', searchPlaceholder: 'লেখা, প্ৰকল্প আৰু পৃষ্ঠা বিচাৰক…', searchLoading: 'বিচাৰ প্ৰস্তুত কৰা হৈছে…', searchHint: 'সকলো ভাষাত বিচাৰিবলৈ লিখক।', searchEmpty: 'কোনো ফলাফল পোৱা নগ’ল।', footer: 'সকলোৰে বাবে সমান সুবিধা — AI সকলোৰে বাবে সহজ কৰা।', copyright: 'মুক্ত উৎস · আন্তৰিকতাৰে নিৰ্মিত', backEnglish: 'ইংৰাজী সংস্কৰণ পঢ়ক', placeholder: 'অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।', noPosts: 'এতিয়ালৈ কোনো লেখা নাই।', viewAll: 'সকলো চাওক', status: 'অৱস্থা', category: 'শ্ৰেণী', tags: 'বিষয়', liveProjects: 'সজীৱ প্ৰকল্প', development: 'নিৰ্মাণাধীন', openIdeas: 'মুক্ত ধাৰণা' },
+export const languages = {
+  en: 'English',
+  as: 'অসমীয়া',
 } as const;
-export function useTranslations(lang: Lang) { return ui[lang]; }
 
-export const navLabels: Record<string, keyof (typeof ui)['en']> = {
-	Projects: 'projects', Research: 'research', Announcements: 'announcements', About: 'about', 'About Us': 'about', Team: 'team', Community: 'community', Contribute: 'contribute',
-};
+export type Lang = keyof typeof languages;
+
+export const defaultLang: Lang = 'en';
+
+export const ui = {
+  en: {
+    'nav.home': 'Home',
+    'nav.blog': 'Blog',
+    'nav.projects': 'Projects',
+    'nav.research': 'Research',
+    'nav.announcements': 'Announcements',
+    'nav.about': 'About',
+    'nav.contribute': 'Contribute',
+    'nav.team': 'Team',
+    'nav.community': 'Community',
+    
+    'search.placeholder': 'Search...',
+    'search.no_results': 'No results found.',
+    'search.loading': 'Searching...',
+    
+    'theme.light': 'Light',
+    'theme.dark': 'Dark',
+    'theme.system': 'System',
+    'theme.toggle': 'Toggle theme',
+    
+    'lang.toggle': 'Switch language',
+    
+    'blog.published': 'Published on',
+    'blog.updated': 'Last updated on',
+    'blog.read_more': 'Read more',
+    'blog.min_read': 'min read',
+    'blog.empty': 'No posts found.',
+    
+    'project.status': 'Status',
+    'project.stack': 'Tech Stack',
+    'project.repo': 'Repository',
+    'project.demo': 'Live Demo',
+    
+    'share.title': 'Share this',
+    'share.copy': 'Copy Link',
+    'share.copied': 'Copied!',
+    'share.native': 'Share',
+    
+    'footer.rights': 'All rights reserved.',
+    'footer.built': 'Built in Assam.',
+    
+    '404.title': 'Page not found',
+    '404.desc': 'The page you are looking for does not exist or has been moved.',
+    '404.home': 'Go back home',
+  },
+  as: {
+    'nav.home': 'মুখ্য পৃষ্ঠা',
+    'nav.blog': 'ব্লগ',
+    'nav.projects': 'প্ৰকল্প',
+    'nav.research': 'গৱেষণা',
+    'nav.announcements': 'ঘোষণা',
+    'nav.about': 'আমাৰ বিষয়ে',
+    'nav.contribute': 'অৱদান আগবঢ়াওক',
+    'nav.team': 'দল',
+    'nav.community': 'সম্প্ৰদায়',
+    
+    'search.placeholder': 'সন্ধান কৰক...',
+    'search.no_results': 'কোনো ফলাফল পোৱা নগ’ল।',
+    'search.loading': 'সন্ধান কৰি আছে...',
+    
+    'theme.light': 'উজ্জ্বল',
+    'theme.dark': 'গাঢ়',
+    'theme.system': 'ছিষ্টেম',
+    'theme.toggle': 'থীম সলনি কৰক',
+    
+    'lang.toggle': 'ভাষা সলনি কৰক',
+    
+    'blog.published': 'প্ৰকাশিত',
+    'blog.updated': 'শেষ আপডেট',
+    'blog.read_more': 'আৰু পঢ়ক',
+    'blog.min_read': 'মিনিট পঢ়া',
+    'blog.empty': 'কোনো পোষ্ট পোৱা নগ’ল।',
+    
+    'project.status': 'স্থিতি',
+    'project.stack': 'প্ৰযুক্তি',
+    'project.repo': 'ৰিপজিটৰি',
+    'project.demo': 'লাইভ ডেমো',
+    
+    'share.title': 'শেয়াৰ কৰক',
+    'share.copy': 'লিংক কপি কৰক',
+    'share.copied': 'কপি হ’ল!',
+    'share.native': 'শেয়াৰ',
+    
+    'footer.rights': 'সকলো অধিকাৰ সংৰক্ষিত।',
+    'footer.built': 'অসমত নিৰ্মিত।',
+    
+    '404.title': 'পৃষ্ঠাটো পোৱা নগ’ল',
+    '404.desc': 'আপুনি বিচৰা পৃষ্ঠাটোৰ অস্তিত্ব নাই বা স্থানান্তৰিত কৰা হৈছে।',
+    '404.home': 'মুখ্য পৃষ্ঠালৈ উভতি যাওক',
+  }
+} as const;
+
+export function useTranslations(lang: Lang) {
+  return function t(key: keyof typeof ui[typeof defaultLang]): string {
+    return ui[lang][key] || ui[defaultLang][key];
+  };
+}

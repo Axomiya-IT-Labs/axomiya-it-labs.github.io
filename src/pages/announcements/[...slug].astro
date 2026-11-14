@@ -1,7 +1,32 @@
 ---
-import { getCollection } from 'astro:content';
-import CollectionDetail from '../../components/CollectionDetail.astro';
-export async function getStaticPaths() { return (await getCollection('announcements')).filter((entry) => entry.data.lang === 'en').map((entry) => ({ params: { slug: entry.data.translationSlug }, props: { entry } })); }
-const { entry } = Astro.props;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Prose from '../../components/Prose.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const items = await getCollection('announcements', ({ data }) => data.lang === 'en');
+  return items.map(item => ({
+    params: { slug: item.data.translationSlug },
+    props: { item }
+  }));
+};
+
+const { item } = Astro.props;
+// FIX: Use render() helper
+const { Content } = await render(item);
 ---
-<CollectionDetail entry={entry} kind="announcements" />
+<BaseLayout lang="en" title={item.data.title} description={item.data.description}>
+  <article class="container-prose py-16">
+    <header class="mb-12 text-center">
+      <span class="badge badge-accent mb-4">Announcement</span>
+      <h1 class="display mb-4">{item.data.title}</h1>
+      <time datetime={new Date(item.data.pubDate).toISOString()} class="text-fg-muted">
+        {new Date(item.data.pubDate).toLocaleDateString('en-IN', { dateStyle: 'long' })}
+      </time>
+    </header>
+    <Prose>
+      <Content />
+    </Prose>
+  </article>
+</BaseLayout>

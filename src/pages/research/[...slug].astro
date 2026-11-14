@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Prose from '../../components/Prose.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { useTranslations } from '../../i18n/ui';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection('research', ({ data }) => data.lang === 'en');
+  return posts.map(post => ({
+    params: { slug: post.data.translationSlug },
+    props: { post }
+  }));
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const t = useTranslations('en');
+const date = new Date(post.data.pubDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
+---
+<BaseLayout lang="en" title={post.data.title} description={post.data.description} ogType="article" ogImage={post.data.ogImage || post.data.heroImage}>
+  <article class="container-prose py-16">
+    <header class="mb-12 text-center max-w-3xl mx-auto">
+      <div class="flex items-center justify-center gap-3 mb-4 text-sm text-fg-muted">
+        <span class="badge badge-accent">Research</span>
+        <time datetime={new Date(post.data.pubDate).toISOString()}>{t('blog.published')} {date}</time>
+      </div>
+      <h1 class="display mb-6">{post.data.title}</h1>
+      {post.data.heroImage && (
+        <img src={post.data.heroImage} alt="" class="w-full h-auto max-h-[400px] object-cover rounded-xl shadow-lg mb-8" />
+      )}
+    </header>
+    
+    <Prose>
+      <Content />
+    </Prose>
+
+    <div class="max-w-[68ch] mx-auto">
+      <ShareButtons lang="en" url={postUrl} title={post.data.title} />
+    </div>
+  </article>
+</BaseLayout>

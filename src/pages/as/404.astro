@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/ui';
+const t = useTranslations('as');
+---
+<BaseLayout lang="as" title={t('404.title')}>
+  <div class="container-prose flex flex-col items-center justify-center min-h-[60vh] text-center py-16">
+    <span class="text-9xl font-black text-accent-soft font-display">404</span>
+    <h1 class="text-3xl font-bold mt-4 mb-2">{t('404.title')}</h1>
+    <p class="text-fg-muted max-w-md mx-auto mb-8">{t('404.desc')}</p>
+    <a href="/as/" class="btn-primary">{t('404.home')}</a>
+  </div>
+</BaseLayout>

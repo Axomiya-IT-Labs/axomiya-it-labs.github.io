@@ -1,0 +1,98 @@
+---
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import { localizePath } from '../i18n/utils';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageToggle from './LanguageToggle.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+
+// Only Blog, Projects, Research in the header as requested
+const navItems = [
+  { key: 'nav.blog', path: '/blog/' },
+  { key: 'nav.projects', path: '/projects/' },
+  { key: 'nav.research', path: '/research/' },
+];
+
+// Helper to check if a link is active
+const isActive = (path: string) => {
+  const localized = localizePath(path, lang);
+  return currentPath.startsWith(localized);
+};
+---
+<header class="sticky top-0 z-40 w-full border-b border-border bg-bg/80 backdrop-blur-md">
+  <div class="container-prose flex h-16 items-center justify-between">
+    
+    <!-- Logo acts as Home button -->
+    <a href={localizePath('/', lang)} class="flex items-center gap-2 font-display text-lg font-bold tracking-tight text-fg hover:opacity-80 transition-opacity">
+      <img src="/brand/logo.png" alt="Axomiya IT Labs" class="h-8 w-auto" onerror="this.style.display='none'" />
+      <span>Axomiya <span class="text-accent">IT Labs</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-1">
+      {navItems.map(item => (
+        <a 
+          href={localizePath(item.path, lang)} 
+          class={`btn-ghost text-sm ${isActive(item.path) ? 'text-accent font-semibold bg-accent-soft' : 'text-fg-muted'}`}
+        >
+          {t(item.key as any)}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Actions (Search, Theme, Lang) -->
+    <div class="flex items-center gap-1">
+      <button id="search-trigger" class="btn-ghost rounded-full p-2" aria-label={t('search.placeholder')}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      
+      <ThemeToggle lang={lang} />
+      <LanguageToggle lang={lang} />
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden btn-ghost rounded-full p-2" aria-label="Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav Drawer -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden bg-bg/95 backdrop-blur-sm md:hidden">
+    <div class="container-prose flex h-16 items-center justify-between border-b border-border">
+      <span class="font-display font-bold text-fg">Menu</span>
+      <button id="mobile-close-btn" class="btn-ghost p-2 rounded-full" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <nav class="container-prose flex flex-col py-6 gap-2">
+      {navItems.map(item => (
+        <a 
+          href={localizePath(item.path, lang)} 
+          class={`block px-4 py-3 rounded-md text-lg font-medium ${isActive(item.path) ? 'bg-accent-soft text-accent' : 'text-fg hover:bg-bg-subtle'}`}
+        >
+          {t(item.key as any)}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  const btn = document.getElementById('mobile-menu-btn');
+  const closeBtn = document.getElementById('mobile-close-btn');
+  const drawer = document.getElementById('mobile-drawer');
+  
+  btn?.addEventListener('click', () => {
+    drawer?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  });
+  
+  closeBtn?.addEventListener('click', () => {
+    drawer?.classList.add('hidden');
+    document.body.style.overflow = '';
+  });
+</script>

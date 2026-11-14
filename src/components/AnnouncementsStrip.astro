@@ -1,0 +1,35 @@
+---
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const isAs = lang === 'as';
+
+const text = {
+  en: {
+    badge: 'Latest Update',
+    title: 'Hackathon 2026 Announced!',
+    desc: 'Join us for the biggest AI event in Assam.',
+    linkText: 'Read announcement →',
+    linkUrl: '/announcements/'
+  },
+  as: {
+    badge: 'শেহতীয়া আপডেট',
+    title: 'হেকাথন ২০২৬ ঘোষণা!',
+    desc: 'অসমৰ আটাইতকৈ ডাঙৰ AI অনুষ্ঠানত যোগ দিয়ক।',
+    linkText: 'ঘোষণা পঢ়ক →',
+    linkUrl: '/as/announcements/'
+  }
+};
+const t = text[lang];
+---
+<section id="announcements" class="py-16 bg-bg-subtle border-b border-border">
+  <div class="container-prose text-center">
+    <span class="badge badge-accent mb-4">{t.badge}</span>
+    <h2 class="text-3xl font-bold font-display text-fg mb-2">{t.title}</h2>
+    <p class="text-fg-muted text-lg max-w-xl mx-auto mb-6">{t.desc}</p>
+    <a href={t.linkUrl} class="btn-secondary">{t.linkText}</a>
+  </div>
+</section>

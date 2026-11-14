@@ -1,126 +1,161 @@
 ---
-import type { Lang } from '../i18n/ui';
 import { useTranslations } from '../i18n/ui';
-const { lang } = Astro.props as { lang: Lang };
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
-<button class="search-trigger" type="button" aria-label={t.search} aria-haspopup="dialog" data-search-open>
-	<svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg>
-	<span class="search-trigger-label">{t.search}</span><kbd>⌘K</kbd>
-</button>
-<dialog class="search-dialog" aria-label={t.search} data-pagefind-ignore data-empty-message={t.searchEmpty} data-loading-message={t.searchLoading} data-hint-message={t.searchHint}>
-	<section class="search-panel">
-		<header class="search-panel-header">
-			<label class="search-field"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg><input type="search" data-search-input placeholder={t.searchPlaceholder} autocomplete="off" /></label>
-			<button class="search-close" type="button" aria-label={t.close} data-search-close>×</button>
-		</header>
-		<p class="search-status" role="status" aria-live="polite" data-search-status>{t.searchHint}</p>
-		<div class="search-results" aria-live="polite" data-search-results></div>
-	</section>
-</dialog>
-<script is:inline>
-	(() => {
-		const dialog = document.querySelector('.search-dialog');
-		const openButton = document.querySelector('[data-search-open]');
-		const closeButton = document.querySelector('[data-search-close]');
-		const input = document.querySelector('[data-search-input]');
-		const status = document.querySelector('[data-search-status]');
-		const resultsBox = document.querySelector('[data-search-results]');
-		if (!dialog || !openButton || !input || !status || !resultsBox) return;
-		let pagefindPromise;
-		let pagefind;
-		let activeLanguage = null;
-		let requestId = 0;
-		let debounceTimer;
-		const savedLang = document.documentElement.lang || 'en';
+<div id="search-overlay" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); align-items: flex-start; justify-content: center; padding-top: 10vh; padding-left: 16px; padding-right: 16px;">
+  <div style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 12px; width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column;">
+    
+    <div style="display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--color-border);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-fg-muted); flex-shrink: 0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      
+      <input 
+        type="text" 
+        id="search-input" 
+        placeholder={t('search.placeholder')} 
+        style="width: 100%; background: transparent; border: none; padding: 16px; color: var(--color-fg); font-size: 18px; outline: none;"
+        autocomplete="off"
+      />
+      
+      <button id="search-close" type="button" style="background: transparent; border: 1px solid var(--color-border); border-radius: 4px; padding: 4px 8px; font-size: 12px; color: var(--color-fg-muted); cursor: pointer; flex-shrink: 0;">ESC</button>
+    </div>
+    
+    <div id="search-results" style="padding: 8px; max-height: 60vh; overflow-y: auto;">
+      <div style="padding: 32px; text-align: center; color: var(--color-fg-muted); font-size: 14px;">Type at least 2 characters...</div>
+    </div>
+    
+  </div>
+</div>
 
-		function loadingSkeleton() {
-			resultsBox.innerHTML = '<div class="search-skeleton"><i></i><i></i><i></i></div>';
-		}
-		async function loadPagefind() {
-			if (!pagefindPromise) pagefindPromise = import('/pagefind/pagefind.js');
-			pagefind = await pagefindPromise;
-			await selectIndex(document.documentElement.lang || savedLang);
-		}
-		async function selectIndex(language) {
-			if (!pagefind || activeLanguage === language) return;
-			if (activeLanguage) await pagefind.destroy();
-			document.documentElement.lang = language;
-			await pagefind.init();
-			activeLanguage = language;
-		}
-		function makeResult(item) {
-			const article = document.createElement('article');
-			article.className = 'search-result';
-			const badge = document.createElement('span');
-			badge.className = 'language-badge';
-			badge.textContent = item.lang === 'as' ? 'অসমীয়া' : 'EN';
-			const link = document.createElement('a');
-			link.href = item.url;
-			link.className = 'search-result-link';
-			const title = document.createElement('strong');
-			title.textContent = item.meta?.title || item.url;
-			const excerpt = document.createElement('span');
-			excerpt.className = 'search-result-excerpt';
-			excerpt.innerHTML = item.excerpt || '';
-			link.append(title, excerpt);
-			article.append(badge, link);
-			return article;
-		}
-		async function searchBothLanguages(query) {
-			const thisRequest = ++requestId;
-			const returnLang = document.documentElement.lang || savedLang;
-			status.textContent = 'Searching…';
-			loadingSkeleton();
-			const combined = [];
-			try {
-				for (const language of ['en', 'as']) {
-					await selectIndex(language);
-					const response = await pagefind.search(query);
-					const data = await Promise.all(response.results.slice(0, 6).map((result) => result.data()));
-					combined.push(...data.map((item) => ({ ...item, lang: language })));
-				}
-			} catch (error) {
-				console.error('Search failed', error);
-			} finally {
-				await selectIndex(returnLang);
-			}
-			if (thisRequest !== requestId) return;
-			resultsBox.replaceChildren();
-			if (!combined.length) {
-				status.textContent = dialog.dataset.emptyMessage || 'No results found.';
-				return;
-			}
-			status.textContent = `${combined.length} result${combined.length === 1 ? '' : 's'}`;
-			combined.forEach((item) => resultsBox.append(makeResult(item)));
-		}
-		async function openSearch() {
-			if (!dialog.open) dialog.showModal();
-			loadingSkeleton();
-			status.textContent = dialog.dataset.loadingMessage || 'Preparing search…';
-			input.focus();
-			try {
-				await loadPagefind();
-				status.textContent = dialog.dataset.hintMessage || 'Type to search all languages.';
-				resultsBox.replaceChildren();
-			} catch (error) {
-				status.textContent = 'Search index is not available yet.';
-				console.error('Could not load Pagefind', error);
-			}
-		}
-		function closeSearch() { if (dialog.open) dialog.close(); openButton.focus(); }
-		openButton.addEventListener('click', openSearch);
-		closeButton?.addEventListener('click', closeSearch);
-		dialog.addEventListener('click', (event) => { if (event.target === dialog) closeSearch(); });
-		input.addEventListener('input', () => {
-			clearTimeout(debounceTimer);
-			const query = input.value.trim();
-			if (!query) { requestId++; resultsBox.replaceChildren(); status.textContent = dialog.dataset.hintMessage || 'Type to search all languages.'; return; }
-			debounceTimer = setTimeout(() => searchBothLanguages(query), 220);
-		});
-		document.addEventListener('keydown', (event) => {
-			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); if (!dialog.open) openSearch(); else input.focus(); }
-			if (event.key === 'Escape' && dialog.open) closeSearch();
-		});
-	})();
+<script is:inline>
+  // Wait for the page to fully load before attaching listeners.
+  // Without this, getElementById returns null because the DOM hasn't parsed yet.
+  window.addEventListener('load', function() {
+    initSearch();
+  });
+
+  function initSearch() {
+    const overlay = document.getElementById('search-overlay');
+    const input = document.getElementById('search-input');
+    const resultsContainer = document.getElementById('search-results');
+    const trigger = document.getElementById('search-trigger');
+    const closeBtn = document.getElementById('search-close');
+
+    if (!overlay || !input || !trigger) {
+      console.error('Search: required elements missing from DOM', { overlay, input, trigger });
+      return;
+    }
+
+    let pagefind = null;
+    let searchTimeout = null;
+
+    async function loadPagefind() {
+      if (pagefind) return pagefind;
+      try {
+        // @ts-ignore
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 20 });
+        await pagefind.init();
+        return pagefind;
+      } catch (e) {
+        console.error("Pagefind load failed:", e);
+        return null;
+      }
+    }
+
+    function openSearch() {
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      setTimeout(function() {
+        input.focus();
+        input.select();
+      }, 100);
+      loadPagefind();
+    }
+
+    function closeSearch() {
+      overlay.style.display = 'none';
+      document.body.style.overflow = '';
+      input.value = '';
+      resultsContainer.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--color-fg-muted); font-size: 14px;">Type at least 2 characters...</div>';
+    }
+
+    async function doSearch(term) {
+      term = term.trim();
+      if (term.length < 2) {
+        resultsContainer.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--color-fg-muted); font-size: 14px;">Type at least 2 characters...</div>';
+        return;
+      }
+      
+      const pf = await loadPagefind();
+      if (!pf) {
+        resultsContainer.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--color-danger); font-size: 14px;">Search index not built yet. Run pnpm build to test.</div>';
+        return;
+      }
+
+      resultsContainer.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--color-fg-muted); font-size: 14px;">Searching...</div>';
+      
+      try {
+        const search = await pf.search(term);
+
+        if (search.results.length === 0) {
+          resultsContainer.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--color-fg-muted); font-size: 14px;">No results found for "' + term + '".</div>';
+          return;
+        }
+
+        const topResults = search.results.slice(0, 10);
+        const html = await Promise.all(topResults.map(async function(result) {
+          const data = await result.data();
+          const title = data.meta.title || data.url;
+          const excerpt = data.excerpt || '';
+          const isAs = data.url.startsWith('/as/');
+          
+          const langBadge = isAs 
+            ? '<span style="display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; background: var(--color-accent-soft); color: var(--color-accent); font-weight: bold; margin-right: 8px;">AS</span>' 
+            : '<span style="display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; background: var(--color-bg-subtle); color: var(--color-fg-muted); font-weight: bold; margin-right: 8px;">EN</span>';
+          
+          return '<a href="' + data.url + '" style="display: block; padding: 12px; border-radius: 8px; text-decoration: none; color: inherit;" onmouseover="this.style.background=\'var(--color-bg-subtle)\'" onmouseout="this.style.background=\'transparent\'">' +
+            '<div style="font-weight: 600; color: var(--color-fg); font-size: 14px; display: flex; align-items: center;">' + langBadge + title + '</div>' +
+            '<div style="color: var(--color-fg-muted); font-size: 12px; margin-top: 4px;">' + excerpt + '</div>' +
+            '</a>';
+        }));
+        
+        resultsContainer.innerHTML = html.join('');
+      } catch (e) {
+        console.error(e);
+        resultsContainer.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--color-danger); font-size: 14px;">Search error. See console.</div>';
+      }
+    }
+
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openSearch();
+    });
+
+    closeBtn.addEventListener('click', closeSearch);
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeSearch();
+    });
+
+    input.addEventListener('input', function(e) {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(function() { doSearch(e.target.value); }, 150);
+    });
+
+    window.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (overlay.style.display === 'none') openSearch();
+        else closeSearch();
+      }
+      if (e.key === 'Escape' && overlay.style.display === 'flex') {
+        closeSearch();
+      }
+    });
+  }
 </script>

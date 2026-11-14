@@ -1,0 +1,37 @@
+---
+import type { Lang } from '../i18n/ui';
+import ContentCard from './ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const isAs = lang === 'as';
+
+const posts = (await getCollection('blog', ({ data }) => data.lang === lang))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3); // Just the top 3
+
+const text = {
+  en: { eyebrow: 'What we write', title: 'From the Blog', linkText: 'View all →', linkUrl: '/blog/' },
+  as: { eyebrow: 'আমি কি লিখোঁ', title: 'ব্লগৰ পৰা', linkText: 'সকলো চাওক →', linkUrl: '/as/blog/' }
+};
+const t = text[lang];
+---
+<section class="py-24 bg-bg-elevated border-y border-border">
+  <div class="container-prose">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <span class="eyebrow mb-2">{t.eyebrow}</span>
+        <h2 class="text-3xl md:text-4xl font-bold font-display">{t.title}</h2>
+      </div>
+      <a href={t.linkUrl} class="text-sm font-semibold text-accent hover:underline hidden sm:block">{t.linkText}</a>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map(post => (
+        <ContentCard entry={post} lang={lang} type="blog" />
+      ))}
+    </div>
+  </div>
+</section>

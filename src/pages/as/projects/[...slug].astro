@@ -1,7 +1,161 @@
 ---
-import { getCollection } from 'astro:content';
-import CollectionDetail from '../../../components/CollectionDetail.astro';
-export async function getStaticPaths() { return (await getCollection('projects')).filter((entry) => entry.data.lang === 'as').map((entry) => ({ params: { slug: entry.data.translationSlug }, props: { entry } })); }
-const { entry } = Astro.props;
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Prose from '../../../components/Prose.astro';
+import ShareButtons from '../../../components/ShareButtons.astro';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getCollection('projects', ({ data }) => data.lang === 'as');
+  return projects.map(project => ({
+    params: { slug: project.data.translationSlug },
+    props: { project }
+  }));
+};
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const logoUrl = project.data.logo || '/assets/projects/default-logo.svg';
 ---
-<CollectionDetail entry={entry} kind="projects" />
+<BaseLayout lang="as" title={project.data.title} description={project.data.description} ogImage={project.data.ogImage || project.data.heroImage}>
+  <article class="container-prose py-16">
+    
+    <!-- Project Header -->
+    <header class="mb-12 flex flex-col md:flex-row items-center md:items-start gap-8 bg-bg-elevated p-8 rounded-2xl border border-border">
+      <div class="w-24 h-24 shrink-0 bg-bg-subtle rounded-2xl flex items-center justify-center p-3 border border-border shadow-sm">
+        <img src={logoUrl} alt={`${project.data.title} logo`} class="w-full h-full object-contain" />
+      </div>
+      
+      <div class="text-center md:text-left flex-1">
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
+          <span class="badge badge-accent font-bold uppercase tracking-wider">{project.data.status}</span>
+          {project.data.category && <span class="badge bg-bg-subtle text-fg-muted">{project.data.category}</span>}
+        </div>
+        
+        <h1 class="display mb-3">{project.data.title}</h1>
+        <p class="lead mb-6">{project.data.description}</p>
+        
+        <div class="flex flex-wrap justify-center md:justify-start gap-3">
+          {project.data.demo && (
+            <a href={project.data.demo} target="_blank" rel="noopener" class="btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              লাইভ ডেমো
+            </a>
+          )}
+          {project.data.repo && (
+            <a href={project.data.repo} target="_blank" rel="noopener" class="btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3-.3 6-1.6 6-6.5a4.6 4.6 0 0 0-1.2-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 1.7 5.4 2 5.4 2a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 8.4c0 4.9 3 6.2 6 6.5a4.8 4.8 0 0 0-1 3.2v4"/><path d="M9 18c-4.5 1.5-5-2.5-7-3"/></svg>
+              GitHub ৰিপজিটৰি
+            </a>
+          )}
+          {project.data.website && (
+            <a href={project.data.website} target="_blank" rel="noopener" class="btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+              ৱেবচাইট
+            </a>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    {project.data.heroImage && (
+      <img src={project.data.heroImage} alt="" class="w-full h-auto max-h-[400px] object-cover rounded-2xl shadow-lg mb-12 border border-border" />
+    )}
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl font-bold mb-6">এই প্ৰকল্পৰ বিষয়ে</h2>
+        <Prose>
+          <Content />
+        </Prose>
+      </div>
+
+      <aside class="space-y-8">
+        {project.data.tech_stack && project.data.tech_stack.length > 0 && (
+          <div class="bg-bg-subtle p-6 rounded-xl border border-border">
+            <h3 class="font-bold text-lg mb-4">প্ৰযুক্তি</h3>
+            <div class="flex flex-wrap gap-2">
+              {project.data.tech_stack.map(tech => (
+                <span class="badge bg-bg-elevated border-border text-fg-muted">{tech}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {project.data.target_audience && (
+          <div class="bg-accent-soft/30 p-6 rounded-xl border border-accent/20">
+            <h3 class="font-bold text-lg mb-2 text-accent">এইটো কাৰ বাবে?</h3>
+            <p class="text-fg-muted text-sm leading-relaxed">{project.data.target_audience}</p>
+          </div>
+        )}
+
+        {project.data.why_built && (
+          <div class="bg-bg-subtle p-6 rounded-xl border border-border">
+            <h3 class="font-bold text-lg mb-2">কিয় নিৰ্মাণ কৰা হৈছিল</h3>
+            <p class="text-fg-muted text-sm leading-relaxed">{project.data.why_built}</p>
+          </div>
+        )}
+      </aside>
+    </div>
+
+    <!-- FAQ Accordion -->
+    {project.data.faq && project.data.faq.length > 0 && (
+      <div class="mb-12 max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">সঘনাই সোধা প্ৰশ্ন</h2>
+        <div class="space-y-3" id="faq-container">
+          {project.data.faq.map((item, i) => (
+            <div class="faq-item bg-bg-elevated border border-border rounded-lg overflow-hidden transition-all duration-300">
+              <button class="faq-trigger w-full flex items-center justify-between p-4 text-left font-semibold hover:bg-bg-subtle transition-colors">
+                <span>{item.q}</span>
+                <svg class="w-5 h-5 transition-transform duration-300 shrink-0 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+              <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                <div class="p-4 pt-0 text-fg-muted text-sm leading-relaxed">{item.a}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="max-w-[68ch] mx-auto">
+      <ShareButtons lang="as" url={postUrl} title={project.data.title} />
+    </div>
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  const faqTriggers = document.querySelectorAll('.faq-trigger');
+  
+  faqTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.faq-item');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
+      const isOpen = item.classList.contains('open');
+
+      // Close all other open items
+      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+        if (openItem !== item) {
+          openItem.classList.remove('open', 'border-accent');
+          openItem.querySelector('.faq-content').style.maxHeight = '0px';
+          openItem.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Toggle the clicked item
+      if (isOpen) {
+        item.classList.remove('open', 'border-accent');
+        content.style.maxHeight = '0px';
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        item.classList.add('open', 'border-accent');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+</script>

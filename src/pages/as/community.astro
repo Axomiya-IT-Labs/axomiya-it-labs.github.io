@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const communities = [
+  { platform: "Telegram", name: "Axomiya IT Labs Group", url: "https://t.me/AxomiyaITLabs", icon: "/social/telegram.svg", description: "দৈনিক আলোচনা, সহায়তা আৰু সম্পদ শেয়াৰৰ বাবে আমাৰ মূল কেন্দ্ৰ।" },
+  { platform: "GitHub", name: "Axomiya IT Labs Repos", url: "https://github.com/Axomiya-IT-Labs", icon: "/social/github.svg", description: "য'ত আমি অসমৰ বাবে মুক্ত-উৎস সঁজুলি নিৰ্মাণ কৰোঁ।" },
+  { platform: "X (Twitter)", name: "Axomiya IT Labs", url: "https://x.com", icon: "/social/x.svg", description: "ঘোষণা আৰু শীঘ্ৰীয়ে পাবলগীয়া আপডেটৰ বাবে আমাক অনুসৰণ কৰক।" },
+  { platform: "Discord", name: "Dev Community", url: "https://discord.gg", icon: "/social/icon.svg", description: "লাইভ ক'ডিং আৰু সহায়ৰ বাবে আমাৰ ভইচ চেনেলত যোগ দিয়ক।" }
+];
+---
+<BaseLayout lang="as" title="সম্প্ৰদায়">
+  <div class="container-prose py-16">
+    <header class="mb-12 text-center">
+      <h1 class="display mb-4">সম্প্ৰদায়ত যোগ দিয়ক</h1>
+      <p class="lead mx-auto">বিভিন্ন প্লেটফৰ্মত আমাৰ সৈতে সংযোগ কৰক। সকলোকে স্বাগতম।</p>
+    </header>
+
+    <div class="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+      {communities.map(community => (
+        <a href={community.url} target="_blank" rel="noopener" class="card flex items-start gap-4 hover:border-accent group p-6">
+          <div class="p-3 bg-bg-subtle rounded-lg shrink-0 group-hover:bg-accent-soft transition-colors"><img src={community.icon} alt={community.platform} class="w-8 h-8 dark:invert" /></div>
+          <div>
+            <h3 class="font-bold font-display text-lg text-fg group-hover:text-accent transition-colors">{community.name}</h3>
+            <p class="text-sm text-fg-muted mt-1">{community.description}</p>
+            <span class="text-xs font-semibold text-accent mt-3 inline-block">যোগ দিয়ক &rarr;</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
