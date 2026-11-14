@@ -2,7 +2,6 @@
 title: "Welcome to Axomiya IT Labs! "
 author: "Rakibul Islam"
 categories: [Community, Welcome]
-excerpt: "Welcome to our community blog where we share updates, insights, and open-source project developments."
 lang: as
 translationSlug: welcome-to-axomiya
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"

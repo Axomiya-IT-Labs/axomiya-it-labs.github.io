@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ContentCard from '../../../components/ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => data.lang === 'as'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout lang="as" title="ব্লগ">
+  <div class="container-prose py-12 md:py-16">
+    <header class="mb-8 md:mb-12">
+      <h1 class="display mb-4">ব্লগ</h1>
+      <p class="lead">সম্প্ৰদায়ৰ টিউটোৰিয়েল, গভীৰ আলোচনা আৰু খবৰ।</p>
+    </header>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map(post => <ContentCard entry={post} lang="as" type="blog" />)}
+      {posts.length === 0 && <p class="text-fg-muted">এতিয়ালৈকে কোনো ব্লগ পোষ্ট প্ৰকাশ কৰা হোৱা নাই।</p>}
+    </div>
+  </div>
+</BaseLayout>

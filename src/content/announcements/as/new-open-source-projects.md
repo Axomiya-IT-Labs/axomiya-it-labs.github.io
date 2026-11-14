@@ -1,12 +1,8 @@
 ---
 title: "New Open Source AI Projects Initiative"
-permalink: /announcements/new-open-source-projects/
-date: 2026-07-20
 author: "Rakibul Islam"
 type: "Project Initiative"
 category: "Projects"
-excerpt: "Announcing our upcoming suite of open-source Assamese AI models, dataset repositories, and developer toolkits."
-image: "/assets/announcements/opensource-initiative.webp"
 tags:
   - Open-Source
   - AI-Projects

@@ -47,7 +47,8 @@ const isActive = (path: string) => {
       <button id="search-trigger" type="button" class="btn-ghost rounded-full p-2" aria-label="Search">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </button>
-      <span class="hidden md:contents"><ThemeToggle lang={lang} /><LanguageToggle lang={lang} /></span>
+      <ThemeToggle lang={lang} />
+      <span class="hidden md:contents"><LanguageToggle lang={lang} /></span>
     </div>
 
     <!-- Mobile menu trigger; logo and search stay clear in the header -->
@@ -66,10 +67,6 @@ const isActive = (path: string) => {
     ))}
     <div class="mobile-menu-divider"></div>
     <div class="mobile-menu-controls">
-      <div class="mobile-menu-control">
-        <span>Theme</span>
-        <ThemeToggle lang={lang} />
-      </div>
       <div class="mobile-menu-control">
         <span>Language</span>
         <LanguageToggle lang={lang} />
@@ -159,6 +156,8 @@ const isActive = (path: string) => {
     const menu = document.getElementById('mobile-menu');
     const backdrop = document.getElementById('mobile-menu-backdrop');
     if (!trigger || !menu || !backdrop) return;
+    const openIcon = trigger.querySelector('.menu-icon-open');
+    const closeIcon = trigger.querySelector('.menu-icon-close');
 
     const openMenu = () => {
       menu.classList.remove('hidden');
@@ -166,6 +165,8 @@ const isActive = (path: string) => {
       backdrop.classList.remove('hidden');
       trigger.setAttribute('aria-expanded', 'true');
       trigger.setAttribute('aria-label', 'Close navigation menu');
+      openIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
     };
     const closeMenu = (restoreFocus = false) => {
       menu.classList.add('hidden');
@@ -173,6 +174,8 @@ const isActive = (path: string) => {
       backdrop.classList.add('hidden');
       trigger.setAttribute('aria-expanded', 'false');
       trigger.setAttribute('aria-label', 'Open navigation menu');
+      openIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
       if (restoreFocus) trigger.focus();
     };
 

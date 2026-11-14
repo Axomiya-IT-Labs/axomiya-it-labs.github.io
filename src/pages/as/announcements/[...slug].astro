@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Prose from '../../../components/Prose.astro';
+import ShareButtons from '../../../components/ShareButtons.astro';
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
@@ -15,6 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const { item } = Astro.props;
 // FIX: Use render() helper
 const { Content } = await render(item);
+const announcementUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <BaseLayout lang="as" title={item.data.title} description={item.data.description}>
   <article class="container-prose py-16">
@@ -28,5 +30,8 @@ const { Content } = await render(item);
     <Prose>
       <Content />
     </Prose>
+    <div class="max-w-[68ch] mx-auto">
+      <ShareButtons lang="as" url={announcementUrl} title={item.data.title} />
+    </div>
   </article>
 </BaseLayout>

@@ -11,8 +11,8 @@ export const GET: APIRoute = async () => {
 
   const site = 'https://axomiya-it-labs.github.io';
   let out = `# Axomiya IT Labs\n\n`;
-  out += `> Assam's first AI & open-source community. Bilingual (English/Assamese) site covering community work, open-source projects, blog posts, and research articles.\n\n`;
-  out += `Assamese translations in progress; English content is authoritative.\n\n`;
+  out += `> Rooted in Assam and open to everyone. Learn AI and open source by building practical tools from local ideas, and help make technology accessible for all.\n\n`;
+  out += `This bilingual site contains blog posts, research articles, projects, and announcements. English routes use the root path; Assamese routes use the /as/ prefix. Some Assamese entries remain translation placeholders and link to their English versions.\n\n`;
 
   out += `## Blog\n\n`;
   for (const p of blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())) {

@@ -1,10 +1,7 @@
 ---
 title: "Krittimat — AI Tools & Prompts Hub"
-permalink: /projects/krittimat/
-date: 2026-07-24
 status: Live
 category: AI & Tools
-excerpt: "Know all the most famous AI tools for everything — from Image Generation to Voice Cloning, Video Creation, Content Writing, Coding, and Prompting in the age of LLMs."
 tags:
   - AI-Tools
   - Prompts

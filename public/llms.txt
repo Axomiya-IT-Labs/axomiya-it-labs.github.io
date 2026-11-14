@@ -1,13 +1,16 @@
 ﻿# Axomiya IT Labs
 
-> A bilingual (English/Assamese) open-source community focused on AI, language technology, and developer education in Assam.
+> Rooted in Assam and open to everyone: learn AI and open source by building practical tools from local ideas, and help make technology accessible for all.
 
-Axomiya IT Labs shares practical AI and open-source education, projects, and community updates rooted in Assam. English pages are the authoritative content while Assamese translations are being prepared.
+Axomiya IT Labs is a bilingual AI and open-source community. The site shares learning resources, projects, research, announcements, and ways to contribute. English pages are available at the root; Assamese pages use the `/as/` prefix. Some Assamese content entries are translation placeholders; those pages link to their English versions.
 
 ## Blog
 - [Blog index](https://axomiya-it-labs.github.io/blog/)
-- [AI Problem Breakdown: Career Guidance After Class 12](https://axomiya-it-labs.github.io/blog/ai-problem-breakdown/)
 - [Welcome to Axomiya IT Labs](https://axomiya-it-labs.github.io/blog/welcome-to-axomiya/)
+
+## Research
+- [Research index](https://axomiya-it-labs.github.io/research/)
+- [AI Problem Breakdown: Career Guidance After Class 12](https://axomiya-it-labs.github.io/research/ai-problem-breakdown/)
 
 ## Projects
 - [Projects index](https://axomiya-it-labs.github.io/projects/)
@@ -24,4 +27,6 @@ Axomiya IT Labs shares practical AI and open-source education, projects, and com
 - [Research](https://axomiya-it-labs.github.io/research/)
 - [Contribute](https://axomiya-it-labs.github.io/contribute/)
 
-Assamese translations are in progress; English content is authoritative.
+## Full content index
+- [llms-full.txt](https://axomiya-it-labs.github.io/llms-full.txt)
+

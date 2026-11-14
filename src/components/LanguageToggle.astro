@@ -7,7 +7,11 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const targetLang = lang === 'en' ? 'as' : 'en';
-const targetPath = swapLangPath(Astro.url.pathname, targetLang);
+const currentPath = Astro.url.pathname;
+const isNotFoundPage = /(^|\/)404(?:\.html)?\/?$/.test(currentPath);
+const targetPath = isNotFoundPage
+  ? (targetLang === 'as' ? '/as/' : '/')
+  : swapLangPath(currentPath, targetLang);
 ---
 <a href={targetPath} class="btn-ghost px-3 text-sm font-semibold uppercase tracking-wider" aria-label={t('lang.toggle')}>
   {lang === 'en' ? 'অসমীয়া' : 'English'}

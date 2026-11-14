@@ -12,7 +12,7 @@ const posts = (await getCollection('research', ({ data }) => data.lang === 'en')
       <p class="lead">Deep dives, technical breakdowns, and case studies.</p>
     </header>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map(post => <ContentCard entry={post} lang="en" type="blog" />)}
+      {posts.map(post => <ContentCard entry={post} lang="en" type="research" />)}
       {posts.length === 0 && <p class="text-fg-muted">No research articles published yet.</p>}
     </div>
   </div>

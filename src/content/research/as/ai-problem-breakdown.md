@@ -1,8 +1,6 @@
 ---
 title: "AI Problem Breakdown: Career Guidance After Class 12"
-date: 2026-07-23
 author: "Rakibul Islam"
-permalink: /research/ai-problem-breakdown/
 lang: as
 translationSlug: ai-problem-breakdown
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"
@@ -13,4 +11,4 @@ placeholder: true
 
 অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।
 
-[Read the English version](/blog/ai-problem-breakdown/)
+[Read the English version](/research/ai-problem-breakdown/)
