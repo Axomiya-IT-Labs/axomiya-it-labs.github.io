@@ -1,6 +1,5 @@
 ---
 interface Props {
-  eyebrow: string;
   title: string;
   titleAccent: string;
   tagline: string;
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const { 
-  eyebrow, 
   title, 
   titleAccent, 
   tagline, 
@@ -21,7 +19,7 @@ const {
   secondaryBtnLink 
 } = Astro.props;
 ---
-<section class="relative flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] text-center px-4 overflow-hidden border-b border-border bg-bg">
+<section class="hero relative flex flex-col items-center justify-center min-h-[calc(100svh-4rem)] text-center px-4 overflow-hidden border-b border-border bg-bg">
   
   <!-- Background Video -->
   <video 
@@ -31,31 +29,32 @@ const {
     playsinline 
     preload="metadata"
     poster="/assets/hero/nature-poster.jpg"
-    class="absolute inset-0 w-full h-full object-cover opacity-30 dark:opacity-40"
+    class="hero-video absolute inset-0 w-full h-full object-cover"
     aria-hidden="true"
   >
     <source src="/assets/hero/nature.mp4" type="video/mp4" />
   </video>
 
   <!-- Dark overlay for text readability -->
-  <div class="absolute inset-0 bg-bg/70 dark:bg-bg/80"></div>
+  <div class="hero-shade absolute inset-0"></div>
+  <div class="hero-light hero-light-one absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="hero-light hero-light-two absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="hero-grain absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   
   <!-- Subtle radial gradient for depth -->
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-accent-soft)_0%,_transparent_70%)] opacity-40 pointer-events-none"></div>
+  <div class="hero-glow absolute inset-0 pointer-events-none"></div>
   
-  <div class="relative z-10 max-w-4xl mx-auto space-y-6">
-    <span class="eyebrow text-sm md:text-base tracking-widest mb-2">{eyebrow}</span>
-    
-    <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black font-display tracking-tighter leading-[0.95] text-fg">
-      {title} <br/>
-      <span class="text-accent">{titleAccent}</span>
+  <div class="hero-content relative z-10 max-w-5xl mx-auto space-y-6 py-20 md:py-24">
+    <h1 class="hero-title text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black font-display tracking-tighter leading-[0.95] text-fg">
+      <span class="block">{title}</span>
+      <span class="hero-title-accent block">{titleAccent}</span>
     </h1>
     
-    <p class="text-base sm:text-lg md:text-xl text-fg-muted font-medium max-w-2xl mx-auto mt-6 leading-relaxed px-2">
+    <p class="hero-tagline text-base sm:text-lg md:text-xl text-fg-muted font-medium max-w-2xl mx-auto mt-6 leading-relaxed px-2">
       {tagline}
     </p>
     
-    <div class="pt-8 md:pt-10 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+    <div class="hero-actions pt-8 md:pt-10 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
       <a href={primaryBtnLink} class="btn-primary text-base md:text-lg px-8 py-3.5 w-full sm:w-auto shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
         {primaryBtnText}
       </a>
@@ -65,3 +64,113 @@ const {
     </div>
   </div>
 </section>
+
+<style>
+  .hero {
+    isolation: isolate;
+    background: #173126;
+  }
+
+  .hero-video {
+    z-index: -3;
+    opacity: 0.9;
+    filter: saturate(1.12) contrast(1.06);
+    transform: scale(1.045);
+    animation: hero-drift 30s ease-in-out infinite alternate;
+  }
+
+  .hero-shade {
+    z-index: -2;
+    background: linear-gradient(180deg, rgb(8 19 15 / 46%) 0%, rgb(8 19 15 / 34%) 42%, rgb(8 19 15 / 78%) 100%);
+  }
+
+  .hero-glow {
+    z-index: -1;
+    background: radial-gradient(ellipse at 50% 44%, rgb(15 31 23 / 12%) 0%, transparent 66%);
+  }
+
+  .hero-light {
+    z-index: 0;
+    mix-blend-mode: screen;
+  }
+
+  .hero-light-one {
+    background: radial-gradient(ellipse 42% 68% at 5% 18%, rgb(238 185 105 / 18%), transparent 75%);
+    animation: light-breathe 12s ease-in-out infinite alternate;
+  }
+
+  .hero-light-two {
+    background: radial-gradient(ellipse 38% 60% at 96% 82%, rgb(75 196 139 / 16%), transparent 72%);
+    animation: light-breathe 16s ease-in-out -6s infinite alternate-reverse;
+  }
+
+  .hero-grain {
+    z-index: 1;
+    opacity: 0.12;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+    mask-image: linear-gradient(transparent, #000 20%, #000 80%, transparent);
+  }
+
+  .hero-content {
+    animation: hero-arrive 900ms cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  .hero-title {
+    color: #fffdf8;
+    text-shadow: 0 5px 32px rgb(0 0 0 / 38%);
+  }
+
+  .hero-title-accent {
+    color: #ffd08c;
+    background: linear-gradient(100deg, #ffe2ad 5%, #ffc77d 52%, #fff0ce 95%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-tagline {
+    color: #fffdf8;
+    text-shadow: 0 2px 16px rgb(0 0 0 / 55%);
+    text-wrap: balance;
+  }
+
+  .hero-actions a {
+    backdrop-filter: blur(12px);
+  }
+
+  .hero-actions a:first-child {
+    box-shadow: 0 10px 35px rgb(0 0 0 / 25%), 0 0 28px rgb(235 137 74 / 24%);
+  }
+
+  .hero-actions a:last-child {
+    border-color: rgb(255 253 248 / 52%);
+    background: rgb(255 255 255 / 9%);
+    color: #fffdf8;
+  }
+
+  .hero-actions a:last-child:hover {
+    background: rgb(255 255 255 / 17%);
+    border-color: #fffdf8;
+    color: #fffdf8;
+  }
+
+  @keyframes hero-drift {
+    from { transform: scale(1.045) translate3d(-0.5%, 0, 0); }
+    to { transform: scale(1.105) translate3d(0.5%, -0.5%, 0); }
+  }
+
+  @keyframes light-breathe {
+    from { opacity: 0.55; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1.08); }
+  }
+
+  @keyframes hero-arrive {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video { display: none; animation: none; }
+    .hero-light, .hero-content { animation: none; }
+    .hero { background: linear-gradient(140deg, #173126, #28543e); }
+  }
+</style>

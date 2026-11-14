@@ -43,12 +43,11 @@ const isActive = (path: string) => {
     </nav>
 
     <!-- Desktop Actions -->
-    <div class="hidden md:flex items-center gap-2 shrink-0">
+    <div class="flex items-center gap-1 md:gap-2 shrink-0">
       <button id="search-trigger" type="button" class="btn-ghost rounded-full p-2" aria-label="Search">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </button>
-      <ThemeToggle lang={lang} />
-      <LanguageToggle lang={lang} />
+      <span class="hidden md:contents"><ThemeToggle lang={lang} /><LanguageToggle lang={lang} /></span>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -58,10 +57,10 @@ const isActive = (path: string) => {
   </div>
 
   <!-- Mobile Nav Drawer (Hidden by default) -->
-  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden bg-bg md:hidden flex flex-col">
+  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden bg-bg text-fg md:hidden flex flex-col">
     <!-- Drawer Header -->
     <div class="container-prose flex h-16 items-center justify-between border-b border-border shrink-0">
-      <span class="font-display font-bold text-fg text-lg">Menu</span>
+      <a href={localizePath('/', lang)} class="font-display font-bold text-fg text-lg">Axomiya <span class="text-accent">IT Labs</span></a>
       <button id="mobile-close-btn" class="btn-ghost p-2 rounded-full" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
@@ -77,18 +76,25 @@ const isActive = (path: string) => {
           {t(item.key as any)}
         </a>
       ))}
+      <div class="my-3 border-t border-border"></div>
+      {[
+        { label: 'About', path: '/about/' },
+        { label: 'Community', path: '/community/' },
+        { label: 'Announcements', path: '/announcements/' },
+        { label: 'Contribute', path: '/contribute/' },
+      ].map(item => (
+        <a href={localizePath(item.path, lang)} class="block px-4 py-3 rounded-lg text-base font-medium text-fg-muted hover:bg-bg-subtle hover:text-fg transition-colors">
+          {item.label}
+        </a>
+      ))}
     </nav>
 
     <!-- Drawer Bottom Controls (Theme + Language) -->
     <div class="border-t border-border bg-bg-elevated shrink-0">
       <div class="container-prose flex flex-col gap-4 py-6">
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-semibold text-fg-muted">Theme</span>
-          <ThemeToggle lang={lang} />
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-semibold text-fg-muted">Language</span>
-          <LanguageToggle lang={lang} />
+        <div class="flex items-center justify-between gap-4">
+          <span class="text-sm font-semibold text-fg-muted">Display & language</span>
+          <div class="flex items-center gap-2"><ThemeToggle lang={lang} /><LanguageToggle lang={lang} /></div>
         </div>
       </div>
     </div>
@@ -112,6 +118,19 @@ const isActive = (path: string) => {
       closeBtn.addEventListener('click', () => {
         drawer.classList.add('hidden');
         document.body.style.overflow = '';
+      });
+    }
+
+    if (drawer) {
+      drawer.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        drawer.classList.add('hidden');
+        document.body.style.overflow = '';
+      }));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !drawer.classList.contains('hidden')) {
+          drawer.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
       });
     }
   });
