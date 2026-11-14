@@ -1,188 +1,53 @@
-# Master Contribution Guide
+# Contributing to Axomiya IT Labs
 
-## Welcome to Axomiya IT Labs
+The website is a bilingual Astro static site. English routes use the root (`/`); Assamese routes use `/as/`. Content is authored in Markdown or MDX and deployed to GitHub Pages.
 
-We're building Assam's first AI and open-source community. Everyone is welcome—regardless of experience level.
+## Repository map
 
----
-
-## Repository Structure
-
-```
-axomiyaitlabs/
-├── _data/                  Site data (navigation, team)
-├── _includes/              Reusable HTML components
-├── _layouts/               Page templates
-├── _pages/                 Main pages (about, projects, community, etc.)
-├── _posts/                 Research articles and tutorials
-├── _projects/              Project descriptions
-├── _sass/                  Styling (SCSS)
-├── assets/                 Images, CSS, JavaScript
-├── _config.yml             Jekyll configuration
-├── Gemfile                 Ruby dependencies
-├── PROJECT.md              How to add projects
-├── RESEARCH.md             How to write articles
-└── README.md               Repository overview
+```text
+src/content/blog/{en,as}/             Articles and tutorials
+src/content/announcements/{en,as}/    Published announcements
+src/content/projects/{en,as}/         Project pages
+src/content/pages/{en,as}/            Static content pages
+src/components/                       Astro UI components
+src/data/                             Typed site data modules
+src/i18n/                             Locale labels and path helpers
+src/layouts/                          Shared layouts and SEO metadata
+src/pages/                            Route definitions and generated endpoints
+src/styles/                           Global styles
+public/                               Static assets copied to dist/
 ```
 
----
+See [PROJECT.md](PROJECT.md) for project entries and [RESEARCH.md](RESEARCH.md) for articles.
 
-## What Can You Contribute?
+## Set up and build
 
-### Projects
-Add a new project or update an existing one.
-- Read `PROJECT.md` for detailed instructions
-- Projects must solve real problems for Assam
-- Can be Live, Beta, In Progress, or Ideas
+Use Node.js 22 or newer and pnpm (the repository pins its package manager version in `package.json`):
 
-### Research Articles
-Write tutorials, guides, or explanations about AI and tech.
-- Read `RESEARCH.md` for detailed instructions
-- Can be in English, Assamese, or both
-- Keep language simple and clear
-
-### Code & Fixes
-Improve the website itself.
-- Fix bugs or broken links
-- Improve styling or performance
-- Add missing features
-- Write better documentation
-
-### Community
-Help others in the community.
-- Answer questions
-- Review pull requests
-- Suggest improvements
-- Share in our Telegram: https://t.me/AxomiyaITLabs
-
----
-
-## How to Contribute
-
-### 1. Set Up Locally
-
-```bash
-# Clone the repository
-git clone https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io.git
-cd axomiya-it-labs.github.io
-
-# Install dependencies
-bundle install
-
-# Start the local server
-bundle exec jekyll serve
+```powershell
+pnpm install
+pnpm dev
+pnpm build
+pnpm preview
 ```
 
-Visit `http://localhost:4000` to see your changes live.
+The production build creates static pages in `dist/`, Pagefind language indexes, sitemap and RSS files, and per-content Open Graph PNGs. The GitHub Actions Pages workflow also uses pnpm.
 
-### 2. Make Your Changes
+## Translation rules
 
-- For **projects**: Add a file to `_projects/`
-- For **articles**: Add a file to `_posts/`
-- For **website fixes**: Edit the relevant file
+- Every English content entry should have a paired Assamese entry with the same `translationSlug`.
+- Use `lang: en` or `lang: as` in frontmatter.
+- Until a real Assamese translation is available, mark the Assamese entry `placeholder: true`, prefix its title with `[AS] `, include `অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।`, and link to its English counterpart.
+- Do not machine-translate article or project prose. Replace the placeholder with reviewed Assamese text when ready.
+- Do not remove the pending marker until the Assamese content is substantive.
 
-Read `PROJECT.md` or `RESEARCH.md` for detailed instructions.
+## Static assets and generated OG images
 
-### 3. Test Your Changes
+Place static assets under `public/` and reference them with absolute site paths beginning with `/`. Current shared icons are in `public/social/`, the shared OG fallback is `public/brand/og-image.webp`, and content images are in `public/assets/images/`. The OG route generator uses each entry's `ogImage` or `heroImage` when that path exists and overlays the title and description; otherwise it creates a branded card. Assamese text is rendered with the bundled Noto Sans Bengali font.
 
-Run `bundle exec jekyll serve` and verify everything looks good.
+## Pull requests
 
-### 4. Commit and Push
-
-```bash
-# Create a new branch
-git checkout -b feature/your-contribution-name
-
-# Add your changes
-git add .
-
-# Commit with a clear message
-git commit -m "Add: Description of what you changed"
-
-# Push to your fork
-git push origin feature/your-contribution-name
-```
-
-### 5. Open a Pull Request
-
-1. Go to https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io
-2. Click "New Pull Request"
-3. Select your branch
-4. Write a clear title and description
-5. Submit!
-
----
-
-## Design System
-
-The site uses a clean, minimal design system:
-
-- **Colors**: Warm, accessible palette
-- **Typography**: Clear, readable fonts
-- **Mobile First**: Works great on phones and tablets
-- **No Jargon**: Accessible to everyone
-
-Don't change the design without discussing with the team first.
-
----
-
-## Writing Guidelines
-
-### Be Clear
-- Use simple, everyday words
-- Avoid jargon or explain it
-- Write short sentences
-- Use bullet points
-
-### Be Respectful
-- Welcome beginners
-- No gatekeeping
-- Assume good intentions
-- Give credit to others
-
-### Be Helpful
-- Include examples
-- Link to related content
-- Explain why something matters
-- Proofread before submitting
-
----
-
-## Git Commit Messages
-
-Write clear, descriptive messages:
-
-```
-Add: New project for weather app
-Fix: Mobile menu not closing properly
-Update: Improve article about AI basics
-Docs: Add instructions for new contributors
-```
-
-Start with: `Add`, `Fix`, `Update`, `Docs`, or `Remove`
-
----
-
-## Questions or Issues?
-
-1. **For quick questions**: Ask in Telegram: https://t.me/AxomiyaITLabs
-2. **For bugs**: Open a GitHub issue
-3. **For ideas**: Discuss in Telegram first
-
----
-
-## Need Help?
-
-Check these resources:
-- `PROJECT.md` - Adding projects
-- `RESEARCH.md` - Writing articles
-- `README.md` - Repository overview
-- Our Telegram community - Ask anything!
-
----
-
-## Thank You
-
-Every contribution—no matter how small—helps make Assam's tech community stronger. We're grateful for your help!
-
-Maintained with care by Axomiya IT Labs community.
+1. Make a focused change and preserve existing content fields.
+2. Run `pnpm build` and review the relevant URLs in the local preview.
+3. Include screenshots or a clear description for visual changes.
+4. Open a pull request with a concise summary and any known limitations.

@@ -13,7 +13,7 @@ tech_stack:
   - JavaScript
   - PyTorch
   - Hugging Face
-  - Jekyll
+  - Astro
 lang: en
 translationSlug: axomiya-ai-tutor
 description: "An interactive LLM learning assistant that translates programming concepts and error logs into beginner-friendly Assamese."

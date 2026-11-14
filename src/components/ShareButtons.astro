@@ -1,0 +1,27 @@
+---
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<div class="share-actions" data-share-actions data-share-title={title}>
+	<button type="button" class="share-button" data-native-share>Share</button>
+	<button type="button" class="share-button share-secondary" data-copy-link>Copy link</button>
+	<span class="share-status" role="status" aria-live="polite"></span>
+</div>
+<script>
+	const wireShareButtons = () => {
+		document.querySelectorAll<HTMLElement>('[data-share-actions]:not([data-wired])').forEach((group) => {
+			group.dataset.wired = 'true';
+			const status = group.querySelector<HTMLElement>('.share-status');
+			const share = group.querySelector<HTMLButtonElement>('[data-native-share]');
+			const copy = group.querySelector<HTMLButtonElement>('[data-copy-link]');
+			share?.addEventListener('click', async () => {
+				const data = { title: group.dataset.shareTitle || document.title, url: location.href };
+				try { if (navigator.share) await navigator.share(data); else { await navigator.clipboard.writeText(data.url); if (status) status.textContent = 'Link copied'; } }
+				catch { if (status) status.textContent = 'Share cancelled'; }
+			});
+			copy?.addEventListener('click', async () => { try { await navigator.clipboard.writeText(location.href); if (status) status.textContent = 'Link copied'; } catch { if (status) status.textContent = location.href; } });
+		});
+	};
+	wireShareButtons();
+	document.addEventListener('astro:page-load', wireShareButtons);
+</script>

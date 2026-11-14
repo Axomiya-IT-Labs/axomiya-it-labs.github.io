@@ -13,7 +13,7 @@ tech_stack:
   - JavaScript
   - PyTorch
   - Hugging Face
-  - Jekyll
+  - Astro
 lang: as
 translationSlug: axomiya-ai-tutor
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"

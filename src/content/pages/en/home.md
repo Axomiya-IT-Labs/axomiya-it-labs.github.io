@@ -74,7 +74,7 @@ description: ""
       <div class="fp-links">
         <a href="https://krittimat.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
         <a href="https://github.com/axomiyaindie/krittimat" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <img src="/assets/images/icons/github.svg/" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
+          <img src="/social/github.svg" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
           GitHub
         </a>
         <a href="/projects/krittimat/" class="btn btn-secondary">Details</a>
@@ -92,7 +92,7 @@ description: ""
       <div class="fp-links">
         <a href="https://whatafter12.vercel.app/en" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open App</a>
         <a href="https://github.com/axomiyaindie/wa12" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          <img src="/assets/images/icons/github.svg/" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
+          <img src="/social/github.svg" alt="" width="15" height="15" aria-hidden="true" style="vertical-align:middle;margin-right:0.3rem;filter:none;opacity:0.7;">
           GitHub
         </a>
         <a href="/projects/what-after-12/" class="btn btn-secondary">Details</a>

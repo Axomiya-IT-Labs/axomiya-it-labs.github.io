@@ -1,6 +1,7 @@
 ﻿// Separate retrieval bots from training crawlers: allow citation-oriented search while opting out of model training.
 const policy = `User-agent: *
 Allow: /
+Disallow: /_actions/
 
 User-agent: OAI-SearchBot
 Allow: /
@@ -28,8 +29,6 @@ Disallow: /
 
 User-agent: Bytespider
 Disallow: /
-
-Disallow: /_actions/
 
 Sitemap: https://axomiya-it-labs.github.io/sitemap-index.xml
 `;

@@ -33,12 +33,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build site
         run: pnpm build
-      - name: Copy static GitHub Pages files
-        run: |
-          mkdir -p dist/research/ai-problem-breakdown
-          cp public/_redirects dist/_redirects
-          cp public/.nojekyll dist/.nojekyll
-          cp public/research/ai-problem-breakdown/index.html dist/research/ai-problem-breakdown/index.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
