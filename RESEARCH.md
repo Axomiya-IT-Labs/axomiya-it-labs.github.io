@@ -31,7 +31,7 @@ Use matching `translationSlug` values for the Assamese counterpart. If a transla
 
 ## Images and Open Graph
 
-Put static images under `public/` and reference them with root-relative paths. For example, `/assets/articles/example.webp` maps to `public/assets/articles/example.webp`. English research OG images are served at `/og/research/{translationSlug}.png`; Assamese research images use `/og/as/research/{translationSlug}.png`. Blog OG images follow the same pattern under `/og/blog/`. The generator creates a branded card containing the site name, locale, and title; it does not use `ogImage` or `heroImage` as a background. `heroImage` is displayed on the article detail page. Assamese OG text uses the bundled Noto Sans Bengali font.
+Put static images under `public/` and reference them with root-relative paths. For example, `/assets/articles/example.webp` maps to `public/assets/articles/example.webp`. English research OG images are served at `/og/research/{translationSlug}.png`; Assamese research images use `/og/as/research/{translationSlug}.png`. Blog OG images follow the same pattern under `/og/blog/`. Blog, research, project, and announcement entries in both locales share the same branded title-card layout. A `heroImage` becomes the generated card background, with a contrast overlay behind the title and description; an explicit `ogImage` overrides the generated card. `heroImage` is also displayed on the article page. Assamese OG text uses the bundled Noto Sans Bengali font.
 
 ## Local workflow
 

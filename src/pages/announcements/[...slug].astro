@@ -18,7 +18,7 @@ const { item } = Astro.props;
 const { Content } = await render(item);
 const announcementUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
-<BaseLayout lang="en" title={item.data.title} description={item.data.description}>
+<BaseLayout lang="en" title={item.data.title} description={item.data.description} ogImage={item.data.ogImage}>
   <article class="container-prose py-16">
     <header class="mb-12 text-center">
       <span class="badge badge-accent mb-4">Announcement</span>

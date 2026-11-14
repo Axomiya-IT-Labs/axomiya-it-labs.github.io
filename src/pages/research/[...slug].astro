@@ -20,7 +20,7 @@ const t = useTranslations('en');
 const date = new Date(post.data.pubDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
-<BaseLayout lang="en" title={post.data.title} description={post.data.description} ogType="article" ogImage={post.data.ogImage || post.data.heroImage}>
+<BaseLayout lang="en" title={post.data.title} description={post.data.description} ogType="article" ogImage={post.data.ogImage}>
   <article class="container-prose py-16">
     <header class="mb-12 text-center max-w-3xl mx-auto">
       <div class="flex items-center justify-center gap-3 mb-4 text-sm text-fg-muted">

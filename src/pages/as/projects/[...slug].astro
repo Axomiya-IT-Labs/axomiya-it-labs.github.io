@@ -18,7 +18,7 @@ const { Content } = await render(project);
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const logoUrl = project.data.logo || '/brand/logo.png';
 ---
-<BaseLayout lang="as" title={project.data.title} description={project.data.description} ogImage={project.data.ogImage || project.data.heroImage}>
+<BaseLayout lang="as" title={project.data.title} description={project.data.description} ogImage={project.data.ogImage}>
   <article class="container-prose py-16">
     
     <!-- Project Header -->

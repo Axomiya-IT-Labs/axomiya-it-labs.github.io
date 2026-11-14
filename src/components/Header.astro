@@ -42,20 +42,19 @@ const isActive = (path: string) => {
       ))}
     </nav>
 
-    <!-- Desktop Actions -->
+    <!-- Search and appearance controls stay grouped on the right -->
     <div class="flex items-center gap-1 md:gap-2 shrink-0">
       <button id="search-trigger" type="button" class="btn-ghost rounded-full p-2" aria-label="Search">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </button>
       <ThemeToggle lang={lang} />
       <span class="hidden md:contents"><LanguageToggle lang={lang} /></span>
+      <!-- Mobile menu trigger sits immediately after Theme -->
+      <button id="mobile-menu-btn" type="button" class="mobile-menu-trigger md:hidden btn-ghost rounded-full p-2" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="menu-icon-close hidden" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
     </div>
-
-    <!-- Mobile menu trigger; logo and search stay clear in the header -->
-    <button id="mobile-menu-btn" type="button" class="mobile-menu-trigger md:hidden btn-ghost rounded-full p-2" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      <svg class="menu-icon-close hidden" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
-    </button>
   </div>
   <div id="mobile-menu-backdrop" class="mobile-menu-backdrop hidden md:hidden" aria-hidden="true"></div>
   <nav id="mobile-menu" aria-label="Mobile navigation" class="mobile-menu-panel hidden md:hidden" inert>

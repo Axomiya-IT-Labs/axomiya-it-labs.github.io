@@ -34,7 +34,7 @@ tech_stack:
 
 Keep the same `translationSlug` and equivalent metadata on the Assamese entry. A pending translation must include `lang: as`, `placeholder: true`, the Assamese pending message `অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।`, and a link to the English page. Keep the English title as the placeholder title; the detail page displays titles verbatim. Do not machine-translate project prose.
 
-Images referenced by `logo`, `ogImage`, or `heroImage` must exist beneath `public/`; use a root-relative URL such as `/assets/projects/my-project.webp`. The Astro build generates a 1200×630 OG image at `/og/projects/{translationSlug}.png` for English and `/og/as/projects/{translationSlug}.png` for Assamese. Generated OG cards show the brand, locale, and title; they do not use `ogImage` or `heroImage` as their background. `heroImage` is displayed on the project detail page, while `logo` is used on project cards and details.
+Images referenced by `logo`, `ogImage`, or `heroImage` must exist beneath `public/`; use a root-relative URL such as `/assets/projects/my-project.webp`. The Astro build generates a 1200×630 OG image at `/og/projects/{translationSlug}.png` for English and `/og/as/projects/{translationSlug}.png` for Assamese. Blog, research, project, and announcement entries in both locales share the same branded title-card layout. When `heroImage` is set, it becomes the background of that generated image, with a contrast overlay behind the title and description. An explicit `ogImage` overrides the generated card. `heroImage` also appears on the project detail page; `logo` is used on project cards and details.
 
 ## Preview and validation
 
