@@ -11,16 +11,34 @@ const { members } = teamData;
       <p class="lead mx-auto">The people building Assam's open-source future.</p>
     </header>
 
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Flex-wrap so cards center when there are fewer than 3 members -->
+    <div class="flex flex-wrap justify-center gap-8">
       {members.map(member => (
-        <div class="card text-center flex flex-col items-center p-8">
-          <img src={member.image} alt={member.name} class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-border" />
+        <div class="card text-center flex flex-col items-center p-8 w-full max-w-sm">
+          <img 
+            src={member.image} 
+            alt={member.name} 
+            class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-border bg-bg-subtle" 
+            onerror="this.onerror=null; this.src='/assets/team/fallbackavtar.svg';" 
+          />
           <h3 class="text-xl font-bold font-display text-fg">{member.name}</h3>
           <p class="text-accent font-medium text-sm mb-4">{member.role}</p>
           <div class="flex gap-3 mt-auto">
-            {member.links.github && <a href={member.links.github} target="_blank" rel="noopener" class="btn-ghost p-2 rounded-full"><img src="/social/github.svg" alt="GitHub" class="w-5 h-5 dark:invert" /></a>}
-            {member.links.linkedin && <a href={member.links.linkedin} target="_blank" rel="noopener" class="btn-ghost p-2 rounded-full"><img src="/social/linkedin.svg" alt="LinkedIn" class="w-5 h-5 dark:invert" /></a>}
-            {member.links.x && <a href={member.links.x} target="_blank" rel="noopener" class="btn-ghost p-2 rounded-full"><img src="/social/x.svg" alt="X" class="w-5 h-5 dark:invert" /></a>}
+            {member.links.github && (
+              <a href={member.links.github} target="_blank" rel="noopener" class="btn-ghost p-2 rounded-full hover:bg-bg-subtle">
+                <img src="/social/github.svg" alt="GitHub" class="w-5 h-5 dark:invert" />
+              </a>
+            )}
+            {member.links.linkedin && (
+              <a href={member.links.linkedin} target="_blank" rel="noopener" class="btn-ghost p-2 rounded-full hover:bg-bg-subtle">
+                <img src="/social/linkedin.svg" alt="LinkedIn" class="w-5 h-5 dark:invert" />
+              </a>
+            )}
+            {member.links.x && (
+              <a href={member.links.x} target="_blank" rel="noopener" class="btn-ghost p-2 rounded-full hover:bg-bg-subtle">
+                <img src="/social/x.svg" alt="X" class="w-5 h-5 dark:invert" />
+              </a>
+            )}
           </div>
         </div>
       ))}

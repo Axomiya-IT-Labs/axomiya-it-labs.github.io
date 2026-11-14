@@ -3,19 +3,11 @@
     {
       "name": "Rakibul Islam",
       "role": "Founder & Lead Developer",
-      "image": "/assets/images/team/leads/rakibul.jpg",
+      "image": "/assets/team/rakibul.jpg",
       "links": {
-        "github": "https://github.com",
-        "linkedin": "https://linkedin.com",
-        "x": "https://x.com"
-      }
-    },
-    {
-      "name": "Assamese AI Team",
-      "role": "Core Contributors",
-      "image": "/assets/images/team/placeholders/avatar.svg",
-      "links": {
-        "github": "https://github.com/Axomiya-IT-Labs"
+        "github": "https://github.com/axomiyaindie",
+        "linkedin": "https://linkedin.com/in/axomiyaindie",
+        "x": "https://x.com/axomiyaindie"
       }
     }
   ]

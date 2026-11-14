@@ -6,7 +6,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
-<button id="theme-toggle" class="btn-ghost rounded-full p-2" aria-label={t('theme.toggle')} title={t('theme.toggle')}>
+<button id="theme-toggle" class="btn-ghost rounded-full p-2 border border-border" aria-label={t('theme.toggle')} title={t('theme.toggle')}>
   <!-- Sun (Light) -->
   <svg class="hidden dark:block" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
   <!-- Moon (Dark) -->
@@ -14,21 +14,22 @@ const t = useTranslations(lang);
 </button>
 
 <script is:inline>
-  // This script runs on every page load to sync the UI with localStorage
-  const toggleBtn = document.getElementById('theme-toggle');
-  const root = document.documentElement;
-  
-  // The actual theme cycling logic is attached in BaseLayout for initial load,
-  // but we need the click handler here.
-  toggleBtn?.addEventListener('click', () => {
-    const current = root.dataset.theme || 'system';
-    let next = 'system';
+  window.addEventListener('load', function () {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
     
-    if (current === 'system') next = 'light';
-    else if (current === 'light') next = 'dark';
-    else if (current === 'dark') next = 'system';
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const current = root.dataset.theme || 'system';
+        let next = 'system';
+        
+        if (current === 'system') next = 'light';
+        else if (current === 'light') next = 'dark';
+        else if (current === 'dark') next = 'system';
 
-    root.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch (e) {}
+        root.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+    }
   });
 </script>

@@ -21,37 +21,32 @@ const {
   secondaryBtnLink 
 } = Astro.props;
 ---
-<section class="relative flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] text-center px-4 overflow-hidden border-b border-border bg-bg">
-  <!-- Subtle Radial Gradient Background -->
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-accent-soft)_0%,_transparent_60%)] opacity-60 pointer-events-none"></div>
+<section class="relative flex flex-col items-center justify-center min-h-[85vh] text-center px-4 overflow-hidden border-b border-border bg-bg">
+  <!-- Subtle radial gradient for depth -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-accent-soft)_0%,_transparent_70%)] opacity-70 pointer-events-none"></div>
   
-  <div class="relative z-10 max-w-4xl mx-auto space-y-6">
-    <span class="eyebrow text-lg mb-2">{eyebrow}</span>
+  <div class="relative z-10 max-w-4xl mx-auto space-y-6 pt-12">
+    <span class="eyebrow text-sm md:text-base tracking-widest mb-2">{eyebrow}</span>
     
     <!-- Huge Brand Name -->
-    <h1 class="text-6xl md:text-8xl lg:text-[7rem] font-black font-display tracking-tighter leading-[0.9] text-fg">
+    <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black font-display tracking-tighter leading-[0.95] text-fg">
       {title} <br/>
       <span class="text-accent">{titleAccent}</span>
     </h1>
     
     <!-- Tagline -->
-    <p class="text-xl md:text-2xl text-fg-muted font-medium max-w-2xl mx-auto mt-8 leading-relaxed">
+    <p class="text-base sm:text-lg md:text-xl text-fg-muted font-medium max-w-2xl mx-auto mt-6 leading-relaxed px-2">
       {tagline}
     </p>
     
     <!-- CTA Buttons -->
-    <div class="pt-10 flex flex-wrap justify-center gap-4">
-      <a href={primaryBtnLink} class="btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:-translate-y-1">
+    <div class="pt-8 md:pt-10 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+      <a href={primaryBtnLink} class="btn-primary text-base md:text-lg px-8 py-3.5 w-full sm:w-auto shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
         {primaryBtnText}
       </a>
-      <a href={secondaryBtnLink} class="btn-secondary text-lg px-8 py-4 hover:-translate-y-1">
+      <a href={secondaryBtnLink} class="btn-secondary text-base md:text-lg px-8 py-3.5 w-full sm:w-auto hover:-translate-y-0.5 transition-all">
         {secondaryBtnText}
       </a>
     </div>
   </div>
-  
-  <!-- Animated Scroll Arrow -->
-  <a href="#announcements" class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-fg-muted hover:text-accent transition-colors" aria-label="Scroll down">
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-  </a>
 </section>
