@@ -50,88 +50,146 @@ const isActive = (path: string) => {
       <span class="hidden md:contents"><ThemeToggle lang={lang} /><LanguageToggle lang={lang} /></span>
     </div>
 
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="md:hidden btn-ghost rounded-full p-2 text-fg" aria-label="Menu">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    <!-- Mobile menu trigger; logo and search stay clear in the header -->
+    <button id="mobile-menu-btn" type="button" class="mobile-menu-trigger md:hidden btn-ghost rounded-full p-2" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="menu-icon-close hidden" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
     </button>
   </div>
-
-  <!-- Mobile Nav Drawer (Hidden by default) -->
-  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden bg-bg text-fg md:hidden flex flex-col">
-    <!-- Drawer Header -->
-    <div class="container-prose flex h-16 items-center justify-between border-b border-border shrink-0">
-      <a href={localizePath('/', lang)} class="font-display font-bold text-fg text-lg">Axomiya <span class="text-accent">IT Labs</span></a>
-      <button id="mobile-close-btn" class="btn-ghost p-2 rounded-full" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      </button>
-    </div>
-
-    <!-- Drawer Nav Links -->
-    <nav class="container-prose flex flex-col py-6 gap-2 flex-1 overflow-y-auto">
-      {navItems.map(item => (
-        <a 
-          href={localizePath(item.path, lang)} 
-          class={`block px-4 py-3 rounded-lg text-lg font-semibold transition-colors ${isActive(item.path) ? 'bg-accent-soft text-accent' : 'text-fg hover:bg-bg-subtle'}`}
-        >
-          {t(item.key as any)}
-        </a>
-      ))}
-      <div class="my-3 border-t border-border"></div>
-      {[
-        { label: 'About', path: '/about/' },
-        { label: 'Community', path: '/community/' },
-        { label: 'Announcements', path: '/announcements/' },
-        { label: 'Contribute', path: '/contribute/' },
-      ].map(item => (
-        <a href={localizePath(item.path, lang)} class="block px-4 py-3 rounded-lg text-base font-medium text-fg-muted hover:bg-bg-subtle hover:text-fg transition-colors">
-          {item.label}
-        </a>
-      ))}
-    </nav>
-
-    <!-- Drawer Bottom Controls (Theme + Language) -->
-    <div class="border-t border-border bg-bg-elevated shrink-0">
-      <div class="container-prose flex flex-col gap-4 py-6">
-        <div class="flex items-center justify-between gap-4">
-          <span class="text-sm font-semibold text-fg-muted">Display & language</span>
-          <div class="flex items-center gap-2"><ThemeToggle lang={lang} /><LanguageToggle lang={lang} /></div>
-        </div>
+  <div id="mobile-menu-backdrop" class="mobile-menu-backdrop hidden md:hidden" aria-hidden="true"></div>
+  <nav id="mobile-menu" aria-label="Mobile navigation" class="mobile-menu-panel hidden md:hidden" inert>
+    <p class="mobile-menu-label">Explore</p>
+    {navItems.map(item => (
+      <a href={localizePath(item.path, lang)} class={`mobile-menu-link ${isActive(item.path) ? 'is-active' : ''}`}>
+        <span>{t(item.key as any)}</span><span class="mobile-menu-arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+    <div class="mobile-menu-divider"></div>
+    <div class="mobile-menu-controls">
+      <div class="mobile-menu-control">
+        <span>Theme</span>
+        <ThemeToggle lang={lang} />
+      </div>
+      <div class="mobile-menu-control">
+        <span>Language</span>
+        <LanguageToggle lang={lang} />
       </div>
     </div>
-  </div>
+  </nav>
 </header>
 
-<script is:inline>
-  window.addEventListener('load', function () {
-    const btn = document.getElementById('mobile-menu-btn');
-    const closeBtn = document.getElementById('mobile-close-btn');
-    const drawer = document.getElementById('mobile-drawer');
-    
-    if (btn && drawer) {
-      btn.addEventListener('click', () => {
-        drawer.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-    
-    if (closeBtn && drawer) {
-      closeBtn.addEventListener('click', () => {
-        drawer.classList.add('hidden');
-        document.body.style.overflow = '';
-      });
-    }
+<style>
+  .mobile-menu-trigger { color: var(--color-fg); }
+  .mobile-menu-backdrop {
+    position: fixed;
+    inset: 4rem 0 0;
+    z-index: 38;
+    background: rgb(12 16 14 / 22%);
+    backdrop-filter: blur(2px);
+  }
+  .mobile-menu-panel {
+    position: absolute;
+    z-index: 41;
+    top: calc(100% + 0.55rem);
+    right: max(1rem, calc((100vw - 1120px) / 2 + 1.5rem));
+    width: min(21rem, calc(100vw - 2rem));
+    padding: 1rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 75%, white 25%);
+    border-radius: 1.1rem;
+    background: color-mix(in srgb, var(--color-bg-elevated) 82%, transparent);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 18%), 0 2px 8px rgb(0 0 0 / 8%);
+    backdrop-filter: blur(24px) saturate(1.35);
+    transform-origin: top right;
+  }
+  .mobile-menu-panel:not(.hidden) { animation: menu-drop 160ms ease-out both; }
+  .mobile-menu-label {
+    margin: 0.1rem 0.5rem 0.55rem;
+    color: var(--color-fg-subtle);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  .mobile-menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.35rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.75rem;
+    color: var(--color-fg);
+    font-weight: 600;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+  .mobile-menu-link:hover,
+  .mobile-menu-link.is-active {
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    text-decoration: none;
+  }
+  .mobile-menu-arrow { color: var(--color-fg-subtle); font-size: 0.9rem; }
+  .mobile-menu-divider { height: 1px; margin: 0.7rem 0.4rem; background: var(--color-border); }
+  .mobile-menu-controls {
+    display: grid;
+    gap: 0.45rem;
+  }
+  .mobile-menu-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2.7rem;
+    padding: 0.15rem 0.55rem;
+    color: var(--color-fg-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .mobile-menu-control a { border: 1px solid var(--color-border); border-radius: 999px; background: rgb(255 255 255 / 18%); }
+  @keyframes menu-drop {
+    from { opacity: 0; transform: translateY(-5px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu-panel:not(.hidden) { animation: none; }
+  }
+</style>
 
-    if (drawer) {
-      drawer.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-        drawer.classList.add('hidden');
-        document.body.style.overflow = '';
-      }));
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !drawer.classList.contains('hidden')) {
-          drawer.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      });
-    }
-  });
+<script is:inline>
+  (() => {
+    const trigger = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    if (!trigger || !menu || !backdrop) return;
+
+    const openMenu = () => {
+      menu.classList.remove('hidden');
+      menu.removeAttribute('inert');
+      backdrop.classList.remove('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.setAttribute('aria-label', 'Close navigation menu');
+    };
+    const closeMenu = (restoreFocus = false) => {
+      menu.classList.add('hidden');
+      menu.setAttribute('inert', '');
+      backdrop.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-label', 'Open navigation menu');
+      if (restoreFocus) trigger.focus();
+    };
+
+    trigger.addEventListener('click', () => {
+      if (trigger.getAttribute('aria-expanded') === 'true') closeMenu();
+      else openMenu();
+    });
+    backdrop.addEventListener('click', () => closeMenu());
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
+    document.addEventListener('click', event => {
+      if (trigger.getAttribute('aria-expanded') === 'true' && !menu.contains(event.target) && !trigger.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') closeMenu(true);
+    });
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 768px)').matches) closeMenu();
+    });
+  })();
 </script>
