@@ -19,7 +19,7 @@ const {
   lang, 
   title, 
   description = 'Axomiya IT Labs — Assam\'s first AI & open-source community.',
-  ogImage = '/brand/og-image.webp',
+  ogImage,
   ogType = 'website'
 } = Astro.props;
 
@@ -29,7 +29,26 @@ const siteName = 'Axomiya IT Labs';
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const currentPath = Astro.url.pathname;
 const canonicalURL = new URL(currentPath, Astro.site);
-const ogImageURL = new URL(ogImage, Astro.site);
+
+// Auto-generate OG image path based on current URL (no /en/ prefix)
+// /blog/welcome/ → /og/blog/welcome.png
+// /as/blog/welcome/ → /og/as/blog/welcome.png
+// / → /og/home.png (fallback to static brand image for homepage)
+// /about/ → /og/about.png (fallback to static brand image for pages without OG)
+let finalOgPath = '/brand/og-image.webp'; // default fallback
+if (ogImage) {
+  // Explicit override from props
+  finalOgPath = ogImage;
+} else if (currentPath !== '/') {
+  // Auto-generate for non-homepage routes
+  const cleanPath = currentPath.replace(/\/$/, ''); // remove trailing slash
+  // Only use auto-generated if the route matches a content type
+  if (cleanPath.match(/^\/(as\/)?(blog|projects|research|announcements)\/[^/]+$/)) {
+    finalOgPath = `/og${cleanPath}.png`;
+  }
+}
+
+const ogImageURL = new URL(finalOgPath, Astro.site);
 
 const isAs = lang === 'as';
 const enPath = isAs ? currentPath.replace(/^\/as/, '') || '/' : currentPath;
@@ -89,7 +108,6 @@ const asURL = new URL(asPath, Astro.site);
     
     <Header lang={lang} />
     
-    <!-- Search Modal (rendered once, globally available) -->
     <SearchModal lang={lang} />
     
     <main id="main-content" class="flex-1">

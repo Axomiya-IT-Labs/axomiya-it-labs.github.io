@@ -33,6 +33,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build site
         run: pnpm build
+      - name: Copy static GitHub Pages files
+        run: cp public/.nojekyll dist/.nojekyll
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
