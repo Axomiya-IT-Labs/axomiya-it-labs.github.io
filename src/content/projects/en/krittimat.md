@@ -18,6 +18,7 @@ translationSlug: krittimat
 description: "Know all the most famous AI tools for everything — from Image Generation to Voice Cloning, Video Creation, Content Writing, Coding, and Prompting in the age of LLMs."
 logo: "/assets/projects/krittimat.webp"
 pubDate: "2026-07-24"
+placeholder: false
 ---
 ## What It Solves
 

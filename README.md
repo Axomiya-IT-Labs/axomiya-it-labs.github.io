@@ -13,117 +13,97 @@
   </p>
 
   <p>
-    <a href="https://axomiya-it-labs.github.io"><strong>Visit Website</strong></a> •
-    <a href="https://t.me/AxomiyaITLabs"><strong>Telegram Community</strong></a> •
-    <a href="https://github.com/Axomiya-IT-Labs"><strong>GitHub Organization</strong></a> •
-    <a href="CONTRIBUTING.md"><strong>Contribution Guide</strong></a>
+    <a href="https://axomiya-it-labs.github.io"><strong>Website</strong></a> •
+    <a href="https://axomiya-it-labs.github.io/projects/"><strong>Explore Projects</strong></a> •
+    <a href="https://t.me/AxomiyaITLabs"><strong>Telegram</strong></a> •
+    <a href="https://github.com/Axomiya-IT-Labs"><strong>GitHub</strong></a> •
+    <a href="CONTRIBUTING.md"><strong>Contribute</strong></a>
   </p>
 
 </div>
 
 ---
 
-## 🌟 Welcome to Axomiya IT Labs
+## Welcome to Axomiya IT Labs
 
-Information has never been more abundant. Every question you have ever had has an answer somewhere online. AI has accelerated this dream: answers are instant, open, and available to anyone with an internet connection.
+Every question ever asked has an answer somewhere on the internet. Modern artificial intelligence has made this knowledge accessible instantly to anyone with an internet connection.
 
-**Yet, access to knowledge is not the same as access to understanding.**
+Yet, access to information is not the same as access to understanding.
 
-When you are a student in Guwahati, a farmer in Nagaon, or a self-taught coder in Silchar, the technology world is still almost entirely in English. It often assumes a context that does not match local realities — a job market that differs, curricula that miss regional needs, and explanations that feel distant from the language you think in.
+For a student in Guwahati, a farmer in Nagaon, or a self-taught coder in Silchar, technology is still presented almost exclusively in English, often assuming contexts, economies, and curricula foreign to Assam.
 
-**Axomiya IT Labs** is an open-source, community-driven initiative building the bridge between the world's technological knowledge and the people of Assam. We are creating an Assamese-first, inclusive ecosystem where curiosity transforms into capability — welcoming curious kids, students, teachers, developers, and lifelong learners alike.
-
----
-
-## 🧭 The Three Pillars
-
-Our entire community is guided by three simple, powerful principles:
-
-| Pillar | What It Means |
-| :--- | :--- |
-| 📖 **Learn** | Plain-language tutorials, AI guides, and tech breakdowns written for people, not just engineers. No gatekeeping, no jargon overload. |
-| 🛠️ **Build** | Real-world open-source software, datasets, and platforms that solve actual local challenges — from career counseling to language datasets. |
-| 🤝 **Share** | Every translation, code improvement, dataset, and question makes the whole community stronger. Everything we build is free and open to all. |
+Axomiya IT Labs exists to bridge that gap. We are building an open-source, community-driven platform where cutting-edge technology, artificial intelligence, and digital tools are localized, explained, and developed in the language people think in.
 
 ---
 
-## 🚀 Projects & Initiatives
+## Why We Exist
 
-We build practical, open-source projects designed to make artificial intelligence, data, and education accessible:
+Knowledge should not be gated behind paywalls, English fluency, or geographical privilege.
 
-### 1. 🎓 [WhatAfter12 — Career Clarity Guidance](https://whatafter12.vercel.app/en)
-* **Status:** Beta • **Category:** AI & Education
-* **Live Demo:** [whatafter12.vercel.app/en](https://whatafter12.vercel.app/en) | **Source Code:** [github.com/axomiyaindie/wa12](https://github.com/axomiyaindie/wa12)
-* **What It Solves:** Class 10 & 12 students in Assam often lack structured career guidance, especially in semi-urban and rural areas. WhatAfter12 is an AI-guided counselor explaining streams, higher education options, local colleges, and scholarship opportunities in plain Assamese and English.
-
-### 2. ⚡ [Krittimat — AI Tools & Prompts Hub](https://krittimat.vercel.app/en)
-* **Status:** Live • **Category:** AI & Productivity
-* **Live Demo:** [krittimat.vercel.app/en](https://krittimat.vercel.app/en) | **Source Code:** [github.com/axomiyaindie/krittimat](https://github.com/axomiyaindie/krittimat)
-* **What It Solves:** Finding the right AI tool among thousands of options can be overwhelming. Krittimat is a curated, structured directory mapping every major AI tool to its specific use case — from image generation and voice cloning to video creation, content writing, coding, and prompt engineering in the LLM era.
-
-### 3. 🌐 [Open Assam Data Hub](https://github.com/Axomiya-IT-Labs/open-assam-data)
-* **Status:** In Progress • **Category:** Data & Automation
-* **Source Code:** [github.com/Axomiya-IT-Labs/open-assam-data](https://github.com/Axomiya-IT-Labs/open-assam-data)
-* **What It Solves:** Contemporary AI models struggle with Assamese because of a critical shortage of structured, open-license regional datasets. This project aggregates, cleans, and publishes open datasets for Assamese speech, text corpora, dictionary terms, and regional metrics.
-
-### 4. 🎙️ Assamese Voice AI & Speech-to-Text Engine
-* **Status:** Community Proposal / Open Idea • **Category:** AI & Speech
-* **What It Solves:** Mainstream voice interfaces frequently struggle with native Assamese accents and regional dialects. This initiative explores fine-tuning open-source models (such as Whisper and Wav2Vec2) on crowdsourced Assamese voice recordings to provide lightweight, on-device speech recognition.
-
-### 5. 💡 Axomiya AI Tutor
-* **Status:** In Development • **Category:** AI & Learning
-* **What It Solves:** Complex programming and computer science tutorials often run at breakneck speeds in complex English. Axomiya AI Tutor provides interactive explanations, breaking down code logic, git workflows, and debugging error messages into beginner-friendly Assamese.
+1. **Contextual Education:** Complex computing, data science, and AI concepts should be available in clear, beginner-friendly Assamese and English.
+2. **Local Problem Solving:** We develop tools that address challenges unique to our region, from career counseling to native speech datasets.
+3. **Open Collaboration:** Every line of code, article, dataset, and translation we produce is free, open source, and accessible to everyone.
 
 ---
 
-## 🌐 The Bilingual Platform
+## What We Build
 
-The Axomiya IT Labs web platform is built with a bilingual-first architecture:
-* **English Edition:** Served at the root URL (`/`)
-* **Assamese Edition:** Served under the `/as/` locale route (e.g., `/as/projects/`, `/as/about/`)
+We design and incubate practical open-source solutions centered on education, regional data, and language technology:
 
-Every project, article, and resource is designed to have a direct Assamese counterpart. Where community translations are still under review, helpful placeholders guide readers while inviting contributors to help translate.
+* **Localized Education & Career Tools:** AI-assisted platforms offering structured guidance on higher education, courses, and scholarships tailored to students in Assam.
+* **AI Discovery & Productivity Hubs:** Curated directories and practical guides mapping modern AI workflows, prompt libraries, and automation tools.
+* **Regional Language Datasets:** Open text, speech, and dictionary datasets enabling researchers and developers to train inclusive models for Assamese.
+* **Native Voice & Language Models:** Speech recognition and assistive language models fine-tuned on regional speech patterns and accents.
+* **Interactive Learning Assistants:** Tools that translate programming concepts, debugging workflows, and error messages into intuitive Assamese.
 
----
+To explore all our active projects, try live demos, review roadmaps, and view source code, visit our projects portal:
 
-## 📚 Key Sections of the Site
-
-* **[About Us](https://axomiya-it-labs.github.io/about/):** Discover the story behind Axomiya IT Labs, our philosophical framework, and why all our work is open-source.
-* **[Projects](https://axomiya-it-labs.github.io/projects/):** Browse live demos, roadmap statuses, and source repositories for all our initiatives.
-* **[Research](https://axomiya-it-labs.github.io/research/):** Read analytical deep dives, including our problem breakdown of post-Class 12 education in Assam.
-* **[Blog](https://axomiya-it-labs.github.io/blog/):** Follow community stories, tutorials, and development updates.
-* **[Announcements](https://axomiya-it-labs.github.io/announcements/):** Official news, hackathons, and major milestone releases.
-* **[Community](https://axomiya-it-labs.github.io/community/):** Find direct links to join our discussions and social channels.
+**Explore all projects live on our website: [https://axomiya-it-labs.github.io/projects/](https://axomiya-it-labs.github.io/projects/)**
 
 ---
 
-## 🤝 Anyone Can Contribute!
+## The Bilingual Platform
 
-You do **not** need to be a software developer or an AI researcher to be a valued part of Axomiya IT Labs. Our mission needs:
+Our web platform is designed with a bilingual architecture:
+* **English Edition:** Served at the root (`https://axomiya-it-labs.github.io/`)
+* **Assamese Edition:** Served under `/as/` (`https://axomiya-it-labs.github.io/as/`)
 
-* 🗣️ **Translators & Proofreaders:** Help translate articles and UI text into rich, natural Assamese.
-* ✍️ **Writers & Educators:** Write beginner-friendly guides, study resources, or tech articles.
-* 🎙️ **Voice & Data Contributors:** Share voice recordings, vocabulary, and local insights for regional AI models.
-* 🎨 **Designers:** Create logos, icons, UI graphics, and social media visuals.
-* 🔍 **Testers:** Test our tools and report typos, broken links, or suggestions.
-* 💻 **Developers:** Contribute to our web platforms, tools, and open datasets.
-
-👉 **Ready to get involved? Please read our complete [Contributing Guide (CONTRIBUTING.md)](CONTRIBUTING.md)** for step-by-step instructions and project folder details!
-
----
-
-## 💬 Connect With Us
-
-We would love to welcome you to our community! Connect with us through any of these channels:
-
-* **Telegram Group:** [t.me/AxomiyaITLabs](https://t.me/AxomiyaITLabs) *(Our primary chat for discussions and help)*
-* **GitHub:** [github.com/Axomiya-IT-Labs](https://github.com/Axomiya-IT-Labs) *(Where all our code lives)*
-* **YouTube:** [@AxomiyaITLabs](https://www.youtube.com/@AxomiyaITLabs)
-* **Facebook:** [Axomiya IT Labs](https://www.facebook.com/AxomiyaITLabs)
-* **X (Twitter):** [@AxomiyaITLabs](https://x.com)
+Explore all sections on the site:
+* **About:** [https://axomiya-it-labs.github.io/about/](https://axomiya-it-labs.github.io/about/)
+* **Projects:** [https://axomiya-it-labs.github.io/projects/](https://axomiya-it-labs.github.io/projects/)
+* **Research:** [https://axomiya-it-labs.github.io/research/](https://axomiya-it-labs.github.io/research/)
+* **Blog:** [https://axomiya-it-labs.github.io/blog/](https://axomiya-it-labs.github.io/blog/)
+* **Announcements:** [https://axomiya-it-labs.github.io/announcements/](https://axomiya-it-labs.github.io/announcements/)
+* **Community:** [https://axomiya-it-labs.github.io/community/](https://axomiya-it-labs.github.io/community/)
 
 ---
 
-## 📄 License
+## How to Contribute
 
-All code and educational content in this repository are published under the open-source **[MIT License](LICENSE)**. Everyone is free to learn from it, fork it, and adapt it to help others.
+Axomiya IT Labs welcomes both developers and non-developers. You do not need to write code to participate. We actively invite:
+
+* Translators and proofreaders to expand our Assamese content.
+* Writers and educators to share guides, career information, and tutorials.
+* Community members to contribute voice samples, dialect words, and regional datasets.
+* Designers to help with UI/UX, branding, and graphics.
+* Developers to contribute to our websites, tools, and open-source models.
+
+For complete setup guides, directory maps, and contribution paths, read our **[Contribution Guide (CONTRIBUTING.md)](CONTRIBUTING.md)**.
+
+---
+
+## Community & Connect
+
+Join our open discussions and connect with learners and builders:
+
+* **Website:** [https://axomiya-it-labs.github.io](https://axomiya-it-labs.github.io)
+* **Telegram Group:** [https://t.me/AxomiyaITLabs](https://t.me/AxomiyaITLabs)
+* **GitHub Organization:** [https://github.com/Axomiya-IT-Labs](https://github.com/Axomiya-IT-Labs)
+* **YouTube:** [https://www.youtube.com/@AxomiyaITLabs](https://www.youtube.com/@AxomiyaITLabs)
+* **Facebook:** [https://www.facebook.com/AxomiyaITLabs](https://www.facebook.com/AxomiyaITLabs)
+
+---
+
+## License
+
+All code and documentation are released under the **[MIT License](LICENSE)**.

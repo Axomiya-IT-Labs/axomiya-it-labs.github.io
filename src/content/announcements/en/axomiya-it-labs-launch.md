@@ -12,20 +12,21 @@ translationSlug: axomiya-it-labs-launch
 description: "We are thrilled to launch Axomiya IT Labs — Assam's first AI and open-source community dedicated to making technology accessible for everyone."
 pubDate: "2026-07-23"
 heroImage: "/assets/announcements/axomiya-it-labs-launch.webp"
+placeholder: false
 ---
 We are excited to announce the official launch of **Axomiya IT Labs** — Assam's first open-source and artificial intelligence community dedicated to democratizing technology across the region!
 
-##  Our Core Vision
+## Our Core Vision
 
 Technology should not be limited by language, location, or financial barriers. Whether you are a student, teacher, developer, freelancer, or curious learner, **Axomiya IT Labs** is built for you.
 
-##  The Three Pillars
+## The Three Pillars
 
--  **Learn**: Beginner-friendly tutorials, AI guides, and tech breakdowns written in clear Assamese and English.
--  **Build**: Practical FOSS tools, localized AI models, and community-driven web platforms.
--  **Share**: Open knowledge sharing where every question, translation, bug fix, and line of code empowers the entire community.
+- **Learn**: Beginner-friendly tutorials, AI guides, and tech breakdowns written in clear Assamese and English.
+- **Build**: Practical FOSS tools, localized AI models, and community-driven web platforms.
+- **Share**: Open knowledge sharing where every question, translation, bug fix, and line of code empowers the entire community.
 
-##  How to Get Involved
+## How to Get Involved
 
 1. Join our active [Telegram Community](https://t.me/AxomiyaITLabs) to connect with builders and mentors.
 2. Explore our open-source projects on [GitHub](https://github.com/Axomiya-IT-Labs).

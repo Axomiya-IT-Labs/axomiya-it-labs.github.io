@@ -1,37 +1,37 @@
 # Contributing to Axomiya IT Labs
 
-First of all, thank you for considering contributing to **Axomiya IT Labs**! 🎉
+First of all, thank you for considering contributing to **Axomiya IT Labs**.
 
-Axomiya IT Labs is built by and for a passionate community dedicated to democratizing technology, artificial intelligence, and open knowledge across Assam and beyond. Our community thrives because individuals with different talents — from writers and translators to students, designers, and software engineers — come together to build things that matter.
+Axomiya IT Labs is built by and for a community dedicated to democratizing technology, artificial intelligence, and open knowledge across Assam and beyond. Our community thrives because individuals with different talents — from writers and translators to students, designers, and software engineers — come together to build things that matter.
 
 **You do NOT need to be a programmer to contribute.** Whether you want to translate a single paragraph into Assamese, suggest a new AI tool, fix a typo, design a graphic, or write code, your help is warmly welcomed and deeply valued.
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-- [The Project & Directory Map](#-repository-and-project-directory-map)
-- [How Non-Developers Can Contribute](#-how-non-developers-can-contribute)
-  - [1. Assamese Language Translation & Review](#1-assamese-language-translation--review)
-  - [2. Writing Content & Guides](#2-writing-content--guides)
-  - [3. Voice & Regional Data Contribution](#3-voice--regional-data-contribution)
-  - [4. Design, Graphics & UI/UX](#4-design-graphics--uiux)
-  - [5. Bug Reporting & Community Feedback](#5-bug-reporting--community-feedback)
-- [How Developers Can Contribute](#-how-developers-can-contribute)
-  - [1. Prerequisites & Local Environment Setup](#1-prerequisites--local-environment-setup)
-  - [2. Project Architecture & Code Stack](#2-project-architecture--code-stack)
+- [Repository and Project Directory Map](#repository-and-project-directory-map)
+- [How Non-Developers Can Contribute](#how-non-developers-can-contribute)
+  - [1. Assamese Language Translation and Review](#1-assamese-language-translation-and-review)
+  - [2. Writing Content and Guides](#2-writing-content-and-guides)
+  - [3. Voice and Regional Data Contribution](#3-voice-and-regional-data-contribution)
+  - [4. Design, Graphics and UI/UX](#4-design-graphics-and-uiux)
+  - [5. Bug Reporting and Community Feedback](#5-bug-reporting-and-community-feedback)
+- [How Developers Can Contribute](#how-developers-can-contribute)
+  - [1. Prerequisites and Local Environment Setup](#1-prerequisites-and-local-environment-setup)
+  - [2. Project Architecture and Code Stack](#2-project-architecture-and-code-stack)
   - [3. Working with Bilingual Content](#3-working-with-bilingual-content)
   - [4. Step-by-Step: Adding a New Content Entry](#4-step-by-step-adding-a-new-content-entry)
-  - [5. Git Workflow & Pull Request Guidelines](#5-git-workflow--pull-request-guidelines)
-- [Contributor Recognition & Attribution](#-contributor-recognition--credits)
-- [Community Guidelines & Code of Conduct](#-community-guidelines--code-of-conduct)
-- [Need Help or Have Questions?](#-need-help-or-have-questions)
+  - [5. Git Workflow and Pull Request Guidelines](#5-git-workflow-and-pull-request-guidelines)
+- [Contributor Recognition and Credits](#contributor-recognition-and-credits)
+- [Community Guidelines and Code of Conduct](#community-guidelines-and-code-of-conduct)
+- [Need Help or Have Questions?](#need-help-or-have-questions)
 
 ---
 
-## 🗺️ Repository and Project Directory Map
+## Repository and Project Directory Map
 
-Here is an overview of where everything is located in this repository:
+Here is an overview of where files and directories are located in this repository:
 
 ```text
 axomiya-it-labs.github.io/
@@ -42,7 +42,7 @@ axomiya-it-labs.github.io/
 │   ├── assets/                           # Media organized by section
 │   │   ├── announcements/                # Banners for community announcements
 │   │   ├── blog/                         # Hero images for blog posts
-│   │   ├── hero/                         # Hero video & animations
+│   │   ├── hero/                         # Hero video and animations
 │   │   ├── projects/                     # Project icons and logos (WhatAfter12, Krittimat, etc.)
 │   │   ├── research/                     # Banners for research articles
 │   │   └── team/                         # Contributor and team photos
@@ -50,7 +50,7 @@ axomiya-it-labs.github.io/
 │   └── llms.txt                          # LLM discovery index file
 │
 ├── src/                                  # Source code of the web platform
-│   ├── content/                          # Markdown/MDX content collections
+│   ├── content/                          # Markdown and MDX content collections
 │   │   ├── announcements/
 │   │   │   ├── en/                       # English announcements
 │   │   │   └── as/                       # Assamese announcements (paired by translationSlug)
@@ -64,7 +64,7 @@ axomiya-it-labs.github.io/
 │   │       ├── en/                       # English analytical research articles
 │   │       └── as/                       # Assamese research articles
 │   │
-│   ├── components/                       # Modular UI components (Astro & MDX)
+│   ├── components/                       # Modular UI components (Astro and MDX)
 │   │   ├── Header.astro                  # Top navigation bar
 │   │   ├── Footer.astro                  # Comprehensive footer with brand links
 │   │   ├── Hero.astro                    # Homepage hero section
@@ -80,7 +80,7 @@ axomiya-it-labs.github.io/
 │   │
 │   ├── i18n/                             # Internationalization configuration
 │   │   ├── ui.ts                         # Static UI string dictionaries (en/as)
-│   │   └── utils.ts                      # Locale route helpers & path translators
+│   │   └── utils.ts                      # Locale route helpers and path translators
 │   │
 │   ├── layouts/                          # Page wrappers and SEO metadata
 │   │   └── BaseLayout.astro              # Base HTML document layout
@@ -90,7 +90,7 @@ axomiya-it-labs.github.io/
 │   │   ├── about.astro                   # About Us page (/about/)
 │   │   ├── community.astro               # Community links (/community/)
 │   │   ├── contribute.astro              # Contribute landing page (/contribute/)
-│   │   ├── team.astro                    # Team & contributor page (/team/)
+│   │   ├── team.astro                    # Team and contributor page (/team/)
 │   │   ├── 404.astro                     # Not Found fallback
 │   │   ├── as/                           # Assamese mirror routes (/as/...)
 │   │   ├── blog/                         # Blog listing and post detail routes
@@ -99,7 +99,7 @@ axomiya-it-labs.github.io/
 │   │   └── announcements/                # Announcements listing and detail routes
 │   │
 │   ├── styles/                           # Global Tailwind and custom CSS styles
-│   └── content.config.ts                 # Astro Content Collections schemas & validation
+│   └── content.config.ts                 # Astro Content Collections schemas and validation
 │
 ├── astro.config.mjs                      # Astro build configuration
 ├── package.json                          # Dependencies and npm scripts
@@ -110,49 +110,49 @@ axomiya-it-labs.github.io/
 
 ---
 
-## 🎨 How Non-Developers Can Contribute
+## How Non-Developers Can Contribute
 
-You do not need to write code to make a huge impact on our community. Here are the most effective ways you can help:
+You do not need to write code to make a significant impact on our community. Here are the primary ways you can help:
 
-### 1. Assamese Language Translation & Review
-We aim for every project, tutorial, and article to be available in both English and natural, easy-to-read Assamese.
-* **Replace Translation Placeholders:** Many Assamese entries in `src/content/{projects,blog,research,announcements}/as/` currently contain placeholder notes (`placeholder: true`). You can write real, reviewed Assamese translations for them!
-* **Proofread & Refine:** If you spot grammatical errors, unnatural machine translations, or confusing technical phrasing in Assamese pages, suggest clearer local terminology.
+### 1. Assamese Language Translation and Review
+We aim for all content to be available in both English and natural, easy-to-read Assamese.
+* **Replace Translation Placeholders:** Any Assamese entries in `src/content/{projects,blog,research,announcements}/as/` marked `placeholder: true` can be replaced with full, human-reviewed Assamese text.
+* **Proofread and Refine:** If you notice grammatical errors or awkward technical translations in Assamese pages, suggest clearer regional vocabulary.
 * **How to submit:**
   * Open a [GitHub Issue](https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io/issues) with the title `Translation: [Article/Project Name]` and paste your Assamese text.
   * Or send your translation directly in our [Telegram Community](https://t.me/AxomiyaITLabs).
 
-### 2. Writing Content & Guides
+### 2. Writing Content and Guides
 * **Educational Guides:** Write plain-language explanations of AI concepts, prompt engineering tips, or coding introductions suitable for beginners.
-* **Career Clarity Articles:** Share accurate information about college degrees, vocational courses, competitive exams, or scholarships in Assam for our [WhatAfter12](https://whatafter12.vercel.app/en) initiative.
-* **AI Tool Reviews:** Suggest or review helpful AI tools for our [Krittimat](https://krittimat.vercel.app/en) directory.
+* **Career Clarity Articles:** Share accurate information about college degrees, vocational courses, competitive exams, or scholarships in Assam for our WhatAfter12 initiative.
+* **AI Tool Reviews:** Suggest or review helpful AI tools for our Krittimat directory.
 
-### 3. Voice & Regional Data Contribution
-* **Speech Recordings:** For our **Assamese Voice AI** project, we need clear audio recordings of spoken Assamese across various regional dialects (Kamrupi, Goalpariya, Upper Assam, etc.) to train speech-to-text models.
-* **Word Lists & Regional Terms:** For the **Open Assam Data Hub**, we welcome lists of everyday Assamese vocabulary, technical terms, and regional knowledge datasets.
+### 3. Voice and Regional Data Contribution
+* **Speech Recordings:** For our Assamese Voice AI project, we collect audio recordings of spoken Assamese across regional dialects to train speech-to-text models.
+* **Word Lists and Regional Terms:** For the Open Assam Data Hub, we welcome lists of everyday Assamese vocabulary, technical terminology, and regional knowledge datasets.
 
-### 4. Design, Graphics & UI/UX
-* **Visual Assets:** Create attractive project logos, icons, diagrams, or social media banners for public announcements.
-* **User Experience Feedback:** Test our apps on your phone or laptop and share suggestions on how we can make our websites cleaner and easier to navigate.
+### 4. Design, Graphics and UI/UX
+* **Visual Assets:** Create project logos, icons, diagrams, or social media banners for public announcements.
+* **User Experience Feedback:** Test our apps on mobile and desktop devices and share suggestions on how we can improve navigation and accessibility.
 
-### 5. Bug Reporting & Community Feedback
-* **Report Broken Links or Typos:** If an image fails to load, a button does not work, or a sentence has a typo, let us know!
-* **Help Fellow Learners:** Join our [Telegram Group](https://t.me/AxomiyaITLabs) and answer questions from curious students or beginners.
+### 5. Bug Reporting and Community Feedback
+* **Report Issues:** If an image fails to load, a link is broken, or a sentence has a typo, let us know by opening an issue on GitHub or posting in our Telegram group.
+* **Help Learners:** Answer questions from students and newcomers joining our community chat.
 
 ---
 
-## 💻 How Developers Can Contribute
+## How Developers Can Contribute
 
-If you want to contribute code, build features, or improve our infrastructure, follow the guide below.
+If you want to contribute code, build features, or improve project infrastructure, follow the instructions below.
 
-### 1. Prerequisites & Local Environment Setup
+### 1. Prerequisites and Local Environment Setup
 
 Make sure you have:
 * **Node.js:** Version 22.0.0 or newer
 * **Package Manager:** `pnpm` (version 9 or 10 recommended)
-* **Git:** Installed on your computer
+* **Git:** Installed on your machine
 
-#### Installation & Running Locally
+#### Installation and Running Locally
 
 1. **Fork and clone the repository:**
    ```bash
@@ -171,7 +171,7 @@ Make sure you have:
    ```
    Astro will provide a local URL (typically `http://localhost:4321/`). Open it in your browser. Live reloading is enabled automatically.
 
-4. **Verify production build & static preview:**
+4. **Verify production build and static preview:**
    ```bash
    pnpm build
    pnpm preview
@@ -180,10 +180,10 @@ Make sure you have:
 
 ---
 
-### 2. Project Architecture & Code Stack
+### 2. Project Architecture and Code Stack
 
 * **Framework:** [Astro 5](https://astro.build/) (Static Site Generation / SSG)
-* **Styling:** [Tailwind CSS](https://tailwindcss.com/) with custom design tokens for typography, dark/light themes, and responsive layouts
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) with design tokens for typography, dark/light themes, and responsive layouts
 * **Search:** [Pagefind](https://pagefind.app/) for fast, client-side, privacy-respecting bilingual search
 * **Language:** TypeScript
 * **Hosting:** GitHub Pages with automated deployment via GitHub Actions
@@ -194,16 +194,16 @@ Make sure you have:
 
 All articles, projects, announcements, and research papers are defined as Astro Content Collections in `src/content.config.ts`.
 
-#### The Golden Rules of Content:
-1. **Paired Locales:** Every piece of content belongs to either `en` (English) or `as` (Assamese) folder.
-2. **Translation Slug:** The English and Assamese files **MUST** share the exact same `translationSlug` in their frontmatter. This connects the two versions so the language switcher works seamlessly.
-3. **Placeholder Status:** If an Assamese translation is not ready yet, set `placeholder: true` in the Assamese frontmatter, include the notice `অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।`, and link to the English version.
+#### Content Rules:
+1. **Paired Locales:** Every piece of content belongs to either the `en` (English) or `as` (Assamese) folder.
+2. **Translation Slug:** The English and Assamese files **MUST** share the exact same `translationSlug` in their frontmatter. This links the two versions together for the language switcher.
+3. **Placeholder Status:** If an Assamese translation is still in progress, set `placeholder: true` in the Assamese frontmatter, include the notice `অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।`, and link to the English version. When providing a complete translation, set `placeholder: false`.
 
 ---
 
 ### 4. Step-by-Step: Adding a New Content Entry
 
-#### Example: Adding a New Project
+#### Example: Adding a Project Entry
 
 1. **Create the English file:** `src/content/projects/en/my-cool-project.md`
    ```yaml
@@ -251,22 +251,25 @@ All articles, projects, announcements, and research papers are defined as Astro 
    demo: "https://my-cool-project.vercel.app"
    lang: as
    translationSlug: my-cool-project
-   description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"
+   description: "প্ৰকল্পটোৰ চমু বিৱৰণ ইয়াত লিখক।"
    logo: "/assets/projects/my-cool-project.svg"
    pubDate: "2026-11-15"
-   placeholder: true
+   placeholder: false
    ---
 
-   অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।
+   ## এই প্ৰকল্পই কি সমাধান কৰে
+   সমস্যাৰ বিৱৰণ ইয়াত দিয়ক...
 
-   [Read the English version](/projects/my-cool-project/)
+   ## মূল বৈশিষ্ট্যসমূহ
+   - বৈশিষ্ট্য ১
+   - বৈশিষ্ট্য ২
    ```
 
 3. **Add any assets:** Place logos or screenshots inside `public/assets/projects/`.
 
 ---
 
-### 5. Git Workflow & Pull Request Guidelines
+### 5. Git Workflow and Pull Request Guidelines
 
 1. **Create a new branch:**
    ```bash
@@ -290,40 +293,40 @@ All articles, projects, announcements, and research papers are defined as Astro 
 
 5. **Open a Pull Request (PR):**
    * Clearly explain what was added, updated, or fixed.
-   * If you made visual changes to the website UI, please attach a screenshot or screen recording.
+   * If you made visual changes to the website UI, please attach a screenshot.
    * Reference any related issues (e.g., `Fixes #12`).
 
 ---
 
-## 🎖️ Contributor Recognition & Credits
+## Contributor Recognition and Credits
 
-Every person who contributes — regardless of whether they wrote 500 lines of code or translated a single paragraph — is an integral part of Axomiya IT Labs!
+Every person who contributes — whether writing code, translating, or writing documentation — is recognized as part of Axomiya IT Labs:
 
-* **Team & Contributors Directory:** Regular contributors will be featured on our official [Team & Contributors Page](https://axomiya-it-labs.github.io/team/) (defined in `src/data/team.json`).
-* **Release Notes:** Contributors are thanked and acknowledged in our public announcement releases.
-* **Community Spotlight:** We highlight community contributions in our Telegram group and social media accounts.
+* **Team and Contributors Directory:** Regular contributors are featured on our official [Team & Contributors Page](https://axomiya-it-labs.github.io/team/) (configured in `src/data/team.json`).
+* **Release Notes:** Contributors are acknowledged in our public release announcements.
+* **Community Highlights:** We regularly highlight community contributions in our Telegram group and social channels.
 
-If you have submitted a contribution and would like to be added to `src/data/team.json` with your photo and social links, feel free to submit a PR or reach out!
+To add yourself to `src/data/team.json` with your photo and social links after a contribution, submit a pull request or contact a maintainer.
 
 ---
 
-## 🤝 Community Guidelines & Code of Conduct
+## Community Guidelines and Code of Conduct
 
-To make Axomiya IT Labs a safe, welcoming, and productive environment for all:
+To keep Axomiya IT Labs an inclusive, safe, and productive space for everyone:
 
-* **Be Respectful & Kind:** We have members of all experience levels. Treat everyone with patience, encouragement, and courtesy.
-* **Value Constructive Collaboration:** Provide actionable, helpful feedback. Disagreements should focus on ideas, never on individuals.
+* **Be Respectful and Patient:** We have members with varying levels of experience. Treat everyone with courtesy and constructive encouragement.
+* **Collaborate in the Open:** Provide helpful, actionable feedback. Focus discussions on ideas and code, never on individuals.
 * **Foster Inclusivity:** Anyone passionate about learning and building is welcome, regardless of technical background, age, or identity.
-* **Keep Knowledge Open:** Prioritize open-source tools, clear documentation, and open collaboration.
+* **Keep Knowledge Free:** Prioritize open-source tools, clear documentation, and public knowledge sharing.
 
 ---
 
-## 📬 Need Help or Have Questions?
+## Need Help or Have Questions?
 
-If you are stuck, unsure how to start, or just want to discuss an idea before submitting a pull request, we are here to support you!
+If you are stuck, unsure where to start, or want to discuss an idea before submitting a pull request, we are here to support you:
 
-* 💬 **Join our Telegram:** [t.me/AxomiyaITLabs](https://t.me/AxomiyaITLabs) *(Fastest response)*
-* 🐙 **GitHub Discussions & Issues:** [github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io/issues](https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io/issues)
-* 🌐 **Official Website:** [axomiya-it-labs.github.io](https://axomiya-it-labs.github.io)
+* **Telegram Group:** [https://t.me/AxomiyaITLabs](https://t.me/AxomiyaITLabs)
+* **GitHub Issues:** [https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io/issues](https://github.com/Axomiya-IT-Labs/axomiya-it-labs.github.io/issues)
+* **Official Website:** [https://axomiya-it-labs.github.io](https://axomiya-it-labs.github.io)
 
-Thank you for helping us build the future of AI and open source for Assam! 🚀
+Thank you for contributing to Axomiya IT Labs.
