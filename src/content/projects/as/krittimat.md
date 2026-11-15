@@ -16,6 +16,7 @@ tech_stack:
 lang: as
 translationSlug: krittimat
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"
+logo: "/assets/projects/krittimat.webp"
 pubDate: "2026-07-24"
 placeholder: true
 ---

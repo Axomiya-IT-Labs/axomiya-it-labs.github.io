@@ -6,6 +6,7 @@ lang: en
 translationSlug: welcome-to-axomiya
 description: "Welcome to our community blog where we share updates, insights, and open-source project developments."
 pubDate: "2026-07-20"
+heroImage: "/assets/blog/welcome.webp"
 ---
 ## Welcome to Axomiya IT Labs!
 

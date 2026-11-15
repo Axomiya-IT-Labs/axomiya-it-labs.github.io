@@ -1,0 +1,72 @@
+<svg width="760" height="220" viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .navy { fill: #0B1F3A; }
+      .blue { fill: #2563EB; }
+      .orange { fill: #F97316; }
+      .green { fill: #22C55E; }
+      .purple { fill: #7C3AED; }
+      .dark { fill: #111827; }
+      .muted { fill: #4B5563; }
+      .stroke-navy { stroke: #0B1F3A; }
+      .stroke-blue { stroke: #2563EB; }
+      .stroke-orange { stroke: #F97316; }
+      .stroke-green { stroke: #22C55E; }
+      .stroke-purple { stroke: #7C3AED; }
+      .title { font: 800 54px 'Inter', 'Segoe UI', Arial, sans-serif; letter-spacing: -1px; }
+      .subtitle { font: 700 18px 'Inter', 'Segoe UI', Arial, sans-serif; letter-spacing: 1.8px; }
+    </style>
+  </defs>
+
+  <!-- ICON -->
+  <g transform="translate(18,22)">
+    <!-- graduation cap -->
+    <polygon points="64,0 0,26 64,52 128,26" class="navy"/>
+    <polygon points="26,38 64,56 102,38 102,78 26,78" class="navy"/>
+    <circle cx="64" cy="26" r="5" fill="#1E3A8A"/>
+    <path d="M64 26 C48 32, 40 36, 36 40" stroke="#F59E0B" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <line x1="36" y1="40" x2="36" y2="72" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="36" cy="78" r="6" fill="#F59E0B"/>
+    <rect x="32" y="78" width="8" height="20" rx="4" fill="#F59E0B"/>
+
+    <!-- compass -->
+    <circle cx="64" cy="126" r="42" fill="white" stroke="#0B1F3A" stroke-width="10"/>
+    <polygon points="64,98 78,132 64,126 50,154" class="orange"/>
+    <polygon points="64,154 50,120 64,126 78,98" class="navy"/>
+    <circle cx="64" cy="126" r="6" fill="white"/>
+
+    <!-- path handle -->
+    <path d="M20 170 C8 166, 6 152, 14 144 L36 122" stroke="#0B1F3A" stroke-width="16" stroke-linecap="round" fill="none"/>
+
+    <!-- arrows -->
+    <path d="M110 112 C130 100, 142 92, 156 84" class="stroke-green" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <polygon points="160,82 148,78 152,92" class="green"/>
+
+    <path d="M106 132 C128 128, 144 122, 164 114" class="stroke-blue" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <polygon points="168,112 156,108 160,122" class="blue"/>
+
+    <path d="M100 150 C126 154, 146 152, 172 146" class="stroke-orange" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <polygon points="176,146 164,140 166,154" class="orange"/>
+  </g>
+
+  <!-- WORDMARK -->
+  <g transform="translate(220,34)">
+    <text x="0" y="58" class="title navy">What After</text>
+
+    <text x="0" y="148" class="title blue" style="font-size: 110px;">12</text>
+    <text x="128" y="126" class="title purple" style="font-size: 64px;">th</text>
+    <text x="212" y="148" class="title orange" style="font-size: 110px;">?</text>
+
+    <!-- underline -->
+    <rect x="128" y="136" width="78" height="6" rx="3" class="purple"/>
+
+    <!-- subline -->
+    <line x1="0" y1="178" x2="80" y2="178" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="96" y="184" class="subtitle dark">CAREER</text>
+    <circle cx="212" cy="176" r="4" class="green"/>
+    <text x="228" y="184" class="subtitle dark">SKILLS</text>
+    <circle cx="326" cy="176" r="4" class="blue"/>
+    <text x="342" y="184" class="subtitle dark">EARNINGS</text>
+    <line x1="482" y1="178" x2="560" y2="178" stroke="#CBD5E1" stroke-width="2"/>
+  </g>
+</svg>

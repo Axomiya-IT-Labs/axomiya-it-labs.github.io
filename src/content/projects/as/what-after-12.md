@@ -18,6 +18,7 @@ tech_stack:
 lang: as
 translationSlug: what-after-12
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"
+logo: "/assets/projects/whatafter12.svg"
 pubDate: "2026-07-23"
 placeholder: true
 ---

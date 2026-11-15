@@ -17,6 +17,7 @@ looking_for:
 lang: en
 translationSlug: assamese-speech-ai
 description: "Fine-tuning OpenAI Whisper on crowdsourced Assamese voice recordings to create an open-source speech recognition model."
+logo: "/assets/projects/ai-voice.png"
 pubDate: "2026-07-23"
 ---
 ## The Problem

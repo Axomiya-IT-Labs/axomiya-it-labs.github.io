@@ -18,6 +18,7 @@ tech_stack:
 lang: en
 translationSlug: what-after-12
 description: "Know all higher education path, jobs & earning opportunities available after 12 in the age of AI."
+logo: "/assets/projects/whatafter12.svg"
 pubDate: "2026-07-23"
 ---
 ## What It Solves

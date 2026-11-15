@@ -14,6 +14,7 @@ tech_stack:
 lang: en
 translationSlug: axomiya-ai-tutor
 description: "An interactive LLM learning assistant that translates programming concepts and error logs into beginner-friendly Assamese."
+logo: "/assets/projects/ai-tutor.png"
 pubDate: "2026-07-23"
 ---
 ## What It Solves

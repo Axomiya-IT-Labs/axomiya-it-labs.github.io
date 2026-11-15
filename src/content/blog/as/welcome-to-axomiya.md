@@ -7,6 +7,7 @@ translationSlug: welcome-to-axomiya
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"
 pubDate: "2026-07-20"
 placeholder: true
+heroImage: "/assets/blog/welcome.webp"
 ---
 <!-- PLACEHOLDER: Assamese translation has not been supplied. -->
 
