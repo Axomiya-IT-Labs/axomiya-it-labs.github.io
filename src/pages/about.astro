@@ -3,22 +3,170 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout lang="en" title="About Us">
   <article class="container-prose py-16">
-    <header class="mb-12 text-center max-w-3xl mx-auto">
-      <h1 class="display mb-4">About Axomiya IT Labs</h1>
-      <p class="lead">Rooted in Assam — building the future of AI and open-source for everyone.</p>
+    
+    <!-- Hero section with eyebrow + big headline -->
+    <header class="mb-16 text-center max-w-3xl mx-auto">
+      <span class="eyebrow mb-4 inline-block">The Why</span>
+      <h1 class="display mb-6">
+        Information is free.<br/>
+        <span class="text-accent">Understanding is next.</span>
+      </h1>
+      <p class="lead mx-auto">
+        Axomiya IT Labs exists because access to knowledge is not the same as access to understanding — especially when that knowledge isn't in your language.
+      </p>
     </header>
 
-    <div class="content-prose mx-auto">
-      <h2>Our Mission</h2>
-      <p>The internet is the greatest free encyclopedia humanity has ever built. We are here to collect precise information, make thoughtful analyses, present clear findings, add local context, and make all of it accessible to everyone in Assam — so that no one is left behind by international standards of technology and knowledge.</p>
-      <p>If you want to share what you know, benefit others, and explore new fields with genuine curiosity — this is your community. Whatever you do professionally, bring your best.</p>
-      <blockquote><p>Assam's first AI and open-source space, where everyone is welcome.</p></blockquote>
-      <h2>What We Do</h2>
-      <ul>
-        <li><strong>Learn:</strong> We share short guides, tutorials, and plain-language explanations of AI and tech.</li>
-        <li><strong>Build:</strong> We create real projects, AI tools, and platforms that solve local problems.</li>
-        <li><strong>Share:</strong> We believe small help compounds. Every translation and bug report makes the community stronger.</li>
-      </ul>
+    <!-- Section 1: The World We Live In -->
+    <section class="mb-16">
+      <div class="content-prose mx-auto">
+        <span class="eyebrow">01 — Context</span>
+        <h2 class="mt-3">The World We're Living In</h2>
+        <p>Every question you've ever had has an answer somewhere online. That was Isaac Asimov's dream — the complete encyclopedia of human knowledge, available to anyone, anywhere. For the first time in history, that dream is essentially real.</p>
+        <p>AI has made it exponentially easier: you can ask, and it answers. You don't need a library card, a university degree, or a good school nearby. You just need an internet connection.</p>
+        <p>But — as anyone in Assam knows — a dream built for the world doesn't always fit the person reading it.</p>
+      </div>
+    </section>
+
+    <!-- Pull quote 1 -->
+    <div class="my-16 text-center">
+      <blockquote class="max-w-2xl mx-auto">
+        <p class="text-2xl md:text-3xl font-display font-bold text-fg italic leading-snug">
+          "Access is not the same as understanding. Understanding is not the same as belonging."
+        </p>
+      </blockquote>
     </div>
+
+    <!-- Section 2: The Gap -->
+    <section class="mb-16">
+      <div class="content-prose mx-auto">
+        <span class="eyebrow">02 — The Gap</span>
+        <h2 class="mt-3">What We're Closing</h2>
+        <p>When you're a student in Guwahati, a farmer in Nagaon, or a self-taught coder in Silchar, the internet is still mostly in English. And even when it's not, it assumes a context that doesn't match yours — a job market that doesn't exist here, a curriculum that doesn't cover your syllabus, a culture that doesn't sound like home.</p>
+        <p>Traditional education was built for a slower age — when information was scarce and teachers were the gatekeepers. Now the gatekeepers are algorithms, and the new literacy is knowing <em>how to learn</em>, not just what to learn.</p>
+        <p>That's what Axomiya IT Labs is here for.</p>
+      </div>
+    </section>
+
+    <!-- What We Do - visual cards -->
+    <section class="my-16">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+          <span class="eyebrow">03 — What We Do</span>
+          <h2 class="mt-3 text-3xl md:text-4xl font-bold font-display">Learn. Build. Share.</h2>
+          <p class="text-fg-muted mt-3">Three words. One community.</p>
+        </div>
+        
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Learn -->
+          <div class="card p-8 hover:border-accent transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-accent-soft flex items-center justify-center mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold font-display mb-2">Learn</h3>
+            <p class="text-fg-muted text-sm leading-relaxed">
+              Short guides, tutorials, and plain-language explanations of AI and tech — written for people, not engineers.
+            </p>
+          </div>
+          
+          <!-- Build -->
+          <div class="card p-8 hover:border-accent transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-accent-soft flex items-center justify-center mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="text-xl font-bold font-display mb-2">Build</h3>
+            <p class="text-fg-muted text-sm leading-relaxed">
+              Real projects, AI tools, and platforms that solve actual local problems — not hypothetical ones.
+            </p>
+          </div>
+          
+          <!-- Share -->
+          <div class="card p-8 hover:border-accent transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-accent-soft flex items-center justify-center mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </div>
+            <h3 class="text-xl font-bold font-display mb-2">Share</h3>
+            <p class="text-fg-muted text-sm leading-relaxed">
+              Every translation, bug report, and small contribution makes the community stronger. Small help compounds.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Our Mission -->
+    <section class="mb-16">
+      <div class="content-prose mx-auto">
+        <span class="eyebrow">04 — Mission</span>
+        <h2 class="mt-3">The Bridge We're Building</h2>
+        <p>We're building the bridge between "the world's knowledge" and "a person in Assam who wants to use it." Not another English-first tech blog. Not a generic course marketplace. An <strong>open-source, Assamese-first community</strong> where curiosity becomes capability — in the language you think in.</p>
+        <p>We collect precise information, make thoughtful analyses, present clear findings, add local context, and make all of it accessible to everyone in Assam — so that no one is left behind by international standards of technology and knowledge.</p>
+      </div>
+    </section>
+
+    <!-- Who This Is For - visual grid -->
+    <section class="my-16">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+          <span class="eyebrow">05 — Audience</span>
+          <h2 class="mt-3 text-3xl md:text-4xl font-bold font-display">Who This Is For</h2>
+          <p class="text-fg-muted mt-3">Everyone who's ever wished the answer sounded like home.</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            'Curious kids',
+            'Stuck students',
+            'Supportive parents',
+            'Ambitious teachers',
+            'Returning developers',
+            'Figuring-it-out entrepreneurs',
+            'Curious newcomers',
+            'Lifelong learners'
+          ].map(who => (
+            <div class="card p-5 text-center hover:border-accent transition-colors">
+              <p class="text-sm font-semibold text-fg">{who}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Pull quote 2 -->
+    <div class="my-16 text-center">
+      <blockquote class="max-w-2xl mx-auto">
+        <p class="text-2xl md:text-3xl font-display font-bold text-fg italic leading-snug">
+          "Assam's first AI and open-source space, where everyone is welcome — whatever you do professionally."
+        </p>
+      </blockquote>
+    </div>
+
+    <!-- Why Open Source -->
+    <section class="mb-16">
+      <div class="content-prose mx-auto">
+        <span class="eyebrow">06 — Open Source</span>
+        <h2 class="mt-3">Why Everything Is Free</h2>
+        <p>Because knowledge that's locked behind a paywall, a login, or a private company isn't really free. Everything we build is open-source — the code, the translations, the documentation. You can fork it, improve it, teach with it, or hand it to a friend.</p>
+        <p>That's how the bridge gets stronger: everyone adds a plank.</p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="my-16">
+      <div class="card bg-accent-soft/30 border-accent/20 p-10 md:p-16 text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Join Us</h2>
+        <p class="text-fg-muted text-lg mb-8 max-w-xl mx-auto">
+          If you want to share what you know, benefit others, and explore new fields with genuine curiosity — this is your community. Bring your best.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/community/" class="btn-primary text-lg px-8 py-3.5">
+            Join the community
+          </a>
+          <a href="/projects/" class="btn-secondary text-lg px-8 py-3.5">
+            See what we're building
+          </a>
+        </div>
+      </div>
+    </section>
+
   </article>
 </BaseLayout>
