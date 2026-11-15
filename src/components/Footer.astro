@@ -7,77 +7,102 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
+
+// Translated brand description + tagline
+const copy = {
+  en: {
+    description: "Assam's first AI & open-source community — inspiring the next generation of builders and creators.",
+    tagline: "Learn. Build. Share. Open to everyone, regardless of experience.",
+    built: "Built in Assam.",
+  },
+  as: {
+    description: "অসমৰ প্ৰথম AI আৰু মুক্ত-উৎস সম্প্ৰদায় — নিৰ্মাতা আৰু সৃষ্টিকৰ্তাসকলৰ পৰৱৰ্তী প্ৰজন্মক অনুপ্ৰাণিত কৰি।",
+    tagline: "শিকক। নিৰ্মাণ কৰক। শেয়াৰ কৰক। অভিজ্ঞতা নিৰ্বিশেষে সকলোৰে বাবে মুক্ত।",
+    built: "অসমত নিৰ্মিত।",
+  }
+};
+const c = copy[lang];
 ---
-<footer class="mt-24 border-t border-border bg-bg py-12 text-fg-muted">
-  <div class="container-prose grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+<footer class="mt-24 border-t border-border bg-bg-elevated py-16 text-fg-muted">
+  <div class="container-prose">
     
-    <!-- Brand Column -->
-    <div class="lg:col-span-1 space-y-4">
-      <a href={localizePath('/', lang)} class="flex items-center gap-2 font-display text-lg font-bold tracking-tight text-fg">
-        <img src="/brand/logo.png" alt="Axomiya IT Labs" class="h-8 w-auto" onerror="this.style.display='none'" />
-        <span>Axomiya <span class="text-accent">IT Labs</span></span>
-      </a>
-      <p class="text-sm max-w-sm leading-relaxed">
-        Rooted in Assam — Assam's first AI & open-source community. Everyone is welcome.
-      </p>
-      <p class="text-sm font-medium pt-2">
-        {t('footer.built')}
-      </p>
-    </div>
+    <!-- Top row: Brand + description (prominent) -->
+    <div class="grid gap-12 md:grid-cols-3 lg:grid-cols-12 pb-12 border-b border-border">
+      
+      <!-- Brand block (spans 5 cols on desktop) -->
+      <div class="lg:col-span-5 space-y-4">
+        <a href={localizePath('/', lang)} class="inline-flex items-center gap-2 font-display text-2xl font-bold tracking-tight text-fg">
+          <img src="/brand/logo.png" alt="Axomiya IT Labs" class="h-9 w-auto" onerror="this.style.display='none'" />
+          <span>Axomiya <span class="text-accent">IT Labs</span></span>
+        </a>
+        <p class="text-base text-fg leading-relaxed max-w-md font-medium">
+          {c.description}
+        </p>
+        <p class="text-sm text-fg-muted leading-relaxed max-w-md">
+          {c.tagline}
+        </p>
+        <p class="text-xs text-fg-subtle uppercase tracking-widest font-semibold pt-2">
+          {c.built}
+        </p>
+      </div>
 
-    <!-- Explore Column (Moved from Header) -->
-    <div>
-      <h3 class="font-semibold text-fg mb-4 text-sm uppercase tracking-wider">Explore</h3>
-      <ul class="space-y-3 text-sm">
-        <li><a href={localizePath('/about/', lang)} class="hover:text-accent transition-colors">About</a></li>
-        <li><a href={localizePath('/community/', lang)} class="hover:text-accent transition-colors">Community</a></li>
-        <li><a href={localizePath('/team/', lang)} class="hover:text-accent transition-colors">Team</a></li>
-        <li><a href={localizePath('/announcements/', lang)} class="hover:text-accent transition-colors">Announcements</a></li>
-        <li><a href={localizePath('/contribute/', lang)} class="hover:text-accent transition-colors">Contribute</a></li>
-      </ul>
-    </div>
+      <!-- Nav links (2 cols on desktop) -->
+      <div class="lg:col-span-2">
+        <h3 class="font-display font-bold text-fg mb-4 text-xs uppercase tracking-widest">Explore</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href={localizePath('/about/', lang)} class="hover:text-accent transition-colors">About</a></li>
+          <li><a href={localizePath('/community/', lang)} class="hover:text-accent transition-colors">Community</a></li>
+          <li><a href={localizePath('/team/', lang)} class="hover:text-accent transition-colors">Team</a></li>
+          <li><a href={localizePath('/announcements/', lang)} class="hover:text-accent transition-colors">Announcements</a></li>
+          <li><a href={localizePath('/contribute/', lang)} class="hover:text-accent transition-colors">Contribute</a></li>
+        </ul>
+      </div>
 
-    <!-- Resources Column -->
-    <div>
-      <h3 class="font-semibold text-fg mb-4 text-sm uppercase tracking-wider">Resources</h3>
-      <ul class="space-y-3 text-sm">
-        <li><a href={localizePath('/research/', lang)} class="hover:text-accent transition-colors">Research</a></li>
-        <li><a href={localizePath('/blog/', lang)} class="hover:text-accent transition-colors">Blog</a></li>
-        <li><a href={localizePath('/projects/', lang)} class="hover:text-accent transition-colors">Projects</a></li>
-      </ul>
-    </div>
+      <!-- Resources (2 cols) -->
+      <div class="lg:col-span-2">
+        <h3 class="font-display font-bold text-fg mb-4 text-xs uppercase tracking-widest">Resources</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href={localizePath('/research/', lang)} class="hover:text-accent transition-colors">Research</a></li>
+          <li><a href={localizePath('/blog/', lang)} class="hover:text-accent transition-colors">Blog</a></li>
+          <li><a href={localizePath('/projects/', lang)} class="hover:text-accent transition-colors">Projects</a></li>
+        </ul>
+      </div>
 
-    <!-- Connect Column -->
-    <div>
-      <h3 class="font-semibold text-fg mb-4 text-sm uppercase tracking-wider">Connect</h3>
-      <div class="flex gap-4 mb-6">
-        <a href="https://github.com/Axomiya-IT-Labs" target="_blank" rel="noopener noreferrer" class="text-fg-muted hover:text-fg group bg-bg-subtle p-2 rounded-full border border-border transition-colors hover:border-accent">
-          <img src="/social/github.svg" alt="GitHub" class="w-5 h-5 opacity-70 group-hover:opacity-100 dark:invert" />
-        </a>
-        <a href="https://t.me/AxomiyaITLabs" target="_blank" rel="noopener noreferrer" class="text-fg-muted hover:text-fg group bg-bg-subtle p-2 rounded-full border border-border transition-colors hover:border-accent">
-          <img src="/social/telegram.svg" alt="Telegram" class="w-5 h-5 opacity-70 group-hover:opacity-100 dark:invert" />
-        </a>
-        <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="text-fg-muted hover:text-fg group bg-bg-subtle p-2 rounded-full border border-border transition-colors hover:border-accent">
-          <img src="/social/x.svg" alt="X" class="w-5 h-5 opacity-70 group-hover:opacity-100 dark:invert" />
-        </a>
-        <a href="https://www.youtube.com/@AxomiyaITLabs" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="text-fg-muted hover:text-fg group bg-bg-subtle p-2 rounded-full border border-border transition-colors hover:border-accent">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5 fill-current opacity-70 group-hover:opacity-100"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/AxomiyaITLabs" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-fg-muted hover:text-fg group bg-bg-subtle p-2 rounded-full border border-border transition-colors hover:border-accent">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5 fill-current opacity-70 group-hover:opacity-100"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.5 1.6-1.5h1.7V3.2c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5v2.1H7v3.2h2.8V21h3.7Z"/></svg>
+      <!-- Connect (3 cols) -->
+      <div class="lg:col-span-3">
+        <h3 class="font-display font-bold text-fg mb-4 text-xs uppercase tracking-widest">Connect</h3>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <a href="https://github.com/Axomiya-IT-Labs" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="group bg-bg-subtle p-2.5 rounded-lg border border-border transition-all hover:border-accent hover:bg-accent-soft">
+            <img src="/social/github.svg" alt="" class="w-5 h-5 opacity-70 group-hover:opacity-100 dark:invert" />
+          </a>
+          <a href="https://t.me/AxomiyaITLabs" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="group bg-bg-subtle p-2.5 rounded-lg border border-border transition-all hover:border-accent hover:bg-accent-soft">
+            <img src="/social/telegram.svg" alt="" class="w-5 h-5 opacity-70 group-hover:opacity-100 dark:invert" />
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X" class="group bg-bg-subtle p-2.5 rounded-lg border border-border transition-all hover:border-accent hover:bg-accent-soft">
+            <img src="/social/x.svg" alt="" class="w-5 h-5 opacity-70 group-hover:opacity-100 dark:invert" />
+          </a>
+          <a href="https://www.youtube.com/@AxomiyaITLabs" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="group bg-bg-subtle p-2.5 rounded-lg border border-border transition-all hover:border-accent hover:bg-accent-soft text-fg-muted">
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5 fill-current opacity-70 group-hover:opacity-100"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/AxomiyaITLabs" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="group bg-bg-subtle p-2.5 rounded-lg border border-border transition-all hover:border-accent hover:bg-accent-soft text-fg-muted">
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5 fill-current opacity-70 group-hover:opacity-100"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.5 1.6-1.5h1.7V3.2c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5v2.1H7v3.2h2.8V21h3.7Z"/></svg>
+          </a>
+        </div>
+        <a href={localizePath('/community/', lang)} class="text-sm text-accent font-semibold hover:underline inline-flex items-center gap-1">
+          Join the community
+          <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>
 
-  </div>
-  
-  <!-- Bottom Bar -->
-  <div class="container-prose mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-fg-muted">
-    <p>© {year} Axomiya IT Labs. {t('footer.rights')}</p>
-    <div class="flex gap-4">
-      <a href="/rss.xml" class="hover:text-fg">RSS Feed</a>
-      <a href="/sitemap-index.xml" class="hover:text-fg">Sitemap</a>
-      <a href="/llms.txt" class="hover:text-fg">llms.txt</a>
+    <!-- Bottom bar -->
+    <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-fg-subtle">
+      <p>© {year} Axomiya IT Labs. {t('footer.rights')}</p>
+      <div class="flex gap-6">
+        <a href="/rss.xml" class="hover:text-fg transition-colors">RSS</a>
+        <a href="/sitemap-index.xml" class="hover:text-fg transition-colors">Sitemap</a>
+        <a href="/llms.txt" class="hover:text-fg transition-colors">llms.txt</a>
+      </div>
     </div>
   </div>
 </footer>
