@@ -7,13 +7,21 @@ const posts = (await getCollection('research', ({ data }) => data.lang === 'en')
 ---
 <BaseLayout lang="en" title="Research">
   <div class="container-prose py-16">
-    <header class="mb-12">
+    <header class="mb-12 text-center">
       <h1 class="display mb-4">Research & Articles</h1>
-      <p class="lead">Deep dives, technical breakdowns, and case studies.</p>
+      <p class="lead mx-auto">Deep dives, technical breakdowns, and case studies from our community.</p>
     </header>
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map(post => <ContentCard entry={post} lang="en" type="research" />)}
-      {posts.length === 0 && <p class="text-fg-muted">No research articles published yet.</p>}
-    </div>
+
+    {posts.length > 0 ? (
+      <div class="flex flex-wrap justify-center gap-6">
+        {posts.map(post => (
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+            <ContentCard entry={post} lang="en" type="research" />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-fg-muted py-12">No research articles published yet.</p>
+    )}
   </div>
 </BaseLayout>

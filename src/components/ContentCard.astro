@@ -39,20 +39,20 @@ const date = new Date(pubDate).toLocaleDateString(lang === 'en' ? 'en-IN' : 'as-
 <article class="card flex flex-col h-full overflow-hidden p-0 group hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
   
   <!-- Image Section -->
-  <a href={href} class={`w-full overflow-hidden bg-bg-subtle relative flex items-center justify-center ${isLogo ? 'aspect-square p-8' : 'aspect-video'}`}>
+  <a href={href} class={`w-full overflow-hidden bg-bg-subtle relative flex items-center justify-center ${isLogo ? 'aspect-square p-10' : 'aspect-video'}`}>
     {displayImage ? (
       <img 
         src={displayImage} 
         alt={title} 
         class={`transition-transform duration-500 group-hover:scale-105 ${
           isLogo 
-            ? 'w-full h-full object-contain max-h-32 drop-shadow-md' 
+            ? 'w-full h-full object-contain drop-shadow-lg' 
             : 'w-full h-full object-cover'
         }`} 
         loading="lazy" 
       />
     ) : (
-      <div class="text-5xl font-display font-black text-border-strong opacity-30">
+      <div class="text-6xl font-display font-black text-border-strong opacity-30">
         {title.charAt(0)}
       </div>
     )}

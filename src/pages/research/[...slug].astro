@@ -20,7 +20,13 @@ const t = useTranslations('en');
 const date = new Date(post.data.pubDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
 ---
-<BaseLayout lang="en" title={post.data.title} description={post.data.description} ogType="article" ogImage={post.data.ogImage}>
+<BaseLayout 
+  lang="en" 
+  title={post.data.title} 
+  description={post.data.description} 
+  ogType="article" 
+  ogImage={post.data.ogImage || post.data.heroImage}
+>
   <article class="container-prose py-16">
     <header class="mb-12 text-center max-w-3xl mx-auto">
       <div class="flex items-center justify-center gap-3 mb-4 text-sm text-fg-muted">
@@ -29,7 +35,11 @@ const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
       </div>
       <h1 class="display mb-6">{post.data.title}</h1>
       {post.data.heroImage && (
-        <img src={post.data.heroImage} alt="" class="w-full h-auto max-h-[400px] object-cover rounded-xl shadow-lg mb-8" />
+        <img 
+          src={post.data.heroImage} 
+          alt={post.data.title} 
+          class="w-full h-auto max-h-[400px] object-cover rounded-xl shadow-lg mb-8" 
+        />
       )}
     </header>
     

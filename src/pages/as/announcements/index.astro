@@ -8,13 +8,21 @@ const announcements = (await getCollection('announcements', ({ data }) => data.l
 ---
 <BaseLayout lang="as" title="ঘোষণা">
   <div class="container-prose py-12 md:py-16">
-    <header class="mb-8 md:mb-12">
+    <header class="mb-8 md:mb-12 text-center">
       <h1 class="display mb-4">ঘোষণা</h1>
-      <p class="lead">Axomiya IT Labs-ৰ খবৰ আৰু আপডেট।</p>
+      <p class="lead mx-auto">Axomiya IT Labs-ৰ খবৰ আৰু আপডেট।</p>
     </header>
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {announcements.map(item => <ContentCard entry={item} lang="as" type="announcements" />)}
-      {announcements.length === 0 && <p class="text-fg-muted">এতিয়ালৈকে কোনো ঘোষণা প্ৰকাশ কৰা হোৱা নাই।</p>}
-    </div>
+
+    {announcements.length > 0 ? (
+      <div class="flex flex-wrap justify-center gap-6">
+        {announcements.map(item => (
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+            <ContentCard entry={item} lang="as" type="announcements" />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-fg-muted py-12">এতিয়ালৈকে কোনো ঘোষণা প্ৰকাশ কৰা হোৱা নাই।</p>
+    )}
   </div>
 </BaseLayout>

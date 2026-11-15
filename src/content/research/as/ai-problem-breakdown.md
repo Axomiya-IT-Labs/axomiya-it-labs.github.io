@@ -4,6 +4,7 @@ author: "Rakibul Islam"
 lang: as
 translationSlug: ai-problem-breakdown
 description: "অসমীয়া অনুবাদ শীঘ্ৰই আহি আছে।"
+heroImage: "/assets/research/careerclarityafter12.png"
 pubDate: "2026-07-23"
 placeholder: true
 ---

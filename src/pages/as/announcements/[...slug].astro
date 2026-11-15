@@ -14,24 +14,39 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const { item } = Astro.props;
-// FIX: Use render() helper
 const { Content } = await render(item);
 const announcementUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Strip [AS] prefix if it exists
+const title = item.data.title.replace(/^\[AS\]\s*/i, '');
 ---
-<BaseLayout lang="as" title={item.data.title} description={item.data.description} ogImage={item.data.ogImage}>
+<BaseLayout 
+  lang="as" 
+  title={title} 
+  description={item.data.description} 
+  ogType="article"
+  ogImage={item.data.ogImage || item.data.heroImage}
+>
   <article class="container-prose py-16">
-    <header class="mb-12 text-center">
+    <header class="mb-12 text-center max-w-3xl mx-auto">
       <span class="badge badge-accent mb-4">ঘোষণা</span>
-      <h1 class="display mb-4">{item.data.title}</h1>
+      <h1 class="display mb-4">{title}</h1>
       <time datetime={new Date(item.data.pubDate).toISOString()} class="text-fg-muted">
         {new Date(item.data.pubDate).toLocaleDateString('as-IN', { dateStyle: 'long' })}
       </time>
+      {item.data.heroImage && (
+        <img 
+          src={item.data.heroImage} 
+          alt={title} 
+          class="w-full h-auto max-h-[400px] object-cover rounded-xl shadow-lg mt-8" 
+        />
+      )}
     </header>
     <Prose>
       <Content />
     </Prose>
     <div class="max-w-[68ch] mx-auto">
-      <ShareButtons lang="as" url={announcementUrl} title={item.data.title} />
+      <ShareButtons lang="as" url={announcementUrl} title={title} />
     </div>
   </article>
 </BaseLayout>

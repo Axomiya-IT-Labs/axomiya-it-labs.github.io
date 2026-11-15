@@ -19,17 +19,29 @@ const { Content } = await render(post);
 const t = useTranslations('as');
 const date = new Date(post.data.pubDate).toLocaleDateString('as-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+const title = post.data.title.replace(/^\[AS\]\s*/i, '');
 ---
-<BaseLayout lang="as" title={post.data.title} description={post.data.description} ogType="article" ogImage={post.data.ogImage}>
+<BaseLayout 
+  lang="as" 
+  title={title} 
+  description={post.data.description} 
+  ogType="article" 
+  ogImage={post.data.ogImage || post.data.heroImage}
+>
   <article class="container-prose py-16">
     <header class="mb-12 text-center max-w-3xl mx-auto">
       <div class="flex items-center justify-center gap-3 mb-4 text-sm text-fg-muted">
         <span class="badge badge-accent">গৱেষণা</span>
         <time datetime={new Date(post.data.pubDate).toISOString()}>{t('blog.published')} {date}</time>
       </div>
-      <h1 class="display mb-6">{post.data.title}</h1>
+      <h1 class="display mb-6">{title}</h1>
       {post.data.heroImage && (
-        <img src={post.data.heroImage} alt="" class="w-full h-auto max-h-[400px] object-cover rounded-xl shadow-lg mb-8" />
+        <img 
+          src={post.data.heroImage} 
+          alt={title} 
+          class="w-full h-auto max-h-[400px] object-cover rounded-xl shadow-lg mb-8" 
+        />
       )}
     </header>
     
@@ -38,7 +50,7 @@ const postUrl = new URL(Astro.url.pathname, Astro.site).toString();
     </Prose>
 
     <div class="max-w-[68ch] mx-auto">
-      <ShareButtons lang="as" url={postUrl} title={post.data.title} />
+      <ShareButtons lang="as" url={postUrl} title={title} />
     </div>
   </article>
 </BaseLayout>
